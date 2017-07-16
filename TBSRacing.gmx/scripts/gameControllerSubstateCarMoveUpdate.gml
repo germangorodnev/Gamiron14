@@ -20,7 +20,12 @@ case GUI_STATES.__PATH_EDIT:
     if (!systemMouseInGUI())
     {
         systemCursorSet(sCursorPointEdit);
-        if (key[KEY.MOUSE_LEFT] == 0)
+        if (key[KEY.MOUSE_RIGHT] == 0)
+        {
+            gameControllerGuistateSet(GUI_STATES.__GUI);
+            exit;        
+        }
+        else if (key[KEY.MOUSE_LEFT] == 0)
         {
             // check the points
             var f = 0;
@@ -74,7 +79,12 @@ case GUI_STATES.__PATH_ERASE:
     if (!systemMouseInGUI())
     {
         systemCursorSet(sCursorPointErase);
-        if (key[KEY.MOUSE_LEFT] == 0)
+        if (key[KEY.MOUSE_RIGHT] == 0)
+        {
+            gameControllerGuistateSet(GUI_STATES.__GUI);
+            exit;        
+        }
+        else if (key[KEY.MOUSE_LEFT] == 0)
         {
             // check the points
             for (var i = 0, pc = path_get_number(pathId); i < pc; i++)

@@ -2,6 +2,7 @@
 with (oGameController)
 {
     substate = argument[0];
+    systemCursorSet(sCursorPointer);
     // resets
     with (oEngineArrow)
         instance_destroy();
@@ -11,6 +12,10 @@ with (oGameController)
         instance_destroy();
     with (oButtonCarGUIDeletePoints)
         instance_destroy();
+    with (oButtonCarGUIDeletePath)
+        instance_destroy();
+        
+    gameControllerGuistateSet(GUI_STATES.__GUI);
         
     switch (substate)
     {
@@ -23,6 +28,7 @@ with (oGameController)
         instance_create(0, 0, oButtonCarGUIBrake);
         instance_create(0, 0, oButtonCarGUIEditPoints);
         instance_create(0, 0, oButtonCarGUIDeletePoints);
+        instance_create(0, 0, oButtonCarGUIDeletePath);
         break;
     }
 }

@@ -1,8 +1,9 @@
 enum GAME_STATES
 {
-    MENU,
-    GAME,
-    PAUSE
+    __MENU,
+    __GAME,
+    __TURNENDYESNO,
+    __PAUSE
 }
 
 enum INGAME_STATES
@@ -30,6 +31,10 @@ enum KEY
 {
     MOUSE_LEFT,
     MOUSE_RIGHT,
+    CAM_LEFT,
+    CAM_TOP,
+    CAM_RIGHT,
+    CAM_BOTTOM,
     CNT
 }   
 
@@ -53,7 +58,8 @@ enum OBJ_PAR
 
 enum PL_CAR_ST
 {
-    __MOVE
+    __INACTIVE,
+    __MOVE_TO_POINT
 }
 
 /////////////// CARS
@@ -64,6 +70,17 @@ enum CARS
     __MINI_TRUCK,
     __MINI_VAN,
     __POLICE
+}
+
+/////////////// WEAPONS
+enum WEAPONS
+{
+    __SIMPLE
+}
+
+enum WEAPON_STATES
+{
+    __FREE
 }
 
 /////////////// CAMERA

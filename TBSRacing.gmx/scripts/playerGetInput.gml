@@ -14,6 +14,24 @@ case os_win32:
         key[KEY.MOUSE_LEFT] = 2;
     else
         key[KEY.MOUSE_LEFT] = -1;
+
+    if ((mouse_check_button_pressed(mb_right)))// * mkey) || (gamepad_button_check_pressed(0, gp_shoulderr) * mgp))
+        key[KEY.MOUSE_RIGHT] = 0;
+    else if ((mouse_check_button(mb_right)))// * mkey) || (gamepad_button_check(0, gp_shoulderr) * mgp))  
+        key[KEY.MOUSE_RIGHT] = 1;
+    else if ((mouse_check_button_released(mb_right)))// * mkey) || (gamepad_button_check_released(0, gp_shoulderr) * mgp))  
+        key[KEY.MOUSE_RIGHT] = 2;
+    else
+        key[KEY.MOUSE_RIGHT] = -1;
+        
+    if (keyboard_check(vk_left))
+        key[KEY.CAM_LEFT] = 1;
+    if (keyboard_check(vk_up))
+        key[KEY.CAM_TOP] = 1;
+    if (keyboard_check(vk_right))
+        key[KEY.CAM_RIGHT] = 1;
+    if (keyboard_check(vk_down))
+        key[KEY.CAM_BOTTOM] = 1;
     break;
     
 /*case os_android:

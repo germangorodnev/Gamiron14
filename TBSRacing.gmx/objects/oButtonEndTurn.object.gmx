@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>-501</depth>
   <persistent>0</persistent>
-  <parentName>oStateObject</parentName>
+  <parentName>oBaseButton</parentName>
   <maskName>sMask32x32</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -30,7 +30,7 @@ event_inherited();
 image_speed = 0;
 
 flagSet(OBJ_PAR.UPDATABLE 
-    | OBJ_PAR.UPDATABLE
+    | OBJ_PAR.DRAWABLE
     | OBJ_PAR.IMPACTABLE_PAUSE 
     | OBJ_PAR.IMPACTABLE_TURN, 1);  
 
@@ -100,10 +100,22 @@ if (!(flags &amp; OBJ_PAR.UPDATABLE))
 
 if (oGameController.key[KEY.MOUSE_LEFT] == 0)
 {
-    if (mouseOnUs())
+    if (oGameController.guistate == GUI_STATES.__GUI)
     {
-        // clicked
-        game_restart();
+        if (mouseOnUs())
+        {
+            if (oGameController.turnEndApproval)
+            {
+                // clicked  
+                with (oGameController)
+                    gameControllerStateSet(INGAME_STATES.GAME);
+            }
+            else
+            {
+                with (oGameController)
+                    gameControllerApproveTurnEnd();
+            }
+        }
     }
 }
 

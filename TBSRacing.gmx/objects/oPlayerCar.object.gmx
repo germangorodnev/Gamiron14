@@ -30,11 +30,79 @@ image_speed = 0;
 
 path_clear_points(pathMove);
 
-type = CARS.__MINI_VAN;
+type = choose(CARS.__MINI_VAN, CARS.__ORANGE, CARS.__MINI_TRUCK);
 
-state = PL_CAR_ST.__MOVE;
+state = PL_CAR_ST.__INACTIVE;
+
+pointId = -1;
+
+// gui control
+engineArrowH = -1;
+
+// target to chase
+targetId = instance_create(x, y, oCarTarget);
+
+dDir = 0;
 
 carPhysicsInit(type);
+if (type == CARS.__ORANGE)
+    carWeaponSet(0, WEAPONS.__SIMPLE);
+
+carInitEnd();
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="1" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>event_inherited();
+instance_destroy(targetId);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// weapon clip
+for (var i = 0; i &lt; weaponsCount; i++)
+{
+    var ww = weapon[i];
+    ww.x = phy_position_x + lengthdir_x(ww.xoff, -phy_rotation);
+    ww.y = phy_position_y + lengthdir_y(ww.yoff, -phy_rotation);     
+}
 </string>
           </argument>
         </arguments>
@@ -63,13 +131,104 @@ if (!(flags &amp; OBJ_PAR.UPDATABLE))
     
 switch (state)
 {
-case PL_CAR_ST.__MOVE:
-    engineTemperature += .03; // update the temperature
-    spd += spdAccelForward;
+case PL_CAR_ST.__INACTIVE:
+    carProceedParams();
+    // take the point
+    if (path_get_number(pathMove))
+    {
+        carPathGetNextPoint();
+        exit;
+    }
+    else
+        carMoveDirection(-phy_rotation);
+    break;
+    
+case PL_CAR_ST.__MOVE_TO_POINT:
+    // change variables
+    carProceedParams();
+    
+    // update position
+    if (!path_get_number(pathMove))
+    {
+        // well, stop
+        carSetState(PL_CAR_ST.__INACTIVE);
+    }
+    else
+    {
+        carTargetSetPoint(path_get_point_x(pathMove, pointId), path_get_point_y(pathMove, pointId));
+    }
+    
+    carMoveToPoint(targetId.phy_position_x, targetId.phy_position_y);
+        
+    if (physics_test_overlap(phy_position_x, phy_position_y, phy_rotation, targetId))
+    {
+        // get next point
+        show_debug_message("POINT DONE!");
+        path_delete_point(pathMove, pointId);
+        if (path_get_number(pathMove))
+        {
+            carTargetSetPoint(path_get_point_x(pathMove, pointId), path_get_point_y(pathMove, pointId));
+        }
+        else
+        {
+            carPathDelete();
+            carSetState(PL_CAR_ST.__INACTIVE);
+        }
+    }
     break;
 }
     
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="16">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// off physical pause
+phy_active = 1;
+flagSet(OBJ_PAR.UPDATABLE, 1);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="15">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// on physical pause
+phy_active = 0;
+flagSet(OBJ_PAR.UPDATABLE, 0);
 </string>
           </argument>
         </arguments>
@@ -174,8 +333,8 @@ playerPathDrawPoint(pathMove, pc - 1);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>// on pause
-
+            <string>/// on pause
+//flagSet(OBJ_PAR.UPDATABLE, 0);
 </string>
           </argument>
         </arguments>

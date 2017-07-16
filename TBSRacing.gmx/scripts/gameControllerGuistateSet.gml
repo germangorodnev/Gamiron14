@@ -1,4 +1,4 @@
-///gameControllerActionSet(GUI_STATES new)
+///gameControllerGuistateSet(GUI_STATES new)
 guistate = argument[0];
 
 // resets

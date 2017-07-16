@@ -30,18 +30,21 @@ event_inherited();
 image_speed = 0;
 
 flagSet(OBJ_PAR.UPDATABLE 
-    | OBJ_PAR.UPDATABLE
+    | OBJ_PAR.DRAWABLE
     | OBJ_PAR.IMPACTABLE_PAUSE 
     | OBJ_PAR.IMPACTABLE_TURN, 1);  
 
 spplateax = oGameController.spplatex + 55;
-spplateay = oGameController.spplatey + 15;
-spplateah = 98;
+spplateay = oGameController.spplatey + 14;
+spplateah = 99;
+hfspplateah = spplateah div 2;
 
-y = view_yview + spplateay + spplateah div 2;
+y = view_yview + spplateay + hfspplateah;
 
 contr = 0;
-yoff = spplateah div 2;
+yoff = hfspplateah;
+if (oGameController.selectedCar.engineArrowH != -1)
+    yoff = oGameController.selectedCar.engineArrowH;
 </string>
           </argument>
         </arguments>
@@ -65,6 +68,7 @@ yoff = spplateah div 2;
           <argument>
             <kind>1</kind>
             <string>event_inherited();
+
 </string>
           </argument>
         </arguments>
@@ -105,8 +109,18 @@ else
 
 if (contr)
 {
-    y = clamp(mouse_y, view_yview + spplateay, view_yview + spplateay + spplateah);
+    var ybeg = view_yview + spplateay;
+    y = clamp(mouse_y, ybeg, ybeg + spplateah);
     yoff = y - (view_yview + spplateay);
+    var percval = clamp(
+        ((ybeg + hfspplateah) - (y /*- view_yview*/)) / hfspplateah,
+        -1,
+        1);
+    if (abs(percval) &lt; .03)
+        percval = 0;
+    with (oGameController.selectedCar)
+        carSetDesiredSpeedByPercent(percval);
+    oGameController.selectedCar.engineArrowH = yoff;
 }
 
 x = view_xview + spplateax;

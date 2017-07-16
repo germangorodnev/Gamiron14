@@ -29,7 +29,7 @@
 event_inherited();
 
 flagSet(OBJ_PAR.UPDATABLE 
-    | OBJ_PAR.UPDATABLE
+    | OBJ_PAR.DRAWABLE
     | OBJ_PAR.IMPACTABLE_PAUSE 
     | OBJ_PAR.IMPACTABLE_TURN, 1);  
 

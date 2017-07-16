@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>-501</depth>
   <persistent>0</persistent>
-  <parentName>oStateObject</parentName>
+  <parentName>oBaseButton</parentName>
   <maskName>sMask32x32</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -30,7 +30,7 @@ event_inherited();
 image_speed = 0;
 
 flagSet(OBJ_PAR.UPDATABLE 
-    | OBJ_PAR.UPDATABLE
+    | OBJ_PAR.DRAWABLE
     | OBJ_PAR.IMPACTABLE_PAUSE 
     | OBJ_PAR.IMPACTABLE_TURN, 1);  
 
@@ -201,7 +201,7 @@ image_speed = 0;
           <argument>
             <kind>1</kind>
             <string>/// draw
-drawCroppedRect(rx1, ry1, rx2, ry2, col, 1, 4);
+drawCroppedRect(rx1, ry1, rx2, ry2, col, 1, 8);
 draw_sprite_ext(sErasePath, 0, rtx, rty, 1, 1, 0, image_blend, image_alpha);
 </string>
           </argument>

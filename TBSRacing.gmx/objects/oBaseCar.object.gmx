@@ -29,7 +29,7 @@
 event_inherited();
 
 flagSet(OBJ_PAR.UPDATABLE 
-    | OBJ_PAR.UPDATABLE
+    | OBJ_PAR.DRAWABLE
     | OBJ_PAR.IMPACTABLE_PAUSE 
     | OBJ_PAR.IMPACTABLE_TURN, 1);  
 
@@ -41,20 +41,31 @@ fixturesCnt = 0;
 
 // physical parameters
 spd = 0;
-spdMaxForward = 10;
-spdMaxBackward = 4;
-spdAccelForward = .02;
-spdAccelBackward = .01;
+spdMaxForward = 135;
+spdMaxBackward = 55;
+spdAccelForward = .07;
+spdBrakeForward = .08;
+spdAccelBackward = .02;
+spdAccelBrake = .12;
+spdDesiredPercent = 0;
+spdDesired = 0;
 
 engineTemperature = 0;
+engineTemperatureIncr = .003;
 engineMaxTemperature = 60;
 
 desiredAngle = 0;
+angleTorque = .2;
 
 type = CARS.__NONE;
 
+weapon[0] = noone; // weapon objects
+weaponsCount = 0;
+
 pathMove = path_add();
 path_set_closed(pathMove, 0);
+//path_set_kind(pathMove, 1);
+//path_set_precision(pathMove, 2);
 
 </string>
           </argument>

@@ -12,7 +12,7 @@ case 7:
     percent = argument[6];
 }
 // determine the offset - 5% from width
-var offX = ((x2 - x1) div 100) * percent,
+var offX = ((x2 - x1) / 100) * percent,
     offY = offX;
 draw_primitive_begin(pr_trianglefan);
 draw_vertex_colour(x1 + offX, y1, col, alpha);

@@ -3,10 +3,32 @@
   <Configs name="configs">
     <Config>Configs\Default</Config>
   </Configs>
+  <datafiles number="1" name="datafiles">
+    <datafile>
+      <name>gamesave.json</name>
+      <exists>-1</exists>
+      <size>0</size>
+      <exportAction>2</exportAction>
+      <exportDir></exportDir>
+      <overwrite>0</overwrite>
+      <freeData>-1</freeData>
+      <removeEnd>0</removeEnd>
+      <store>0</store>
+      <ConfigOptions>
+        <Config name="Default">
+          <CopyToMask>9223372036854775807</CopyToMask>
+        </Config>
+      </ConfigOptions>
+      <filename>gamesave.json</filename>
+    </datafile>
+  </datafiles>
   <NewExtensions/>
   <sounds name="sound"/>
   <sprites name="sprites">
     <sprites name="Cars">
+      <sprites name="Things">
+        <sprite>sprites\sTaran</sprite>
+      </sprites>
       <sprite>sprites\sPlayerCar1</sprite>
       <sprite>sprites\sPlayerCar2</sprite>
       <sprite>sprites\sPlayerCar3</sprite>
@@ -16,6 +38,7 @@
         <sprites name="Path">
           <sprite>sprites\sErasePath</sprite>
           <sprite>sprites\sDrawPath</sprite>
+          <sprite>sprites\sDeletePath</sprite>
         </sprites>
         <sprite>sprites\sSpeedometer</sprite>
         <sprite>sprites\sSpeedometerArrow</sprite>
@@ -32,6 +55,14 @@
     </sprites>
     <sprites name="Masks">
       <sprite>sprites\sMask32x32</sprite>
+    </sprites>
+    <sprites name="Guns">
+      <sprites name="Simple">
+        <sprite>sprites\sGunSimple</sprite>
+        <sprite>sprites\sGunSimpleEffect</sprite>
+        <sprite>sprites\sGunSimpleBullet</sprite>
+        <sprite>sprites\sGunSimpleIco</sprite>
+      </sprites>
     </sprites>
   </sprites>
   <backgrounds name="background">
@@ -53,6 +84,7 @@
       <script>scripts\systemGetPhrase.gml</script>
       <script>scripts\systemCursorSet.gml</script>
       <script>scripts\systemMouseInGUI.gml</script>
+      <script>scripts\gameSetState.gml</script>
     </scripts>
     <scripts name="GUI">
       <script>scripts\drawCroppedRect.gml</script>
@@ -73,12 +105,33 @@
       <scripts name="DEBUG">
         <script>scripts\carDebugDraw.gml</script>
       </scripts>
+      <scripts name="STATES">
+        <script>scripts\carSetState.gml</script>
+      </scripts>
+      <scripts name="PATH">
+        <script>scripts\carPathAddPointToTheEnd.gml</script>
+        <script>scripts\carPathDelete.gml</script>
+        <script>scripts\carPathGetNextPoint.gml</script>
+      </scripts>
+      <scripts name="MOVING">
+        <script>scripts\carMoveToPoint.gml</script>
+        <script>scripts\carMoveDirection.gml</script>
+      </scripts>
+      <scripts name="WEAPONS">
+        <script>scripts\carWeaponSet.gml</script>
+      </scripts>
       <script>scripts\carInMouse.gml</script>
       <script>scripts\carPhysicsInit.gml</script>
-      <script>scripts\carPathAddPointToTheEnd.gml</script>
+      <script>scripts\carInitEnd.gml</script>
+      <script>scripts\carProceedParams.gml</script>
+      <script>scripts\carSetDesiredSpeedByPercent.gml</script>
+      <script>scripts\carTargetSetPoint.gml</script>
     </scripts>
     <scripts name="GAME CONTROLLER">
-      <scripts name="SBUSTATE">
+      <scripts name="STATE">
+        <script>scripts\gameControllerStateSet.gml</script>
+      </scripts>
+      <scripts name="SUBSTATE">
         <script>scripts\gameControllerSubstateSet.gml</script>
         <script>scripts\gameControllerSubstateNoneUpdate.gml</script>
         <script>scripts\gameControllerSubstateCarMoveUpdate.gml</script>
@@ -86,38 +139,62 @@
       <scripts name="ACTIONS">
         <script>scripts\gameControllerGuistateSet.gml</script>
       </scripts>
+      <scripts name="YesNo">
+        <script>scripts\gameControllerYesNoInit.gml</script>
+        <script>scripts\gameControllerYesNoEnd.gml</script>
+      </scripts>
       <script>scripts\gameControllerGotCarClick.gml</script>
+      <script>scripts\gameControllerApproveTurnEnd.gml</script>
     </scripts>
     <scripts name="CAMERA">
       <script>scripts\camDebug.gml</script>
     </scripts>
-    <script>scripts\mouseOnUs.gml</script>
+    <scripts name="USEFUL">
+      <script>scripts\mouseOnUs.gml</script>
+      <script>scripts\angleRotate.gml</script>
+      <script>scripts\cycle.gml</script>
+    </scripts>
   </scripts>
   <fonts name="fonts">
     <font>fonts\fSpeed</font>
+    <font>fonts\fQuestion</font>
     <font>fonts\fTurnEnd</font>
   </fonts>
   <objects name="objects">
     <objects name="Base">
       <object>objects\oStateObject</object>
       <object>objects\oBaseDerivable</object>
+      <object>objects\oBaseButton</object>
       <objects name="Physics">
         <object>objects\oBasePhysicalMovable</object>
         <object>objects\oBasePhysicalStatic</object>
       </objects>
       <object>objects\oBaseCar</object>
+      <object>objects\oBaseWeapon</object>
+      <object>objects\oWeaponSimple</object>
+      <object>objects\oCarTarget</object>
     </objects>
     <objects name="Player">
       <object>objects\oPlayerCar</object>
-      <objects name="GUI">
-        <objects name="Path Editing">
-          <object>objects\oButtonCarGUIEditPoints</object>
-          <object>objects\oButtonCarGUIDeletePoints</object>
-        </objects>
-        <object>objects\oEngineArrow</object>
-        <object>objects\oButtonEndTurn</object>
-        <object>objects\oButtonCarGUIBrake</object>
+    </objects>
+    <objects name="GUI">
+      <objects name="Path Editing">
+        <object>objects\oButtonCarGUIEditPoints</object>
+        <object>objects\oButtonCarGUIDeletePoints</object>
+        <object>objects\oButtonCarGUIDeletePath</object>
       </objects>
+      <objects name="Yes No">
+        <object>objects\oYesno</object>
+        <object>objects\oButtonYes</object>
+        <object>objects\oButtonNo</object>
+      </objects>
+      <object>objects\oEngineArrow</object>
+      <object>objects\oButtonEndTurn</object>
+      <object>objects\oButtonCarGUIBrake</object>
+      <object>objects\oButtonCarGUIWeaponCarMode</object>
+    </objects>
+    <objects name="Obstacles">
+      <object>objects\oBaseWall</object>
     </objects>
     <object>objects\oControl</object>
     <object>objects\oGameController</object>

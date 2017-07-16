@@ -27,6 +27,7 @@
             <kind>1</kind>
             <string>/// game control
 image_speed = 0;
+randomize();
 
 global.guiW = 1280;
 global.guiH = 720;
@@ -34,7 +35,13 @@ global.guiH = 720;
 global.lang = LANG.ENG;
 global.debug = 0;
 
+global.gameState = GAME_STATES.__GAME;
+global.oGameState = global.gameState;
+
 systemCursorSet(sCursorPointer);
+
+show_debug_message(string(OBJ_PAR.UPDATABLE));
+show_debug_message(string(OBJ_PAR.DRAWABLE));
 
 room_goto_next();
 </string>
