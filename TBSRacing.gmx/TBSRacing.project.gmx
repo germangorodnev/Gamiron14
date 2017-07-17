@@ -22,7 +22,9 @@
       <filename>gamesave.json</filename>
     </datafile>
   </datafiles>
-  <NewExtensions/>
+  <NewExtensions>
+    <extension index="0">extensions\TrueLight2D</extension>
+  </NewExtensions>
   <sounds name="sound"/>
   <sprites name="sprites">
     <sprites name="Cars">
@@ -47,6 +49,7 @@
         <sprite>sprites\sPoliceCar1</sprite>
       </sprites>
       <sprite>sprites\sSelectedSign</sprite>
+      <sprite>sprites\sCarSmoke</sprite>
     </sprites>
     <sprites name="GUI">
       <sprites name="Car Control">
@@ -67,10 +70,12 @@
         <sprite>sprites\sCursorPointer</sprite>
         <sprite>sprites\sCursorPointEdit</sprite>
         <sprite>sprites\sCursorPointErase</sprite>
+        <sprite>sprites\sCursorArrow</sprite>
       </sprites>
     </sprites>
     <sprites name="Masks">
       <sprite>sprites\sMask32x32</sprite>
+      <sprite>sprites\sMaskGrass</sprite>
     </sprites>
     <sprites name="Guns">
       <sprites name="Simple">
@@ -81,11 +86,28 @@
       </sprites>
     </sprites>
     <sprites name="Obstacles">
+      <sprites name="Trash">
+        <sprite>sprites\sCans</sprite>
+        <sprite>sprites\sPaper</sprite>
+      </sprites>
       <sprite>sprites\sUmbrella</sprite>
+      <sprite>sprites\sTree</sprite>
+      <sprite>sprites\sTrashcanBig</sprite>
+      <sprite>sprites\sTrashcanSmall</sprite>
+    </sprites>
+    <sprites name="Lights">
+      <sprite>sprites\spr_light_spot</sprite>
+      <sprite>sprites\spr_light_point</sprite>
+      <sprite>sprites\spr_light_spark</sprite>
+      <sprite>sprites\sLightPoint</sprite>
+    </sprites>
+    <sprites name="Weahte">
+      <sprite>sprites\sWeatherRain</sprite>
     </sprites>
   </sprites>
   <backgrounds name="background">
     <background>background\background0</background>
+    <background>background\tls1</background>
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
@@ -104,6 +126,7 @@
       <script>scripts\systemCursorSet.gml</script>
       <script>scripts\systemMouseInGUI.gml</script>
       <script>scripts\gameSetState.gml</script>
+      <script>scripts\drawBigArrow.gml</script>
     </scripts>
     <scripts name="GUI">
       <script>scripts\drawCroppedRect.gml</script>
@@ -135,6 +158,7 @@
       <scripts name="MOVING">
         <script>scripts\carMoveToPoint.gml</script>
         <script>scripts\carMoveDirection.gml</script>
+        <script>scripts\carMoveArrow.gml</script>
       </scripts>
       <scripts name="WEAPONS">
         <script>scripts\carWeaponSet.gml</script>
@@ -150,6 +174,7 @@
       <script>scripts\carTargetSetPoint.gml</script>
       <script>scripts\carBrakePress.gml</script>
       <script>scripts\carCollideWalls.gml</script>
+      <script>scripts\carDrawShadow.gml</script>
     </scripts>
     <scripts name="GAME CONTROLLER">
       <scripts name="STATE">
@@ -172,13 +197,22 @@
     </scripts>
     <scripts name="CAMERA">
       <script>scripts\camDebug.gml</script>
+      <script>scripts\camSetTarget.gml</script>
+      <script>scripts\camSetState.gml</script>
     </scripts>
     <scripts name="USEFUL">
       <script>scripts\mouseOnUs.gml</script>
       <script>scripts\angleRotate.gml</script>
       <script>scripts\cycle.gml</script>
     </scripts>
+    <scripts name="WEATHER">
+      <script>scripts\weatherInit.gml</script>
+      <script>scripts\weatherUpdate.gml</script>
+    </scripts>
   </scripts>
+  <shaders name="shaders">
+    <shader type="GLSLES">shaders\shdBlack.shader</shader>
+  </shaders>
   <fonts name="fonts">
     <font>fonts\fSpeed</font>
     <font>fonts\fQuestion</font>
@@ -219,7 +253,11 @@
     </objects>
     <objects name="Obstacles">
       <object>objects\oBaseWall</object>
+      <object>objects\oMaterialMask</object>
       <object>objects\oUmbrella</object>
+      <object>objects\oTree</object>
+      <object>objects\oTrashcanSmall</object>
+      <object>objects\oTrashacnBig</object>
     </objects>
     <object>objects\oControl</object>
     <object>objects\oGameController</object>

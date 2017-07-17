@@ -55,7 +55,7 @@ engineTemperatureIncr = .003;
 engineMaxTemperature = 60;
 
 desiredAngle = 0;
-angleTorque = .35;
+angleTorque = .15;
 
 brake = 0;
 
@@ -74,6 +74,7 @@ path_set_closed(pathMove, 0);
 //path_set_kind(pathMove, 1);
 //path_set_precision(pathMove, 2);
 
+
 // particles
 psys = part_system_create();
 part_system_automatic_update(psys, 0);
@@ -86,6 +87,15 @@ pem = part_emitter_create(psys);
 ptyre = part_type_create();
 part_type_life(ptyre, 15, 60);
 part_type_alpha2(ptyre, .1, 0);
+
+// car smoke
+smoke = part_type_create();
+part_type_sprite(smoke, sCarSmoke, 0, 0, 0);
+part_type_size(smoke, .1, 2, .1, .1);
+part_type_orientation(smoke, 0, 359, 1, 1, 0);
+part_type_life(smoke, 10, 160);
+part_type_alpha2(smoke, .1, 0);
+part_type_speed(smoke, 2, 3, 0, 0);
 
 </string>
           </argument>
@@ -115,6 +125,8 @@ path_delete(pathMove);
 
 part_emitter_destroy(psys, pem);
 part_type_destroy(ptyre);
+part_type_destroy(smoke);
+
 part_system_destroy(psys);
 
 </string>

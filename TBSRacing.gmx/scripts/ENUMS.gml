@@ -72,6 +72,12 @@ enum CARS
     __POLICE
 }
 
+enum CONTROL_TYPES
+{
+    POINTS,
+    ARROW
+}
+
 /////////////// WEAPONS
 enum WEAPONS
 {
@@ -100,4 +106,11 @@ enum LANG
 {
     RUS,
     ENG
+}
+
+enum WEAHTER
+{
+    __SUNNY = 1 << 0,
+    __CLOUDY = 1 << 1,
+    __RAINY = 1 << 2
 }

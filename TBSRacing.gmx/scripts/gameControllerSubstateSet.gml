@@ -4,6 +4,7 @@ with (oGameController)
     substate = argument[0];
     systemCursorSet(sCursorPointer);
     // resets
+    arrowBuild = 0;
     with (oEngineArrow)
         instance_destroy();
     with (oButtonCarGUIBrake)
@@ -29,9 +30,12 @@ with (oGameController)
     case SUBSTATES.__CAR_MOVE:
         instance_create(0, 0, oEngineArrow);
         instance_create(0, 0, oButtonCarGUIBrake);
-        instance_create(0, 0, oButtonCarGUIEditPoints);
-        instance_create(0, 0, oButtonCarGUIDeletePoints);
-        instance_create(0, 0, oButtonCarGUIDeletePath);
+        if (selectedCar.control == CONTROL_TYPES.POINTS)
+        {
+            instance_create(0, 0, oButtonCarGUIEditPoints);
+            instance_create(0, 0, oButtonCarGUIDeletePoints);
+            instance_create(0, 0, oButtonCarGUIDeletePath);
+        }
         break;
     }
 }

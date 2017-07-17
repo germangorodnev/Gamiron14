@@ -94,7 +94,7 @@ case CARS.__ORANGE:
     spdMaxForward = 250;
     spdAccelForward = .65;
     spdAccelBrake = .85;
-    angleTorque = .8;
+    angleTorque = .23;
     
     // particles
     part_type_sprite(ptyre, sPlayerCar3Tyre, 0, 0, 0);

@@ -6,6 +6,7 @@ var dx = lengthdir_x(spd, argument[0]),
 
 if (!brake)    
     physics_apply_force(phy_position_x, phy_position_y, dx, dy);
+    
 
 carParticlesGenerate();
 carCollideWalls();

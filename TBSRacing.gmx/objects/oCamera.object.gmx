@@ -37,6 +37,7 @@ view_hport = global.guiH;
 view_hborder = view_wview / 2;
 view_vborder = view_hview / 2;
 view_visible = 1;
+friction = .4;
 
 state = CAM_STATES.__FREE;
 
@@ -145,9 +146,14 @@ if (camFlags &amp; CAM_FLAGS.DARKEN)
 switch (state)
 {
 case CAM_STATES.__FREE:
-    var mscreenx = mouse_x - view_xview,
+    /*var mscreenx = mouse_x - view_xview,
         mscreeny = mouse_y - view_yview;
-    if (!point_in_rectangle(mscreenx, mscreeny, 
+    friction = 0;
+    if ((abs(mouse_x - x) &gt;= (global.guiW / 2 - 40)) || (abs(mouse_y - y) &gt;= (global.guiH / 2 - 40)))
+    {
+        move_towards_point(mouse_x, mouse_y, movSpd); //(distance_to_point(mouse_x, mouse_y) / 4) * (global.guiW / global.guiH));
+    }
+    /*if (!point_in_rectangle(mscreenx, mscreeny, 
         mdeadx1, mdeady1, mdeadx2, mdeady2))
     {
         targX = mouse_x;
@@ -165,13 +171,11 @@ case CAM_STATES.__FREE:
             y += lengthdir_y(movSpd, dd);  
         }
     }
-    else
+    else*/
     {
         var ymove = oGameController.key[KEY.CAM_BOTTOM] - oGameController.key[KEY.CAM_TOP],
             xmove = oGameController.key[KEY.CAM_RIGHT] - oGameController.key[KEY.CAM_LEFT],
             spdmove = movSpd;
-        if ((xmove != 0) &amp;&amp; (ymove != 0))
-            spdmove *= .7;
         x += spdmove * xmove;
         y += spdmove * ymove;
     }
@@ -189,18 +193,6 @@ default: //case CAM_STATES.__PLAYER:
     }
     else
         move_towards_point(targX, targY, movSpd);
-    /*if (shake)
-    {
-        var cl = min(view_xview, shX),
-            cr = min(room_width - view_xview, shX);
-        if (cl &gt;= shX &amp;&amp; cr &gt;= shX)
-            view_xview += choose(irandom_range(1, shX) * -1, irandom_range(1, shX));
-        else if (cl &gt;= shX)
-            view_xview += irandom_range(1, shX) * -1;
-        else
-            view_xview += irandom_range(1, shX);
-        y += irandom_range(-1 * min(view_yview, shY), min(room_height - view_yview, shY)); //irandom_range(-shY, shY);
-    }*/
     break;
 }
 

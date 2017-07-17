@@ -49,9 +49,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.175"
-     inkscape:cx="285.48771"
-     inkscape:cy="-178.30085"
+     inkscape:zoom="0.49497476"
+     inkscape:cx="121.38843"
+     inkscape:cy="-345.17751"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -110,11 +110,30 @@
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
     <g
+       id="g10324"
+       transform="matrix(0.90943811,0.08593714,-0.08593714,0.90943811,74.136202,99.604505)"
+       style="fill:#000000;fill-opacity:1;stroke:none"
+       inkscape:export-filename="D:\Gamedeveloping\Gamiron 14\graphen\gui\brake.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <path
+         inkscape:connector-curvature="0"
+         id="path7300-3-1"
+         d="m 566.35928,1546.9554 -5.08981,24.6868 11.65226,2.8807 3.70759,-24.015 z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:3.22735476;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         sodipodi:nodetypes="ccccc"
+         inkscape:connector-curvature="0"
+         id="path7302-2-3"
+         d="m 540.08641,1571.4252 c 13.31005,-5.8236 33.49623,-4.8574 55.42205,-2.1734 l -8.10018,76.535 c -25.33828,16.2552 -42.72337,12.6272 -56.50875,0 z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:3.22735476;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    </g>
+    <g
        id="g7361"
        inkscape:export-filename="D:\Gamedeveloping\Gamiron 14\graphen\gui\brake.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90"
-       transform="translate(20.203051,0)">
+       transform="translate(-18.182745,228.29447)">
       <path
          inkscape:connector-curvature="0"
          id="path7300"
@@ -443,8 +462,8 @@
        id="rect7139"
        width="1280"
        height="720"
-       x="-371.42856"
-       y="738.07648"
+       x="911.42853"
+       y="380.93362"
        ry="0.66258901" />
     <path
        style="fill:none;fill-rule:evenodd;stroke:#4e8c50;stroke-width:6;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
@@ -731,6 +750,195 @@
            inkscape:connector-curvature="0"
            sodipodi:nodetypes="ccccccccccccccccc" />
       </g>
+    </g>
+    <g
+       id="g10324-4"
+       transform="matrix(0.90943811,0.08593714,-0.08593714,0.90943811,185.3184,115.25043)"
+       style="fill:#000000;fill-opacity:1;stroke:none"
+       inkscape:export-filename="D:\Gamedeveloping\Gamiron 14\graphen\gui\brake pressed.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <path
+         inkscape:connector-curvature="0"
+         id="path7300-3-1-1"
+         d="m 566.35928,1546.9554 -5.08981,24.6868 11.65226,2.8807 3.70759,-24.015 z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:3.22735476;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         sodipodi:nodetypes="ccccc"
+         inkscape:connector-curvature="0"
+         id="path7302-2-3-6"
+         d="m 540.08641,1571.4252 c 13.31005,-5.8236 33.49623,-4.8574 55.42205,-2.1734 l -10.32372,70.636 c -25.33828,16.2552 -42.72337,12.6272 -56.50875,0 z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:3.22735476;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    </g>
+    <path
+       style="fill:#727272;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:3;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 566.22442,1570.7373 -4.73125,22.9477 10.8314,2.6778 3.4464,-22.3233 z"
+       id="path7300-3"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="D:\Gamedeveloping\Gamiron 14\graphen\gui\brake pressed.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="fill:#7c7c7c;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 541.80237,1593.4833 c 12.1691,-5.6675 26.16907,-4.4742 48.73986,0.7576 l -6.81853,62.8821 c -23.5533,15.11 -39.71367,11.7376 -52.52793,0 z"
+       id="path7302-2"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       inkscape:export-filename="D:\Gamedeveloping\Gamiron 14\graphen\gui\brake pressed.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <ellipse
+       style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.90880692;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="path7304-01"
+       cx="870.85321"
+       cy="1418.5306"
+       transform="matrix(0.96864716,0.2484405,-0.20638059,0.97847179,0,0)"
+       rx="2.4467666"
+       ry="2.671025"
+       inkscape:export-filename="D:\Gamedeveloping\Gamiron 14\graphen\gui\brake pressed.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <ellipse
+       style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.90880692;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="path7304-0-51"
+       cx="871.34247"
+       cy="1434.5568"
+       transform="matrix(0.96864716,0.2484405,-0.20638059,0.97847179,0,0)"
+       rx="2.4467666"
+       ry="2.671025"
+       inkscape:export-filename="D:\Gamedeveloping\Gamiron 14\graphen\gui\brake pressed.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <ellipse
+       style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.90880692;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="path7304-6-3"
+       cx="871.34253"
+       cy="1450.4049"
+       transform="matrix(0.96864716,0.2484405,-0.20638059,0.97847179,0,0)"
+       rx="2.4467666"
+       ry="2.671025"
+       inkscape:export-filename="D:\Gamedeveloping\Gamiron 14\graphen\gui\brake pressed.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <ellipse
+       style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.90880692;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="path7304-3-8"
+       cx="871.50562"
+       cy="1466.431"
+       transform="matrix(0.96864716,0.2484405,-0.20638059,0.97847179,0,0)"
+       rx="2.4467666"
+       ry="2.671025"
+       inkscape:export-filename="D:\Gamedeveloping\Gamiron 14\graphen\gui\brake pressed.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <ellipse
+       style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.83999383;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="path7304-8-1"
+       cx="863.52197"
+       cy="1410.8296"
+       transform="matrix(0.96796195,0.25109693,-0.17935894,0.9837837,0,0)"
+       rx="2.2755249"
+       ry="2.6686869"
+       inkscape:export-filename="D:\Gamedeveloping\Gamiron 14\graphen\gui\brake pressed.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <ellipse
+       style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.83999383;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="path7304-0-5-7"
+       cx="863.97711"
+       cy="1426.8417"
+       transform="matrix(0.96796195,0.25109693,-0.17935894,0.9837837,0,0)"
+       rx="2.2755249"
+       ry="2.6686869"
+       inkscape:export-filename="D:\Gamedeveloping\Gamiron 14\graphen\gui\brake pressed.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <ellipse
+       style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.83999383;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="path7304-6-9-5"
+       cx="863.97711"
+       cy="1442.676"
+       transform="matrix(0.96796195,0.25109693,-0.17935894,0.9837837,0,0)"
+       rx="2.2755249"
+       ry="2.6686869"
+       inkscape:export-filename="D:\Gamedeveloping\Gamiron 14\graphen\gui\brake pressed.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <ellipse
+       style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.83999383;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="path7304-3-2-0"
+       cx="864.12878"
+       cy="1458.6881"
+       transform="matrix(0.96796195,0.25109693,-0.17935894,0.9837837,0,0)"
+       rx="2.2755249"
+       ry="2.6686869"
+       inkscape:export-filename="D:\Gamedeveloping\Gamiron 14\graphen\gui\brake pressed.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.64572334px;line-height:415.99998474%;font-family:'Comic Sans MS';-inkscape-font-specification:'Comic Sans MS';letter-spacing:0px;word-spacing:0px;writing-mode:tb-rl;fill:#000000;fill-opacity:1;stroke:#b22f2f;stroke-width:0.7698608;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       x="906.42999"
+       y="1436.2316"
+       id="text7357-0"
+       sodipodi:linespacing="415.99998%"
+       transform="matrix(0.93804234,0.11091257,-0.19602326,1.0428725,0,0)"
+       inkscape:export-filename="D:\Gamedeveloping\Gamiron 14\graphen\gui\brake pressed.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan7359-3"
+         x="1464.1938"
+         y="878.46771"
+         style="line-height:415.99998474%;letter-spacing:-5.95360613px;stroke:#b22f2f;stroke-width:0.7698608;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         dy="-3.2980044">BRAKE</tspan></text>
+    <image
+       y="-953.59186"
+       x="1176.63"
+       id="image11517"
+       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAdCAYAAAC9pNwMAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
+AAAN1wAADdcBQiibeAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAOgSURB
+VEiJvdZLbNRVFMfxT5lH6ROkPFvk0RJBCRo3SqKxlaghMT4STVwoZefOjYkrjTtNDFGMK4OPCN0Y
+XakBQ6LQKgiRIAgNqaIIwtS29BFbZqbt/Ntx8Z+ZloFiSwsnmfzn3nvu/d7zu68TQQvewRr0oMtt
+sjPITvq14wO8iPpbBS3B8/gSovPKBOPpYp9unMZfQkWGcvXzsByr0Y9XkJwJuAQ/YfO9Na9ZULpe
+b/qY3uETBkbaBeOp6Y61SajWtMHkoq6K19u6am+hOpsdM5Q5L5m5KBkkZMYGBdlwIp3JAwZH/8yP
+8zreni4UornvV+gZGj23dGDkjDtKN4azKomojjeojjdc1enc4BcGR8/li2/MFEq4TpDBPuhOHb5h
+h46BXY73vCnch17FWzOFTgbDQehNH5/SORX8o73v/XxxB3beDLQYfBL+HT07pfP8yBILSjfki8+g
+di7AZ5FNB13Gs5nrO5dENdZ+amEIvwsHsGK24DRGssaNZa85ywWLRxZqqttjUekmWI8jwlvvpsEw
+iqsi7hjYpTWxzVDmfKEuNq/aw7Ufqo6vI7xA9mHZnIFP973rdN97LqePaUtsdyVzoeBYGqnRWLc7
+f9TuFso+bXgxOBOCA6f6dugY+ChfdyoddGtNNLuS+bvgPD8Hr4rXwz34HktvBhyH9v6dfhv4JA99
+AQ/hUDro1nYNfLHG2s9UxdbARnyHJf8HLikqD6Ey938Yz2J/rlyOb7BlfkHmdYWOI2N9WhPbDY7+
+Ab/jUXRON+LS3Hc0F+n+SW2p3ESODI/1+bHzZclMYqJjpMYjtR+rjK0iPGr7UDNdcD9G8By+vo7/
+ELbiaCro1NbZLBVMBFUWXa6xbreK2Eq4Tyj7deHFUjcgIpTqRrZAqMaDFbGVmupalEcn7pFU0Ong
+pZfykzqBx3JBTQmeiVVgLxrLo8s11u3JywzSQdfkU9AhXPNCWlUs9UwsiSfxQyro0pZolsxcLDRO
+yH4nbBAqtDjfPpuI81adG3RzeXSFprqW/BojfNFaE9skM5fgV6HsvXMBhkXCjXR/ZWy1proWZdGJ
+e2Qoc15bolk66IGf8cRspJ5s/XgcJ69kLmjr3G44uFxojJSUKpvYfA/g8zniFqxG+K5nq+L12afW
+Hso+vfZwtjK2Kp86BxjD1NnGLGwxTiFbHW/I1lZsyUN/ESYOZcIje0tsiTAXz0PHhW/3bbGlwjw7
+q+jyuB22DEfxbXHDf7HDSZxZ6O64AAAAAElFTkSuQmCC
+"
+       preserveAspectRatio="none"
+       height="29"
+       width="30"
+       transform="matrix(-0.70710678,0.70710678,-0.70710678,-0.70710678,0,0)" />
+    <g
+       id="g11541"
+       transform="matrix(-0.67452273,-0.67452273,0.67452273,-0.67452273,-1236.7511,2384.9636)"
+       inkscape:export-filename="D:\Gamedeveloping\Gamiron 14\graphen\gui\cursor arrow.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       style="stroke-width:2.09661365;stroke-miterlimit:4;stroke-dasharray:none">
+      <path
+         sodipodi:nodetypes="cccccccc"
+         inkscape:connector-curvature="0"
+         id="path11520"
+         d="m -183.57142,1483.255 c 0.0794,3.2538 1.68251,4.0699 -0.35714,10.7143 l 24.46428,-3.0357 0,7.1429 c 3.30547,-5.1469 5.93503,-8.6483 12.85714,-10.1786 -4.17417,-1.3513 -7.27409,-1.9798 -13.65493,-9.9511 l 0,7.094 z"
+         style="fill:#ddd768;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:2.09661365;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none" />
+      <path
+         sodipodi:nodetypes="ccccccc"
+         id="path11520-0"
+         d="m -159.78824,1479.2568 0.0893,6.3794 -22.95652,-1.919 c 0.15866,1.3627 0.91322,1.9812 0.77691,4.6425 l 31.75646,-0.6132 c -4.59359,-2.3999 -3.57506,-1.2428 -9.66613,-8.4897 z"
+         style="fill:#e5e18d;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:2.09661365;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         inkscape:connector-curvature="0" />
     </g>
   </g>
 </svg>

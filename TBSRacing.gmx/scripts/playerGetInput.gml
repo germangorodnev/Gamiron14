@@ -7,11 +7,17 @@ case os_win32:
         mgp = controlBit & CONTROL.__GAMEPAD;
     // 0 - pressed, 1 - const pressed, 2 - released, -1 - non active
     if ((mouse_check_button_pressed(mb_left)))// * mkey) || (gamepad_button_check_pressed(0, gp_shoulderr) * mgp))
+    {
         key[KEY.MOUSE_LEFT] = 0;
+        lReleased = 0;
+    }
     else if ((mouse_check_button(mb_left)))// * mkey) || (gamepad_button_check(0, gp_shoulderr) * mgp))  
         key[KEY.MOUSE_LEFT] = 1;
     else if ((mouse_check_button_released(mb_left)))// * mkey) || (gamepad_button_check_released(0, gp_shoulderr) * mgp))  
+    {
         key[KEY.MOUSE_LEFT] = 2;
+        lReleased = 1;
+    }
     else
         key[KEY.MOUSE_LEFT] = -1;
 
@@ -24,13 +30,13 @@ case os_win32:
     else
         key[KEY.MOUSE_RIGHT] = -1;
         
-    if (keyboard_check(vk_left))
+    if (keyboard_check(ord('A')))
         key[KEY.CAM_LEFT] = 1;
-    if (keyboard_check(vk_up))
+    if (keyboard_check(ord('W')))
         key[KEY.CAM_TOP] = 1;
-    if (keyboard_check(vk_right))
+    if (keyboard_check(ord('D')))
         key[KEY.CAM_RIGHT] = 1;
-    if (keyboard_check(vk_down))
+    if (keyboard_check(ord('S')))
         key[KEY.CAM_BOTTOM] = 1;
     break;
     

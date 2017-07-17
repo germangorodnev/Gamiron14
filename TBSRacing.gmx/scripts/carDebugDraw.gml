@@ -8,11 +8,11 @@ draw_set_colour(c_white);
 draw_set_font(fSpeed);
 draw_set_halign(fa_left);
 draw_set_valign(fa_top);
-draw_text_colour(phy_position_x + 20, phy_position_y - 40, "Speed: " + string(spd), 
+draw_text_colour(phy_position_x + 20, phy_position_y - 40, "Speed: " + string(spd) + "; Speed rl: " + string(phy_speed), 
     c_black, c_black, c_black, c_black, 1);
 draw_text_colour(phy_position_x + 20, phy_position_y - 20, "Percent: " + string(spdDesiredPercent), 
     c_black, c_black, c_black, c_black, 1);
-draw_text_colour(phy_position_x + 20, phy_position_y, "Angle: " + string(phy_rotation) + "; Angle D: " + string(dDir), 
+draw_text_colour(phy_position_x + 20, phy_position_y, "Angle: " + string(phy_rotation), 
     c_black, c_black, c_black, c_black, 1);
 draw_text_colour(phy_position_x + 20, phy_position_y + 20, "Spd Desired: " + string(spdDesired), 
     c_black, c_black, c_black, c_black, 1);

@@ -7,6 +7,7 @@ with (oGameController)
         pathId = selectedCar.pathMove;
         gameControllerSubstateSet(SUBSTATES.__CAR_MOVE);
         gameControllerGuistateSet(GUI_STATES.__GUI);
+        camSetTarget(selectedCar.phy_position_x, selectedCar.phy_position_y);
     }
     else
     {

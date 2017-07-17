@@ -31,7 +31,7 @@ image_speed = 0;
 path_clear_points(pathMove);
 
 type = choose(CARS.__MINI_VAN, CARS.__ORANGE, CARS.__MINI_TRUCK);
-
+control = CONTROL_TYPES.ARROW;
 state = PL_CAR_ST.__INACTIVE;
 
 pointId = -1;
@@ -42,7 +42,15 @@ engineArrowH = -1;
 // target to chase
 targetId = instance_create(x, y, oCarTarget);
 
-dDir = 0;
+angleAdd = 0;
+
+// new control form
+arrowDir = 0;
+
+// colour
+colArrowInner = make_colour_hsv(135, 195, 170);
+colArrowOuter = make_colour_hsv(135, 195, 121);
+arrowLen = 150;
 
 carPhysicsInit(type);
 if (type == CARS.__ORANGE)
@@ -129,58 +137,74 @@ for (var i = 0; i &lt; weaponsCount; i++)
 if (!(flags &amp; OBJ_PAR.UPDATABLE))
     exit;
     
-switch (state)
+switch (control)
 {
-case PL_CAR_ST.__INACTIVE:
-    carProceedParams();
-    part_system_update(psys);
-    
-    // take the point
-    if (path_get_number(pathMove))
+case CONTROL_TYPES.ARROW:
+    switch (state)
     {
-        carPathGetNextPoint();
-        exit;
+    case PL_CAR_ST.__INACTIVE:
+    case PL_CAR_ST.__MOVE_TO_POINT:
+        carProceedParams();
+        part_system_update(psys);
+        carMoveArrow();    
+        break;
     }
-    else
-        carMoveDirection(-phy_rotation);
     break;
-    
-case PL_CAR_ST.__MOVE_TO_POINT:
-    // change variables
-    carProceedParams();
-    part_system_update(psys);
-    
-    // update position
-    if (!path_get_number(pathMove))
+case CONTROL_TYPES.POINTS:
+    switch (state)
     {
-        // well, stop
-        carSetState(PL_CAR_ST.__INACTIVE);
-    }
-    else
-    {
-        carTargetSetPoint(path_get_point_x(pathMove, pointId), path_get_point_y(pathMove, pointId));
-    }
-    
-    carMoveToPoint(targetId.phy_position_x, targetId.phy_position_y);
+    case PL_CAR_ST.__INACTIVE:
+        carProceedParams();
+        part_system_update(psys);
         
-    if (physics_test_overlap(phy_position_x, phy_position_y, phy_rotation, targetId))
-    {
-        // get next point
-        show_debug_message("POINT DONE!");
-        path_delete_point(pathMove, pointId);
+        // take the point
         if (path_get_number(pathMove))
         {
-            carTargetSetPoint(path_get_point_x(pathMove, pointId), path_get_point_y(pathMove, pointId));
+            carPathGetNextPoint();
+            exit;
+        }
+        else
+            carMoveDirection(-phy_rotation);
+        break;
+        
+    case PL_CAR_ST.__MOVE_TO_POINT:
+        // change variables
+        carProceedParams();
+        part_system_update(psys);
+        
+        // update position
+        if (!path_get_number(pathMove))
+        {
+            // well, stop
+            carSetState(PL_CAR_ST.__INACTIVE);
         }
         else
         {
-            carPathDelete();
-            carSetState(PL_CAR_ST.__INACTIVE);
+            carTargetSetPoint(path_get_point_x(pathMove, pointId), path_get_point_y(pathMove, pointId));
         }
+        
+        carMoveToPoint(targetId.phy_position_x, targetId.phy_position_y);
+            
+        if (physics_test_overlap(phy_position_x, phy_position_y, phy_rotation, targetId))
+        {
+            // get next point
+            show_debug_message("POINT DONE!");
+            path_delete_point(pathMove, pointId);
+            if (path_get_number(pathMove))
+            {
+                carTargetSetPoint(path_get_point_x(pathMove, pointId), path_get_point_y(pathMove, pointId));
+            }
+            else
+            {
+                carPathDelete();
+                carSetState(PL_CAR_ST.__INACTIVE);
+            }
+        }
+        break;
     }
     break;
 }
-    
+        
 
 </string>
           </argument>
@@ -232,40 +256,6 @@ flagSet(OBJ_PAR.UPDATABLE, 1);
             <string>/// on physical pause
 phy_active = 0;
 flagSet(OBJ_PAR.UPDATABLE, 0);
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="7" enumb="14">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// draw path
-if (!path_get_number(pathMove))
-    exit;
-var pc = path_get_number(pathMove);
-for (var i = 0; i &lt; pc - 1; i++)
-{
-    playerPathDrawLine(path_get_point_x(pathMove, i), path_get_point_y(pathMove, i),
-        path_get_point_x(pathMove, i + 1), path_get_point_y(pathMove, i + 1));
-    playerPathDrawPoint(pathMove, i);
-}
-playerPathDrawPoint(pathMove, pc - 1);
-
 </string>
           </argument>
         </arguments>
@@ -360,7 +350,13 @@ playerPathDrawPoint(pathMove, pc - 1);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_self();
+            <string>if (oGameController.selectedCar == id)
+    drawBigArrow(phy_position_x, phy_position_y, 
+        phy_position_x + lengthdir_x(arrowLen, arrowDir),
+        phy_position_y + lengthdir_y(arrowLen, arrowDir),
+        colArrowInner, colArrowOuter, image_alpha);
+//carDrawShadow();
+draw_self();
 carDebugDraw();
 </string>
           </argument>

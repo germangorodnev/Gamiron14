@@ -35,6 +35,7 @@ instance_create(oPlayerCar.x, oPlayerCar.y, oCamera);
 
 controlBit = CONTROL.__KEYMOUSE;
 key[KEY.CNT] = 0;
+lReleased = 1;
 
 ingameState = INGAME_STATES.TURN;
 substate = SUBSTATES.__NONE;
@@ -74,6 +75,11 @@ pathPointRad = 5;
 pathPointTrack = -1;
 pathId = -1;
 
+// control arrow
+arrowBuild = 0;
+arrowColInner = make_colour_hsv(38, 195, 170);
+arrowColOuter = make_colour_hsv(38, 106, 86);
+
 kmhx = spidx;
 kmhy = spplatey;
 kmhtx = kmhx + 8;
@@ -90,7 +96,53 @@ selectedSignMaxXscale = 1.7;
 turnTimerX = global.guiW div 2;
 turnTimerY = global.guiH div 8;
 
+weather = WEAHTER.__RAINY;
+// rain
+psysrain = part_system_create();
+part_system_depth(psysrain, depth);
+part_system_automatic_update(psysrain, 0);
+// emitter
+rainemm = part_emitter_create(psysrain);
+
+// type
+raintype = part_type_create();
+part_type_sprite(raintype, sWeatherRain, 0, 0, 0);
+part_type_life(raintype, room_speed * 1.5, room_speed * 2);
+part_type_speed(raintype, 2, 4, 0, 0);
+
+
+
+weatherInit(weather);
+
+
 alarm[0] = room_speed / 2;
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="1" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>part_type_destroy(raintype);
+part_emitter_destroy(psysrain, rainemm);
+part_system_destroy(psysrain);
+
 
 </string>
           </argument>
@@ -171,6 +223,7 @@ case INGAME_STATES.TURN:
     
 case INGAME_STATES.GAME:
     // performing
+    weatherUpdate();
     if (turnTimer &amp;&amp; !--turnTimer)
     {
         // end, pause
@@ -229,7 +282,7 @@ case INGAME_STATES.TURN:
             draw_set_font(fSpeed);
             draw_set_halign(fa_left);
             draw_set_valign(fa_top);
-            draw_text_colour(kmhtx, kmhty, string_format(selectedCar.spd, 1, 0), black, black, black, black, 1);
+            draw_text_colour(kmhtx, kmhty, string_format(selectedCar.phy_speed * 50, 1, 0), black, black, black, black, 1);
         }
         break;
     }
@@ -278,7 +331,12 @@ case SUBSTATES.__CAR_MOVE:
         draw_sprite_ext(sSelectedSign, 0, selectedCar.phy_position_x, selectedCar.phy_position_y - selectedSignYoff - abs(sin(global.ctime / 75)) * selectedSignMaxH, clamp(selectedSignXscale, -1, 1), 1, 0, c_white, 1);
         with (selectedCar)
         {
-            event_perform(ev_other, ev_user4);
+            if (control == CONTROL_TYPES.ARROW)
+            {
+                if (oGameController.arrowBuild)
+                    drawBigArrow(phy_position_x, phy_position_y, mouse_x, mouse_y,
+                        oGameController.arrowColInner, oGameController.arrowColOuter, 1);
+            }
         }
     }
     break;
