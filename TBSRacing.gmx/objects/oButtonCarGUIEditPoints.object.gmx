@@ -46,6 +46,7 @@ active = 0;
 
 colActive = make_colour_hsv(86, 68, 66); 
 colInactive = make_colour_hsv(0, 0, 12); 
+colMayBeActive = make_colour_hsv(89, 118, 89);
 col = colInactive;
 
 rtx = rx1 + (rx2 - rx1) div 2;
@@ -104,9 +105,11 @@ image_yscale = hh / 32;
 if (!(flags &amp; OBJ_PAR.UPDATABLE))
     exit;
 
-if (oGameController.key[KEY.MOUSE_LEFT] == 0)
+if (mouseOnUs())
 {
-    if (mouseOnUs())
+    if (!active)
+        col = colMayBeActive;
+    if (oGameController.key[KEY.MOUSE_LEFT] == 0)
     {
         // edit points
         switch (active)
@@ -123,6 +126,9 @@ if (oGameController.key[KEY.MOUSE_LEFT] == 0)
         }
     }
 }
+else
+    if (!active)
+        col = colInactive;
 
 
 x = view_xview + rx1;

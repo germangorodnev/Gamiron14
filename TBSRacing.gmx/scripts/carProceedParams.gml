@@ -29,7 +29,8 @@ else
 {
     // to 0
     spd -= min(spdAccelBrake * sign(spd), abs(spd) * sign(spd));
-    spd = clamp(spd, -spdMaxBackward, spdMaxForward);    
+    spd = clamp(spd, -spdMaxBackward, spdMaxForward);  
+    // change speed too  
 }
 
 

@@ -133,6 +133,8 @@ switch (state)
 {
 case PL_CAR_ST.__INACTIVE:
     carProceedParams();
+    part_system_update(psys);
+    
     // take the point
     if (path_get_number(pathMove))
     {
@@ -146,6 +148,7 @@ case PL_CAR_ST.__INACTIVE:
 case PL_CAR_ST.__MOVE_TO_POINT:
     // change variables
     carProceedParams();
+    part_system_update(psys);
     
     // update position
     if (!path_get_number(pathMove))

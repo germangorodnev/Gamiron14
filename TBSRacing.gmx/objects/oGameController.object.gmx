@@ -80,6 +80,11 @@ kmhtx = kmhx + 8;
 kmhty = kmhy + 1;
 black = c_black;
 
+selectedSignYoff = 35;
+selectedSignMaxH = 25;
+selectedSignXscale = 1;
+selectedSignXpath = 0; // 0 - to -1, 1 - to 1
+selectedSignMaxXscale = 1.7;
 
 // time
 turnTimerX = global.guiW div 2;
@@ -135,13 +140,18 @@ gameControllerSubstateSet(SUBSTATES.__NONE);
           <argument>
             <kind>1</kind>
             <string>/// control the game
-// updatable
-// exit
+playerGetInput();
+switch (global.gameState)
+{
+case GAME_STATES.__TURNENDYESNO:
+case GAME_STATES.__PAUSE:
+    exit;
+    break;
+}
 
 switch (ingameState)
 {
 case INGAME_STATES.TURN:
-    playerGetInput();
     // determine actions
     switch (substate)
     {
@@ -160,7 +170,6 @@ case INGAME_STATES.TURN:
     
     
 case INGAME_STATES.GAME:
-    playerGetInput();
     // performing
     if (turnTimer &amp;&amp; !--turnTimer)
     {
@@ -220,7 +229,7 @@ case INGAME_STATES.TURN:
             draw_set_font(fSpeed);
             draw_set_halign(fa_left);
             draw_set_valign(fa_top);
-            draw_text_colour(kmhtx, kmhty, string_format(selectedCar.spd * 15, 1, 0), black, black, black, black, 1);
+            draw_text_colour(kmhtx, kmhty, string_format(selectedCar.spd, 1, 0), black, black, black, black, 1);
         }
         break;
     }
@@ -265,6 +274,8 @@ case SUBSTATES.__NONE:
 case SUBSTATES.__CAR_MOVE:
     if (instance_exists(selectedCar))
     {
+        // "selected" arrow
+        draw_sprite_ext(sSelectedSign, 0, selectedCar.phy_position_x, selectedCar.phy_position_y - selectedSignYoff - abs(sin(global.ctime / 75)) * selectedSignMaxH, clamp(selectedSignXscale, -1, 1), 1, 0, c_white, 1);
         with (selectedCar)
         {
             event_perform(ev_other, ev_user4);

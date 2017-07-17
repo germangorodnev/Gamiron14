@@ -39,6 +39,8 @@ ry1 = oCamera.mdeady1 + 15;
 rx2 = rx1 + 300;
 ry2 = ry1 + 80;
 col = make_colour_hsv(0, 0, 12);
+colHover = make_colour_hsv(0, 176, 120);
+cc = col;
 
 rtx = rx1 + 150;
 rty = ry1 + 40;
@@ -98,12 +100,13 @@ image_yscale = hh / 32;
 if (!(flags &amp; OBJ_PAR.UPDATABLE))
     exit;
 
-if (oGameController.key[KEY.MOUSE_LEFT] == 0)
+if (mouseOnUs())
 {
+    cc = colHover;
+    if (oGameController.key[KEY.MOUSE_LEFT] == 0)
+    {
     if (oGameController.guistate == GUI_STATES.__GUI)
     {
-        if (mouseOnUs())
-        {
             if (oGameController.turnEndApproval)
             {
                 // clicked  
@@ -118,7 +121,8 @@ if (oGameController.key[KEY.MOUSE_LEFT] == 0)
         }
     }
 }
-
+else
+    cc = col;
 
 x = view_xview + rx1;
 y = view_yview + ry1;
@@ -196,7 +200,7 @@ image_speed = 0;
           <argument>
             <kind>1</kind>
             <string>/// draw
-drawCroppedRect(rx1, ry1, rx2, ry2, col, 1, 4);
+drawCroppedRect(rx1, ry1, rx2, ry2, cc, 1, 6);
 draw_set_font(fTurnEnd);
 draw_set_halign(fa_center);
 draw_set_valign(fa_middle);

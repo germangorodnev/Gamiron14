@@ -29,9 +29,24 @@
       <sprites name="Things">
         <sprite>sprites\sTaran</sprite>
       </sprites>
-      <sprite>sprites\sPlayerCar1</sprite>
-      <sprite>sprites\sPlayerCar2</sprite>
-      <sprite>sprites\sPlayerCar3</sprite>
+      <sprites name="Player">
+        <sprites name="1">
+          <sprite>sprites\sPlayerCar1</sprite>
+          <sprite>sprites\sPlayerCar1Tyre</sprite>
+        </sprites>
+        <sprites name="2">
+          <sprite>sprites\sPlayerCar2</sprite>
+          <sprite>sprites\sPlayerCar2Tyre</sprite>
+        </sprites>
+        <sprites name="3">
+          <sprite>sprites\sPlayerCar3</sprite>
+          <sprite>sprites\sPlayerCar3Tyre</sprite>
+        </sprites>
+      </sprites>
+      <sprites name="Police">
+        <sprite>sprites\sPoliceCar1</sprite>
+      </sprites>
+      <sprite>sprites\sSelectedSign</sprite>
     </sprites>
     <sprites name="GUI">
       <sprites name="Car Control">
@@ -43,6 +58,7 @@
         <sprite>sprites\sSpeedometer</sprite>
         <sprite>sprites\sSpeedometerArrow</sprite>
         <sprite>sprites\sBrake</sprite>
+        <sprite>sprites\sBrakePressed</sprite>
         <sprite>sprites\sSpeedPlate</sprite>
         <sprite>sprites\sSpeedPlateArrow</sprite>
         <sprite>sprites\sKmh</sprite>
@@ -63,6 +79,9 @@
         <sprite>sprites\sGunSimpleBullet</sprite>
         <sprite>sprites\sGunSimpleIco</sprite>
       </sprites>
+    </sprites>
+    <sprites name="Obstacles">
+      <sprite>sprites\sUmbrella</sprite>
     </sprites>
   </sprites>
   <backgrounds name="background">
@@ -120,12 +139,17 @@
       <scripts name="WEAPONS">
         <script>scripts\carWeaponSet.gml</script>
       </scripts>
+      <scripts name="EFFECTS">
+        <script>scripts\carParticlesGenerate.gml</script>
+      </scripts>
       <script>scripts\carInMouse.gml</script>
       <script>scripts\carPhysicsInit.gml</script>
       <script>scripts\carInitEnd.gml</script>
       <script>scripts\carProceedParams.gml</script>
       <script>scripts\carSetDesiredSpeedByPercent.gml</script>
       <script>scripts\carTargetSetPoint.gml</script>
+      <script>scripts\carBrakePress.gml</script>
+      <script>scripts\carCollideWalls.gml</script>
     </scripts>
     <scripts name="GAME CONTROLLER">
       <scripts name="STATE">
@@ -195,6 +219,7 @@
     </objects>
     <objects name="Obstacles">
       <object>objects\oBaseWall</object>
+      <object>objects\oUmbrella</object>
     </objects>
     <object>objects\oControl</object>
     <object>objects\oGameController</object>

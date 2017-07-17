@@ -22,9 +22,9 @@ draw_line_width_colour(phy_position_x, phy_position_y,
     phy_position_y + lengthdir_y(15, phy_rotation),
     3, c_blue, c_blue);
 
-/*draw_line_width_colour(phy_position_x, phy_position_y, 
-    phy_position_x + lengthdir_x(15, dDirTest),
-    phy_position_y + lengthdir_y(15, dDirTest),
+draw_line_width_colour(phy_position_x, phy_position_y, 
+    phy_position_x + lengthdir_x(40, -phy_speed_x),
+    phy_position_y + lengthdir_y(40, -phy_speed_y),
     3, c_green, c_green);
     
 

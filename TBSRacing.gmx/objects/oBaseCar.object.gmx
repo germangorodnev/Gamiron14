@@ -43,10 +43,10 @@ fixturesCnt = 0;
 spd = 0;
 spdMaxForward = 135;
 spdMaxBackward = 55;
-spdAccelForward = .07;
-spdBrakeForward = .08;
-spdAccelBackward = .02;
-spdAccelBrake = .12;
+spdAccelForward = .4;
+spdBrakeForward = .6;
+spdAccelBackward = .3;
+spdAccelBrake = .2;
 spdDesiredPercent = 0;
 spdDesired = 0;
 
@@ -55,17 +55,37 @@ engineTemperatureIncr = .003;
 engineMaxTemperature = 60;
 
 desiredAngle = 0;
-angleTorque = .2;
+angleTorque = .35;
+
+brake = 0;
+
+inertiaDir = 0;
+forwardDir = 0;
+angleDif = 0;
 
 type = CARS.__NONE;
 
 weapon[0] = noone; // weapon objects
 weaponsCount = 0;
 
+// path
 pathMove = path_add();
 path_set_closed(pathMove, 0);
 //path_set_kind(pathMove, 1);
 //path_set_precision(pathMove, 2);
+
+// particles
+psys = part_system_create();
+part_system_automatic_update(psys, 0);
+part_system_depth(psys, 300);
+part_system_automatic_draw(psys, 1);
+part_system_position(psys, 0, 0);
+
+pem = part_emitter_create(psys);
+
+ptyre = part_type_create();
+part_type_life(ptyre, 15, 60);
+part_type_alpha2(ptyre, .1, 0);
 
 </string>
           </argument>
@@ -92,6 +112,11 @@ path_set_closed(pathMove, 0);
             <string>event_inherited();
 
 path_delete(pathMove);
+
+part_emitter_destroy(psys, pem);
+part_type_destroy(ptyre);
+part_system_destroy(psys);
+
 </string>
           </argument>
         </arguments>

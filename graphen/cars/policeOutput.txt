@@ -1,0 +1,8 @@
+physics_fixture_add_point(fix, 38 - xoff, 55 - yoff);
+physics_fixture_add_point(fix, 19 - xoff, 57 - yoff);
+physics_fixture_add_point(fix, 5 - xoff, 49 - yoff);
+physics_fixture_add_point(fix, 0 - xoff, 38 - yoff);
+physics_fixture_add_point(fix, 0 - xoff, 21 - yoff);
+physics_fixture_add_point(fix, 5 - xoff, 12 - yoff);
+physics_fixture_add_point(fix, 19 - xoff, 3 - yoff);
+physics_fixture_add_point(fix, 38 - xoff, 5 - yoff);

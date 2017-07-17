@@ -15,6 +15,9 @@ with (oGameController)
     with (oButtonCarGUIDeletePath)
         instance_destroy();
         
+    selectedSignXscale = 1;
+    selectedSignXpath = 0;
+
     gameControllerGuistateSet(GUI_STATES.__GUI);
         
     switch (substate)

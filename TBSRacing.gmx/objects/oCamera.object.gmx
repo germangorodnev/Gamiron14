@@ -117,8 +117,11 @@ shY = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//if (!(flags &amp; OBJ_PAR.UPDATABLE))
-//    exit;
+            <string>if (!(flags &amp; OBJ_PAR.UPDATABLE))
+{
+    speed = 0;
+    exit;
+}
     
 if (camFlags &amp; CAM_FLAGS.SHAKING)
 {
