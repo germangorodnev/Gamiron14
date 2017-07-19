@@ -3,7 +3,7 @@
   <spriteName>sTree</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>-4</depth>
+  <depth>-20</depth>
   <persistent>0</persistent>
   <parentName>oBaseWall</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -176,7 +176,7 @@ image_speed = 0;
   <PhysicsObjectAwake>-1</PhysicsObjectAwake>
   <PhysicsObjectKinematic>0</PhysicsObjectKinematic>
   <PhysicsShapePoints>
-    <point>96,128</point>
+    <point>110,120</point>
     <point>32,68</point>
   </PhysicsShapePoints>
 </object>

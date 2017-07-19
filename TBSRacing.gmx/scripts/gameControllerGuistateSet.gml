@@ -18,6 +18,10 @@ case GUI_STATES.__GUI:
         col = colInactive;
     }    
     break;
+    
+case GUI_STATES.__WEAPON_TARGET:
+    systemCursorSet(sCursorTarget);
+    break;
 
 case GUI_STATES.__PATH_EDIT:
     with (oButtonCarGUIEditPoints)

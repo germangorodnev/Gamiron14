@@ -106,8 +106,8 @@ if (mouseOnUs())
         cc = colHover;
     if (oGameController.key[KEY.MOUSE_LEFT] == 0)
     {
-    if (oGameController.guistate == GUI_STATES.__GUI)
-    {
+        if (oGameController.guistate == GUI_STATES.__GUI)
+        {
             if (oGameController.turnEndApproval)
             {
                 // clicked  

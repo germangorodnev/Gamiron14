@@ -71,6 +71,13 @@
         <sprite>sprites\sCursorPointEdit</sprite>
         <sprite>sprites\sCursorPointErase</sprite>
         <sprite>sprites\sCursorArrow</sprite>
+        <sprite>sprites\sCursorTarget</sprite>
+      </sprites>
+      <sprites name="Car HP">
+        <sprite>sprites\sCarHP</sprite>
+        <sprite>sprites\sCarHPWheel</sprite>
+        <sprite>sprites\sCarHPEngine</sprite>
+        <sprite>sprites\sCarHPWeaponIcon</sprite>
       </sprites>
     </sprites>
     <sprites name="Masks">
@@ -94,12 +101,15 @@
       <sprite>sprites\sTree</sprite>
       <sprite>sprites\sTrashcanBig</sprite>
       <sprite>sprites\sTrashcanSmall</sprite>
+      <sprite>sprites\sTrashcanPark</sprite>
+      <sprite>sprites\sBank</sprite>
     </sprites>
     <sprites name="Lights">
       <sprite>sprites\spr_light_spot</sprite>
       <sprite>sprites\spr_light_point</sprite>
       <sprite>sprites\spr_light_spark</sprite>
       <sprite>sprites\sLightPoint</sprite>
+      <sprite>sprites\sLantern1</sprite>
     </sprites>
     <sprites name="Weahte">
       <sprite>sprites\sWeatherRain</sprite>
@@ -108,10 +118,22 @@
   <backgrounds name="background">
     <background>background\background0</background>
     <background>background\tls1</background>
+    <background>background\background2</background>
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
     <script>scripts\ENUMS.gml</script>
+    <scripts name="GAME">
+      <scripts name="WEATHER">
+        <script>scripts\weatherInit.gml</script>
+        <script>scripts\weatherUpdate.gml</script>
+      </scripts>
+      <scripts name="LIGHT">
+        <script>scripts\gameLightUpdate.gml</script>
+        <script>scripts\gameLightDraw.gml</script>
+      </scripts>
+      <script>scripts\gameSetState.gml</script>
+    </scripts>
     <scripts name="FLAGS">
       <script>scripts\flagSet.gml</script>
       <script>scripts\flagIsActive.gml</script>
@@ -125,7 +147,6 @@
       <script>scripts\systemGetPhrase.gml</script>
       <script>scripts\systemCursorSet.gml</script>
       <script>scripts\systemMouseInGUI.gml</script>
-      <script>scripts\gameSetState.gml</script>
       <script>scripts\drawBigArrow.gml</script>
     </scripts>
     <scripts name="GUI">
@@ -166,6 +187,9 @@
       <scripts name="EFFECTS">
         <script>scripts\carParticlesGenerate.gml</script>
       </scripts>
+      <scripts name="PHYSICS">
+        <script>scripts\getLateralVelocity.gml</script>
+      </scripts>
       <script>scripts\carInMouse.gml</script>
       <script>scripts\carPhysicsInit.gml</script>
       <script>scripts\carInitEnd.gml</script>
@@ -184,6 +208,7 @@
         <script>scripts\gameControllerSubstateSet.gml</script>
         <script>scripts\gameControllerSubstateNoneUpdate.gml</script>
         <script>scripts\gameControllerSubstateCarMoveUpdate.gml</script>
+        <script>scripts\gameControllerSubstateCarWeaponsUpdate.gml</script>
       </scripts>
       <scripts name="ACTIONS">
         <script>scripts\gameControllerGuistateSet.gml</script>
@@ -194,6 +219,9 @@
       </scripts>
       <script>scripts\gameControllerGotCarClick.gml</script>
       <script>scripts\gameControllerApproveTurnEnd.gml</script>
+      <script>scripts\gameControllerCarModeChange.gml</script>
+      <script>scripts\gameControllerSelectSignUpdate.gml</script>
+      <script>scripts\gameControllerCarWeaponButtonsInit.gml</script>
     </scripts>
     <scripts name="CAMERA">
       <script>scripts\camDebug.gml</script>
@@ -204,10 +232,7 @@
       <script>scripts\mouseOnUs.gml</script>
       <script>scripts\angleRotate.gml</script>
       <script>scripts\cycle.gml</script>
-    </scripts>
-    <scripts name="WEATHER">
-      <script>scripts\weatherInit.gml</script>
-      <script>scripts\weatherUpdate.gml</script>
+      <script>scripts\objectInView.gml</script>
     </scripts>
   </scripts>
   <shaders name="shaders">
@@ -249,6 +274,7 @@
       <object>objects\oEngineArrow</object>
       <object>objects\oButtonEndTurn</object>
       <object>objects\oButtonCarGUIBrake</object>
+      <object>objects\oButtonCarGUIWeapon</object>
       <object>objects\oButtonCarGUIWeaponCarMode</object>
     </objects>
     <objects name="Obstacles">
@@ -256,12 +282,16 @@
       <object>objects\oMaterialMask</object>
       <object>objects\oUmbrella</object>
       <object>objects\oTree</object>
+      <object>objects\oLoveka</object>
+      <object>objects\oLantern1</object>
       <object>objects\oTrashcanSmall</object>
+      <object>objects\oTrashcanPark</object>
       <object>objects\oTrashacnBig</object>
     </objects>
     <object>objects\oControl</object>
     <object>objects\oGameController</object>
     <object>objects\oCamera</object>
+    <object>objects\oLightDepth</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rInit</room>

@@ -1,20 +1,59 @@
 // selected sign upd
-switch (selectedSignXpath)
-{
-case 0:
-    if (selectedSignXscale == -selectedSignMaxXscale)
-        selectedSignXpath = 1;
-    selectedSignXscale = max(-selectedSignMaxXscale, selectedSignXscale - .05);
-    break;
-case 1:
-    if (selectedSignXscale == selectedSignMaxXscale)
-        selectedSignXpath = 0;
-    selectedSignXscale = min(selectedSignMaxXscale, selectedSignXscale + .05);
-    break;
-}
+gameControllerSelectSignUpdate();
 
 switch (selectedCar.control)
-{
+{   
+case CONTROL_TYPES.ARROW:
+    switch (guistate)
+    {
+    case GUI_STATES.__GUI: // just move the mouse, nothing special about path
+        if (!systemMouseInGUI())
+        {
+            systemCursorSet(sCursorPointer);
+            if (arrowBuild)
+            {
+                systemCursorSet(sCursorArrow);
+                if (key[KEY.MOUSE_LEFT] == 1)
+                {
+                    with (selectedCar)
+                    {
+                        arrowDir = point_direction(phy_position_x, phy_position_y, mouse_x, mouse_y);
+                    }
+                }
+                else if (key[KEY.MOUSE_LEFT] == 2)
+                {
+                    arrowBuild = 0;
+                }
+            }
+            else if ((key[KEY.MOUSE_LEFT] == 0) 
+                && (!position_meeting(mouse_x, mouse_y, oButtonEndTurn)))
+            {
+                var osel = selectedCar;
+                var clickCar = gameControllerGotCarClick();
+                if (clickCar == osel)
+                {   
+                    arrowBuild = 1;
+                }
+                else
+                    arrowBuild = 0;
+            }
+        }  
+        else
+        {
+            // we're on the gui zone
+            systemCursorSet(sCursorPointer);
+        }              
+        break;
+        
+    case GUI
+    }
+    break;
+    
+    
+    
+    
+    
+    
 case CONTROL_TYPES.POINTS:
     switch (guistate)
     {
@@ -120,56 +159,6 @@ case CONTROL_TYPES.POINTS:
         }
         else
             systemCursorSet(sCursorPointer);        
-        break;
-    }
-    break;
-    
-    
-    
-    
-    
-    
-    
-    
-case CONTROL_TYPES.ARROW:
-    switch (guistate)
-    {
-    case GUI_STATES.__GUI: // just move the mouse, nothing special about path
-        if (!systemMouseInGUI())
-        {
-            systemCursorSet(sCursorPointer);
-            if (arrowBuild)
-            {
-                systemCursorSet(sCursorArrow);
-                if (key[KEY.MOUSE_LEFT] == 1)
-                {
-                    with (selectedCar)
-                    {
-                        arrowDir = point_direction(phy_position_x, phy_position_y, mouse_x, mouse_y);
-                    }
-                }
-                else if (key[KEY.MOUSE_LEFT] == 2)
-                {
-                    arrowBuild = 0;
-                }
-            }
-            if (key[KEY.MOUSE_LEFT] == 0)
-            {
-                var osel = selectedCar;
-                var clickCar = gameControllerGotCarClick();
-                if (clickCar == osel)
-                {   
-                    arrowBuild = 1;
-                }
-                else
-                    arrowBuild = 0;
-            }
-        }  
-        else
-        {
-            // we're on the gui zone
-            systemCursorSet(sCursorPointer);
-        }              
         break;
     }
     break;

@@ -47,6 +47,14 @@ angleAdd = 0;
 // new control form
 arrowDir = 0;
 
+// hp
+wheelsCount = 4;
+wheelHP[3] = 0;
+wheelMaxHP[3] = 0;
+
+engineHP = 350;
+engineMaxHP = engineHP;
+
 // colour
 colArrowInner = make_colour_hsv(135, 195, 170);
 colArrowOuter = make_colour_hsv(135, 195, 121);
@@ -108,6 +116,8 @@ instance_destroy(targetId);
 for (var i = 0; i &lt; weaponsCount; i++)
 {
     var ww = weapon[i];
+    if (ww == noone)
+        continue;
     ww.x = phy_position_x + lengthdir_x(ww.xoff, -phy_rotation);
     ww.y = phy_position_y + lengthdir_y(ww.yoff, -phy_rotation);     
 }
@@ -136,21 +146,20 @@ for (var i = 0; i &lt; weaponsCount; i++)
             <string>/// Update
 if (!(flags &amp; OBJ_PAR.UPDATABLE))
     exit;
-    
-switch (control)
+switch (state)
 {
-case CONTROL_TYPES.ARROW:
-    switch (state)
-    {
-    case PL_CAR_ST.__INACTIVE:
-    case PL_CAR_ST.__MOVE_TO_POINT:
-        carProceedParams();
-        part_system_update(psys);
-        carMoveArrow();    
-        break;
-    }
+case PL_CAR_ST.__INACTIVE:
+case PL_CAR_ST.__MOVE_TO_POINT:
+    carProceedParams();
+    part_system_update(psys);
+    carMoveArrow();  
+    //physics_apply_impulse(phy_position_x, phy_position_y,
+        
     break;
-case CONTROL_TYPES.POINTS:
+}
+
+
+/*case CONTROL_TYPES.POINTS:
     switch (state)
     {
     case PL_CAR_ST.__INACTIVE:
@@ -279,7 +288,17 @@ flagSet(OBJ_PAR.UPDATABLE, 0);
           <argument>
             <kind>1</kind>
             <string>/// draw light
-
+// forward lights
+if (!objectInView())
+    exit;
+var sx = phy_position_x + lengthdir_x(forwLightX, phy_rotation),
+    sy = phy_position_y + lengthdir_y(forwLightX, phy_rotation);
+var ldx = lengthdir_x(forwLightY, -phy_rotation + 90),
+    ldy = lengthdir_y(forwLightY, -phy_rotation + 90);
+draw_sprite_ext(sLightPoint, 0, sx + ldx - view_xview, 
+    sy + ldy - view_yview, 1, 1, 0, forwLightCol, image_alpha);
+draw_sprite_ext(sLightPoint, 0, sx - ldx - view_xview, 
+    sy - ldy - view_yview, 1, 1, 0, forwLightCol, image_alpha);
 </string>
           </argument>
         </arguments>

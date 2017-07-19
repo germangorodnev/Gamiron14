@@ -172,27 +172,41 @@ case CAM_STATES.__FREE:
         }
     }
     else*/
-    {
-        var ymove = oGameController.key[KEY.CAM_BOTTOM] - oGameController.key[KEY.CAM_TOP],
-            xmove = oGameController.key[KEY.CAM_RIGHT] - oGameController.key[KEY.CAM_LEFT],
-            spdmove = movSpd;
-        x += spdmove * xmove;
-        y += spdmove * ymove;
-    }
+    var ymove = oGameController.key[KEY.CAM_BOTTOM] - oGameController.key[KEY.CAM_TOP],
+        xmove = oGameController.key[KEY.CAM_RIGHT] - oGameController.key[KEY.CAM_LEFT],
+        spdmove = movSpd;
+    x += spdmove * xmove;
+    y += spdmove * ymove;
+    x = clamp(x, view_wview div 2, room_width - view_wview div 2);
+    y = clamp(y, view_hview div 2, room_height - view_hview div 2);
     break;
     
-default: //case CAM_STATES.__PLAYER:
-    var dd = point_direction(oPlayer.x, oPlayer.y, mouse_x, mouse_y);
-    targX = oPlayer.x + lengthdir_x(camMaxDist, dd);
-    targY = oPlayer.y + lengthdir_y(camMaxDist, dd);
-    if (distance_to_point(targX, targY) &lt; movSpd)
+case CAM_STATES.__PARTICULAR_OBJ:
+    if (oGameController.key[KEY.CAM_TOP] == 1
+        || oGameController.key[KEY.CAM_BOTTOM] == 1
+        || oGameController.key[KEY.CAM_RIGHT] == 1
+        || oGameController.key[KEY.CAM_LEFT] == 1)
+    {
+        camSetState(CAM_STATES.__FREE);
+        speed = 0;
+        exit;
+    }
+    var dist = distance_to_point(targX, targY);
+    if (dist &lt; movSpd)
     {
         speed = 0;
         x = targX;
         y = targY;
+        camSetState(CAM_STATES.__FREE);
     }
     else
-        move_towards_point(targX, targY, movSpd);
+    {
+        var dd = point_direction(x, y, targX, targY);
+        x += lengthdir_x(min(dd, movSpd), dd);   
+        y += lengthdir_y(min(dd, movSpd), dd);  
+    }
+    x = clamp(x, view_wview div 2, room_width - view_wview div 2);
+    y = clamp(y, view_hview div 2, room_height - view_hview div 2);
     break;
 }
 

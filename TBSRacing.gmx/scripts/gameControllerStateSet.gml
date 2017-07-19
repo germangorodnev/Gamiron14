@@ -7,6 +7,7 @@ case INGAME_STATES.GAME:
     with (oButtonEndTurn)
         instance_destroy();
     // begin the (n)sec turn
+    playerGUISetSelectedCar(noone);
     gameControllerSubstateSet(SUBSTATES.__NONE);
     turnTimer = turnTurns;
     with (oStateObject)

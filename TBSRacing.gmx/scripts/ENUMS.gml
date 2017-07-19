@@ -24,7 +24,8 @@ enum GUI_STATES
 {
     __GUI,
     __PATH_EDIT,
-    __PATH_ERASE
+    __PATH_ERASE,
+    __WEAPON_TARGET
 }
 
 enum KEY

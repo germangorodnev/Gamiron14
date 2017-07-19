@@ -38,6 +38,9 @@ wDmgMin = 0;
 wDmgMax = 0;
 wDmgRecoil = 3;
 
+wMaxHP = 50;
+wHP = wMaxHP;
+
 xoff = 0;
 yoff = 0;
 </string>

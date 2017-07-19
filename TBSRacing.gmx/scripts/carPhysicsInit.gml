@@ -1,5 +1,14 @@
 ///carPhysicsInit(type)
-var ad = .7;
+var ad = .7,
+    rest = .05;
+    
+// wheels
+for (var i = 0; i < wheelsCount; i++)
+{
+    wheelMaxHP[i] = 100;
+    wheelHP[i] = wheelMaxHP[i];
+}
+
 switch (argument[0])
 {
 case CARS.__MINI_VAN:
@@ -8,7 +17,7 @@ case CARS.__MINI_VAN:
     var fix = physics_fixture_create();
     physics_fixture_set_collision_group(fix, 0);    
     physics_fixture_set_density(fix, .2);  
-    physics_fixture_set_restitution(fix, .2);  
+    physics_fixture_set_restitution(fix, rest);  
     physics_fixture_set_linear_damping(fix, .5);  
     physics_fixture_set_angular_damping(fix, ad);  
     physics_fixture_set_awake(fix, 1);
@@ -29,6 +38,12 @@ case CARS.__MINI_VAN:
     
     // particles
     part_type_sprite(ptyre, sPlayerCar1Tyre, 0, 0, 0);
+    
+    // light
+    forwLightX = 35;
+    forwLightY = 15;
+    
+    weaponsCount = 2;
     break;
     
 case CARS.__MINI_TRUCK:
@@ -37,7 +52,7 @@ case CARS.__MINI_TRUCK:
     var fix = physics_fixture_create();
     physics_fixture_set_collision_group(fix, 0);    
     physics_fixture_set_density(fix, .3);  
-    physics_fixture_set_restitution(fix, .3);  
+    physics_fixture_set_restitution(fix, rest);  
     physics_fixture_set_linear_damping(fix, .4);  
     physics_fixture_set_angular_damping(fix, ad);  
     physics_fixture_set_awake(fix, 1);
@@ -62,6 +77,8 @@ case CARS.__MINI_TRUCK:
     
     // particles
     part_type_sprite(ptyre, sPlayerCar2Tyre, 0, 0, 0);
+    
+    weaponsCount = 1;
     break;
 
 case CARS.__ORANGE:
@@ -70,7 +87,7 @@ case CARS.__ORANGE:
     var fix = physics_fixture_create();
     physics_fixture_set_collision_group(fix, 0);    
     physics_fixture_set_density(fix, .5);  
-    physics_fixture_set_restitution(fix, .3);  
+    physics_fixture_set_restitution(fix, rest);  
     physics_fixture_set_linear_damping(fix, .3);  
     physics_fixture_set_angular_damping(fix, ad);  
     physics_fixture_set_awake(fix, 1);
@@ -98,6 +115,8 @@ case CARS.__ORANGE:
     
     // particles
     part_type_sprite(ptyre, sPlayerCar3Tyre, 0, 0, 0);
+    
+    weaponsCount = 1;
     break;
     
 ////////////////// POLICE //////////////////////
@@ -108,7 +127,7 @@ case CARS.__POLICE:
     var fix = physics_fixture_create();
     physics_fixture_set_collision_group(fix, 0);    
     physics_fixture_set_density(fix, .5);  
-    physics_fixture_set_restitution(fix, .3);  
+    physics_fixture_set_restitution(fix, rest);  
     physics_fixture_set_linear_damping(fix, .3);  
     physics_fixture_set_angular_damping(fix, ad);  
     physics_fixture_set_awake(fix, 1);
@@ -155,5 +174,12 @@ case CARS.__POLICE:
     spdMaxForward = 190;
     spdAccelForward = .2;
     spdAccelBrake = .2;
+    
+    weaponsCount = 1;
     break;
 }
+
+// weapons
+for (var i = 0; i < weaponsCount; i++)
+    weapon[i] = noone;
+
