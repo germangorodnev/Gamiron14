@@ -59,6 +59,7 @@ desiredAngle = 0;
 angleTorque = .24;
 angleIncr = .14;
 angleStep = 0;
+angleEqual = 0;
 
 brake = 0;
 
@@ -87,8 +88,9 @@ part_system_position(psys, 0, 0);
 
 pem = part_emitter_create(psys);
 
+// tyre effect
 ptyre = part_type_create();
-part_type_life(ptyre, 15, 60);
+part_type_life(ptyre, 30, 60);
 part_type_alpha2(ptyre, .1, 0);
 
 // car smoke

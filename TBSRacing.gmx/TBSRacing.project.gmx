@@ -44,6 +44,10 @@
           <sprite>sprites\sPlayerCar3</sprite>
           <sprite>sprites\sPlayerCar3Tyre</sprite>
         </sprites>
+        <sprites name="4">
+          <sprite>sprites\sPlayerCar4</sprite>
+          <sprite>sprites\sPlayerCar4Tyre</sprite>
+        </sprites>
       </sprites>
       <sprites name="Police">
         <sprite>sprites\sPoliceCar1</sprite>
@@ -83,6 +87,7 @@
     <sprites name="Masks">
       <sprite>sprites\sMask32x32</sprite>
       <sprite>sprites\sMaskGrass</sprite>
+      <sprite>sprites\sMaskAllyCar</sprite>
     </sprites>
     <sprites name="Guns">
       <sprites name="Simple">
@@ -91,6 +96,13 @@
         <sprite>sprites\sGunSimpleBullet</sprite>
         <sprite>sprites\sGunSimpleIco</sprite>
       </sprites>
+      <sprites name="Rocket">
+        <sprite>sprites\sGunRocket</sprite>
+        <sprite>sprites\sGunRocketEffect</sprite>
+        <sprite>sprites\sGunRocketBullet</sprite>
+        <sprite>sprites\sGunRocketIco</sprite>
+      </sprites>
+      <sprite>sprites\sShootSign</sprite>
     </sprites>
     <sprites name="Obstacles">
       <sprites name="Trash">
@@ -116,11 +128,12 @@
     </sprites>
   </sprites>
   <backgrounds name="background">
-    <background>background\background0</background>
     <background>background\tls1</background>
     <background>background\background2</background>
   </backgrounds>
-  <paths name="paths"/>
+  <paths name="paths">
+    <path>paths\pEmbankment1</path>
+  </paths>
   <scripts name="scripts">
     <script>scripts\ENUMS.gml</script>
     <scripts name="GAME">
@@ -133,6 +146,7 @@
         <script>scripts\gameLightDraw.gml</script>
       </scripts>
       <script>scripts\gameSetState.gml</script>
+      <script>scripts\gameBulletCreate.gml</script>
     </scripts>
     <scripts name="FLAGS">
       <script>scripts\flagSet.gml</script>
@@ -180,9 +194,12 @@
         <script>scripts\carMoveToPoint.gml</script>
         <script>scripts\carMoveDirection.gml</script>
         <script>scripts\carMoveArrow.gml</script>
+        <script>scripts\carKillLateralVelocity.gml</script>
       </scripts>
       <scripts name="WEAPONS">
         <script>scripts\carWeaponSet.gml</script>
+        <script>scripts\weaponSetState.gml</script>
+        <script>scripts\weaponSetTargetDirection.gml</script>
       </scripts>
       <scripts name="EFFECTS">
         <script>scripts\carParticlesGenerate.gml</script>
@@ -233,6 +250,7 @@
       <script>scripts\angleRotate.gml</script>
       <script>scripts\cycle.gml</script>
       <script>scripts\objectInView.gml</script>
+      <script>scripts\approach.gml</script>
     </scripts>
   </scripts>
   <shaders name="shaders">
@@ -253,9 +271,10 @@
         <object>objects\oBasePhysicalStatic</object>
       </objects>
       <object>objects\oBaseCar</object>
-      <object>objects\oBaseWeapon</object>
-      <object>objects\oWeaponSimple</object>
+      <object>objects\oBaseBullet</object>
       <object>objects\oCarTarget</object>
+      <object>objects\oAllyCarPlace</object>
+      <object>objects\oBaseCollidable</object>
     </objects>
     <objects name="Player">
       <object>objects\oPlayerCar</object>
@@ -279,6 +298,7 @@
     </objects>
     <objects name="Obstacles">
       <object>objects\oBaseWall</object>
+      <object>objects\oWallBulletWalkable</object>
       <object>objects\oMaterialMask</object>
       <object>objects\oUmbrella</object>
       <object>objects\oTree</object>
@@ -288,6 +308,16 @@
       <object>objects\oTrashcanPark</object>
       <object>objects\oTrashacnBig</object>
     </objects>
+    <objects name="Guns">
+      <object>objects\oBaseWeapon</object>
+      <object>objects\oWeaponSimple</object>
+      <object>objects\oBulletSimple</object>
+      <object>objects\oWeaponRocket</object>
+      <object>objects\oRocketBullet</object>
+    </objects>
+    <objects name="Enemies">
+      <object>objects\oEnemyCar</object>
+    </objects>
     <object>objects\oControl</object>
     <object>objects\oGameController</object>
     <object>objects\oCamera</object>
@@ -296,6 +326,7 @@
   <rooms name="rooms">
     <room>rooms\rInit</room>
     <room>rooms\rEmbankment</room>
+    <room>rooms\rField</room>
     <room>rooms\rMainMenu</room>
   </rooms>
   <help>

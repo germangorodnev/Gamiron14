@@ -109,14 +109,74 @@ case CARS.__ORANGE:
     
     // parameters
     spdMaxForward = 250;
-    spdAccelForward = .65;
-    spdAccelBrake = .85;
-    angleTorque = .23;
+    spdAccelForward = 1.5;
+    spdAccelBrake = 1.6;
+    spdAccelBackward = 1
+    angleTorque = .35;
     
     // particles
     part_type_sprite(ptyre, sPlayerCar3Tyre, 0, 0, 0);
     
     weaponsCount = 1;
+    break;
+    
+case CARS.__SCOOL_BUS:
+    sprite_index = sPlayerCar4;
+    // make the fixture
+    // left
+    var fix = physics_fixture_create();
+    var density = .7
+    physics_fixture_set_collision_group(fix, 0);    
+    physics_fixture_set_density(fix, density);  
+    physics_fixture_set_restitution(fix, .01);  
+    physics_fixture_set_linear_damping(fix, .3);  
+    physics_fixture_set_angular_damping(fix, ad);  
+    physics_fixture_set_awake(fix, 1);
+
+    var xoff = sprite_get_xoffset(sprite_index),
+        yoff = sprite_get_yoffset(sprite_index);
+    physics_fixture_set_polygon_shape(fix);
+    physics_fixture_add_point(fix, 0 - xoff, 12 - yoff);
+    physics_fixture_add_point(fix, 231 - xoff, 11 - yoff);
+    physics_fixture_add_point(fix, 235 - xoff, 16 - yoff);
+    physics_fixture_add_point(fix, 235 - xoff, 98 - yoff);
+    physics_fixture_add_point(fix, 231 - xoff, 103 - yoff);
+    physics_fixture_add_point(fix, 0 - xoff, 102 - yoff);   
+     
+    fixtures[fixturesCnt++] = physics_fixture_bind(fix, id);
+    physics_fixture_delete(fix);
+    
+    // right
+    fix = physics_fixture_create();
+    physics_fixture_set_collision_group(fix, 0);    
+    physics_fixture_set_density(fix, density);  
+    physics_fixture_set_restitution(fix, .01);  
+    physics_fixture_set_linear_damping(fix, .3);  
+    physics_fixture_set_angular_damping(fix, ad);  
+    physics_fixture_set_awake(fix, 1);
+
+    physics_fixture_set_polygon_shape(fix);
+    physics_fixture_add_point(fix, 235 - xoff, 16 - yoff);
+    physics_fixture_add_point(fix, 247 - xoff, 17 - yoff);
+    physics_fixture_add_point(fix, 255 - xoff, 53 - yoff);
+    physics_fixture_add_point(fix, 254 - xoff, 81 - yoff);
+    physics_fixture_add_point(fix, 247 - xoff, 97 - yoff);
+    physics_fixture_add_point(fix, 235 - xoff, 98 - yoff);
+
+    fixtures[fixturesCnt++] = physics_fixture_bind(fix, id);
+    physics_fixture_delete(fix);
+
+    // parameters
+    spdMaxForward = 220;
+    spdAccelForward = 1.4;
+    spdAccelBrake = 2;
+    spdAccelBackward = 1.5
+    angleTorque = .16;
+    
+    // particles
+    part_type_sprite(ptyre, sPlayerCar4Tyre, 0, 0, 0);
+    
+    weaponsCount = 3;
     break;
     
 ////////////////// POLICE //////////////////////
@@ -156,8 +216,6 @@ case CARS.__POLICE:
     physics_fixture_set_angular_damping(fix, ad);  
     physics_fixture_set_awake(fix, 1);
 
-    var xoff = sprite_get_xoffset(sprite_index),
-        yoff = sprite_get_yoffset(sprite_index);
     physics_fixture_set_polygon_shape(fix);
     physics_fixture_add_point(fix, 38 - xoff, 5 - yoff);
     physics_fixture_add_point(fix, 92 - xoff, 1 - yoff);
@@ -172,8 +230,9 @@ case CARS.__POLICE:
 
     // parameters
     spdMaxForward = 190;
-    spdAccelForward = .2;
-    spdAccelBrake = .2;
+    spdAccelForward = 1.6;
+    spdAccelBrake = 2;
+    spdAccelBackward = 1.5;
     
     weaponsCount = 1;
     break;

@@ -1,5 +1,6 @@
 if (!global.debug)
     exit;
+draw_text_colour(phy_position_x - 30, phy_position_y - 70, string(phy_angular_velocity), c_red, c_blue, c_red, c_yellow, 1);
 physics_world_draw_debug(phy_debug_render_coms | phy_debug_render_core_shapes);
 physics_draw_debug();
 draw_line_width_colour(phy_position_x, phy_position_y, 

@@ -38,6 +38,9 @@ case os_win32:
         key[KEY.CAM_RIGHT] = 1;
     if (keyboard_check(ord('S')))
         key[KEY.CAM_BOTTOM] = 1;
+        
+    if (keyboard_check_pressed(vk_tab))
+        key[KEY.SWITCH] = 1;
     break;
     
 /*case os_android:

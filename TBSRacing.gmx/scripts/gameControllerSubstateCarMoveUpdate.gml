@@ -7,6 +7,15 @@ case CONTROL_TYPES.ARROW:
     switch (guistate)
     {
     case GUI_STATES.__GUI: // just move the mouse, nothing special about path
+        if (key[KEY.SWITCH])
+        {
+            if (instance_number(oPlayerCar) > 1)
+            {
+                arrowBuild = 0;
+                playerGUISetSelectedCar(playerTeam[(selectedCarInd + 1) % playerCarsCnt]);
+                exit;
+            }
+        }
         if (!systemMouseInGUI())
         {
             systemCursorSet(sCursorPointer);
@@ -18,6 +27,7 @@ case CONTROL_TYPES.ARROW:
                     with (selectedCar)
                     {
                         arrowDir = point_direction(phy_position_x, phy_position_y, mouse_x, mouse_y);
+                        angleEqual = 0;
                     }
                 }
                 else if (key[KEY.MOUSE_LEFT] == 2)
@@ -45,7 +55,28 @@ case CONTROL_TYPES.ARROW:
         }              
         break;
         
-    case GUI
+    case GUI_STATES.__WEAPON_TARGET:
+        if (key[KEY.MOUSE_RIGHT] == 0)
+        {
+            gameControllerGuistateSet(GUI_STATES.__GUI);    
+            exit; 
+       }       
+        if (!systemMouseInGUI())
+        {
+            systemCursorSet(sCursorTarget);
+            if (key[KEY.MOUSE_LEFT] == 0)
+            {
+                // set target direction
+                with (weaponTargeting.weap)
+                    weaponSetTargetDirection(point_direction(phy_position_x, phy_position_y, mouse_x, mouse_y));
+                gameControllerGuistateSet(GUI_STATES.__GUI);    
+            }
+        }
+        else
+        {
+            systemCursorSet(sCursorPointer);        
+        }    
+        break;
     }
     break;
     

@@ -22,6 +22,9 @@ if (spdDesiredPercent > 0)
 else if (spdDesiredPercent < 0) 
 {
     // decrease speed to backward
+    var spdChange = spdAccelBackward;
+    if (spd > 0)
+        spdChange = spdAccelBrake;
     spd += spdAccelBackward * sign(spdDesired - spd);
     spd = clamp(spd, -spdMaxBackward, spdMaxForward);    
 }

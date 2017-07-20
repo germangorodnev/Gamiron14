@@ -3,6 +3,7 @@ guistate = argument[0];
 
 // resets
 pathPointTrack = -1;
+weaponTargeting = noone;
 
 switch (argument[0])
 {
@@ -20,7 +21,7 @@ case GUI_STATES.__GUI:
     break;
     
 case GUI_STATES.__WEAPON_TARGET:
-    systemCursorSet(sCursorTarget);
+    //systemCursorSet(sCursorTarget);
     break;
 
 case GUI_STATES.__PATH_EDIT:

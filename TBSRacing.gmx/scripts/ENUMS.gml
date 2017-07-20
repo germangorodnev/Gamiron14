@@ -36,6 +36,7 @@ enum KEY
     CAM_TOP,
     CAM_RIGHT,
     CAM_BOTTOM,
+    SWITCH,
     CNT
 }   
 
@@ -63,6 +64,12 @@ enum PL_CAR_ST
     __MOVE_TO_POINT
 }
 
+/////////////// ENEMIES
+enum EN_CAR_ST
+{
+    __INACTIVE
+}
+
 /////////////// CARS
 enum CARS
 {
@@ -70,6 +77,7 @@ enum CARS
     __ORANGE,
     __MINI_TRUCK,
     __MINI_VAN,
+    __SCOOL_BUS,
     __POLICE
 }
 
@@ -82,12 +90,21 @@ enum CONTROL_TYPES
 /////////////// WEAPONS
 enum WEAPONS
 {
-    __SIMPLE
+    __SIMPLE,
+    __ROCKET
+}
+
+enum BULLETS
+{
+    __SIMPLE,
+    __ROCKET
 }
 
 enum WEAPON_STATES
 {
-    __FREE
+    __FREE,
+    __SIMPLE_ATTACK,
+    __ROCKET_ATTACK
 }
 
 /////////////// CAMERA

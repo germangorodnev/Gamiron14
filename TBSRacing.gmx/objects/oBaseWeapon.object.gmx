@@ -43,6 +43,12 @@ wType = WEAPONS.__SIMPLE;
 wDmgMin = 0;
 wDmgMax = 0;
 wDmgRecoil = 3;
+wAngleNeed = phy_rotation;
+wAngleSpeed = .3;
+
+canShoot = -1;
+canShootTmrSteps = room_speed;
+needShoot = 0;
 
 </string>
           </argument>

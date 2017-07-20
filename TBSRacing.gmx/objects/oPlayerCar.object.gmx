@@ -30,7 +30,7 @@ image_speed = 0;
 
 path_clear_points(pathMove);
 
-type = choose(CARS.__MINI_VAN, CARS.__ORANGE, CARS.__MINI_TRUCK);
+type = choose(CARS.__MINI_VAN, CARS.__ORANGE, CARS.__MINI_TRUCK, CARS.__SCOOL_BUS);
 control = CONTROL_TYPES.ARROW;
 state = PL_CAR_ST.__INACTIVE;
 
@@ -61,9 +61,19 @@ colArrowOuter = make_colour_hsv(135, 195, 121);
 arrowLen = 150;
 
 carPhysicsInit(type);
-if (type == CARS.__ORANGE)
+if (weaponsCount == 1)
     carWeaponSet(0, WEAPONS.__SIMPLE);
-
+else if (weaponsCount == 2)
+{
+    carWeaponSet(0, WEAPONS.__SIMPLE);
+    carWeaponSet(1, WEAPONS.__ROCKET);
+}
+else if (weaponsCount == 3)
+{
+    carWeaponSet(0, WEAPONS.__SIMPLE);
+    carWeaponSet(1, WEAPONS.__ROCKET);
+    carWeaponSet(2, choose(WEAPONS.__ROCKET, WEAPONS.__SIMPLE));
+}
 carInitEnd();
 
 </string>
@@ -118,8 +128,8 @@ for (var i = 0; i &lt; weaponsCount; i++)
     var ww = weapon[i];
     if (ww == noone)
         continue;
-    ww.x = phy_position_x + lengthdir_x(ww.xoff, -phy_rotation);
-    ww.y = phy_position_y + lengthdir_y(ww.yoff, -phy_rotation);     
+    ww.phy_position_x = phy_position_x + lengthdir_x(ww.lenoff, -phy_rotation + ww.angleoff);
+    ww.phy_position_y = phy_position_y + lengthdir_y(ww.lenoff, -phy_rotation + ww.angleoff);     
 }
 </string>
           </argument>

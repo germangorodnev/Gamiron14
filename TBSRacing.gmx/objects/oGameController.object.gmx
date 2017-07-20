@@ -50,6 +50,7 @@ yesno = 0;
 
 // cars
 selectedCar = noone;
+selectedCarInd = -1;
 
 guix1 = 0;
 guiy1 = global.guiH - (global.guiH div 4);
@@ -79,6 +80,9 @@ pathId = -1;
 arrowBuild = 0;
 arrowColInner = make_colour_hsv(38, 195, 170);
 arrowColOuter = make_colour_hsv(38, 106, 86);
+
+// weapon
+weaponTargeting = noone;
 
 kmhx = spidx;
 kmhy = spplatey;
@@ -133,11 +137,20 @@ part_system_automatic_update(psysrain, 0);
 // emitter
 rainemm = part_emitter_create(psysrain);
 
-// type
+// rain
 raintype = part_type_create();
 part_type_sprite(raintype, sWeatherRain, 0, 0, 0);
 part_type_life(raintype, room_speed * 1.5, room_speed * 2);
 part_type_speed(raintype, 2, 4, 0, 0);
+
+
+// rocket smoke effect
+rocketsmoke = part_type_create();
+part_type_sprite(rocketsmoke, sCarSmoke, 0, 0, 0);
+part_type_life(rocketsmoke, room_speed / 4, room_speed / 2);
+part_type_orientation(rocketsmoke, 0, 359, 0, 2, 0);
+part_type_alpha2(rocketsmoke, .1, 0);
+part_type_speed(rocketsmoke, .2, .3, 0, 0);
 
 // light system
 lightsurf = surface_create(global.guiW, global.guiH);
@@ -179,6 +192,8 @@ part_system_destroy(psysrain);
 
 /// light
 surface_free(lightsurf);
+
+part_type_destroy(rocketsmoke);
 </string>
           </argument>
         </arguments>
@@ -251,8 +266,8 @@ case INGAME_STATES.TURN:
         gameControllerSubstateCarMoveUpdate();        
         break;
         
-    case SUBSTATES.__CAR_WEAPONS:
-        gameControllerSubstateCarWeaponsUpdate();
+    //case SUBSTATES.__CAR_WEAPONS:
+    //    gameControllerSubstateCarWeaponsUpdate();
     }
     break;
     
@@ -359,8 +374,9 @@ case INGAME_STATES.TURN:
             else if (percent &gt;= .35)
                 coldraw = make_colour_hsv(14, 208, 70);
             else
-                coldraw = make_colour_hsv(254, 255, 72);
-
+                coldraw = make_colour_hsv(254, 255, 72)
+                
+            drawCroppedRect(carhpenx1 - 2, carhpeny1 - 2, carhpenx2 + 2, carhpeny2 + 2, c_black, image_alpha, 8);
             drawCroppedRect(carhpenx1, carhpeny1, carhpenx2, carhpeny2, coldraw, image_alpha, 8);
             draw_sprite_ext(sCarHPEngine, 0, carhpenx, carhpeny, 1, 1, 0, image_blend, image_alpha);
         }
@@ -399,6 +415,8 @@ case INGAME_STATES.GAME:
             <kind>1</kind>
             <string>/// draw things
 ///Draw game gui
+draw_text_colour(view_xview + 30, view_yview + 30, string(fps), c_red, c_blue, c_red, c_yellow, 1);
+
 switch (substate)
 {
 case SUBSTATES.__NONE:

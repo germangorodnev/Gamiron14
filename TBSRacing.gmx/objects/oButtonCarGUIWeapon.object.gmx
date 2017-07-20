@@ -49,6 +49,18 @@ index = 0;
 spr = -1;
 img = 0;
 
+needShoot = 0;
+nsx1 = rx1 + 5;
+nsy1 = ry1 + 5;
+nsx2 = nsx1 + sprite_get_width(sShootSign) + 4;
+nsy2 = nsy1 + sprite_get_height(sShootSign) + 4;
+
+nsx = nsx1 + 2 + sprite_get_width(sShootSign) / 2;
+nsy = nsy1 + 2 + sprite_get_height(sShootSign) / 2;
+
+nscolactive = make_colour_hsv(255, 230, 115);
+nscolinactive = make_colour_hsv(255, 0, 115);
+
 image_xscale = 1;
 image_yscale = 1;
 </string>
@@ -102,13 +114,23 @@ if (!(flags &amp; OBJ_PAR.UPDATABLE))
 
 if (oGameController.key[KEY.MOUSE_LEFT] == 0)
 {
-    if (mouseOnUs())
-    {
-        // well, maybe shoot
-        if ((weap.wHP / weap.wMaxHP) &gt; .3)
+    if ((weap.wHP / weap.wMaxHP) &gt;= .35)
+    {                    
+        // clicked weapon
+        if (point_in_rectangle(mouse_x - view_xview, mouse_y - view_yview, nsx1, nsy1, nsx2, nsy2))
         {
-            with (oGameController)  
-                gameControllerGuistateSet(GUI_STATES.__WEAPON_TARGET);
+            // clicked attack bt  
+            weap.needShoot = !weap.needShoot; 
+        }
+        else
+        {
+            if (mouseOnUs())
+            {
+            // well, maybe shoot
+                with (oGameController)  
+                    gameControllerGuistateSet(GUI_STATES.__WEAPON_TARGET);
+                oGameController.weaponTargeting = id;            
+            }
         }
     }   
 }
@@ -206,6 +228,55 @@ drawCroppedRect(rx1, ry1, rx2, ry2, coldraw, 1, 6);
 
 draw_sprite_ext(spr, img, xx, yy, 1, 1, 0, image_blend, image_alpha);
 
+// attack
+var colIco, colRect;
+if (weap.needShoot)
+{
+    colRect = nscolactive;
+    colIco = c_white;
+}
+else
+{
+    colRect = nscolinactive;
+    colIco = c_gray;
+}
+drawCroppedRect(nsx1 - 4, nsy1 - 4, nsx2 + 4, nsy2 + 4, c_black, 1, 8);
+drawCroppedRect(nsx1, nsy1, nsx2, nsy2, colRect, 1, 8);
+draw_sprite_ext(sShootSign, 0, nsx, nsy, 1, 1, 0, colIco, image_alpha);
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (oGameController.weaponTargeting == id)
+{
+    with (weap)
+    {
+        var dd = point_direction(phy_position_x, phy_position_y, mouse_x, mouse_y);
+        drawBigArrow(phy_position_x, phy_position_y, 
+            phy_position_x + lengthdir_x(55, dd),
+            phy_position_y + lengthdir_y(55, dd),
+            colArrowInner, colArrowOuter, image_alpha);    
+    }
+}
 </string>
           </argument>
         </arguments>

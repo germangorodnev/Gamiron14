@@ -37,12 +37,20 @@ wType = WEAPONS.__SIMPLE;
 wDmgMin = 0;
 wDmgMax = 0;
 wDmgRecoil = 3;
+wAngleSpeed = .6;
 
 wMaxHP = 50;
 wHP = wMaxHP;
 
-xoff = 0;
-yoff = 0;
+shotTmr = -1;
+shotTmrStep = round(.05 * room_speed);
+canShootTmrSteps = room_speed div 2;
+
+lenoff = 0;
+angleoff = 0;
+
+colArrowInner = make_colour_hsv(0, 167, 115);
+colArrowOuter = make_colour_hsv(0, 211, 76);
 </string>
           </argument>
         </arguments>
@@ -92,10 +100,27 @@ yoff = 0;
 if (!(flags &amp; OBJ_PAR.UPDATABLE))
     exit;
 
+if (canShoot &amp;&amp; !--canShoot)
+    canShoot = -1;
+    
 switch (state)
 {
 case WEAPON_STATES.__FREE:
-
+    phy_rotation = angleRotate(phy_rotation, -wAngleNeed, wAngleSpeed);
+    if (phy_rotation == -wAngleNeed
+        &amp;&amp; needShoot
+        &amp;&amp; canShoot == -1)
+    {
+       // shoot
+       weaponSetState(WEAPON_STATES.__SIMPLE_ATTACK);
+    }
+    break;
+    
+case WEAPON_STATES.__SIMPLE_ATTACK:
+    if (shotTmr &amp;&amp; !--shotTmr)
+    {
+        weaponSetState(WEAPON_STATES.__FREE);
+    }
     break;
 }
 </string>
@@ -197,6 +222,36 @@ image_speed = imgspdstop;
             <string>/// on pause
 imgspdstop = image_speed;
 image_speed = 0;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>draw_self();
+if (state == WEAPON_STATES.__SIMPLE_ATTACK)
+    draw_sprite_ext(sGunSimpleEffect, 0, 
+        phy_position_x + lengthdir_x(60, -phy_rotation),
+        phy_position_y + lengthdir_y(60, -phy_rotation),
+        1, 1, -phy_rotation, image_blend, image_alpha);
+        
+
 </string>
           </argument>
         </arguments>

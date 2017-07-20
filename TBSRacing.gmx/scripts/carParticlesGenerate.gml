@@ -8,7 +8,7 @@ if (phy_speed > 1)
     {
         // drift
         part_type_orientation(ptyre, -phy_rotation, -phy_rotation, 0, 0, 0);
-        part_emitter_burst(psys, pem, ptyre, 20);
+        part_emitter_burst(psys, pem, ptyre, 1);
         
         // smoke
         part_type_direction(smoke, -inertiaDir, -inertiaDir, 0, 0);

@@ -34,7 +34,6 @@ with (oGameController)
     case SUBSTATES.__NONE:
         break;
     case SUBSTATES.__CAR_WEAPONS:
-        //instance_create(0, 0, oButtonCarGUIWeaponCarMode);
         break;
     case SUBSTATES.__CAR_MOVE:
         instance_create(0, 0, oEngineArrow);

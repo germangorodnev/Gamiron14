@@ -52,8 +52,8 @@ draw_primitive_end();
 draw_line_width_colour(x1 - vx1, y1 - vy1, x1 + vx1, y1 + vy1, lw, colOuter, colOuter);
 draw_line_width_colour(x1 + vx1, y1 + vy1, headX + vx2, headY + vy2, lw, colOuter, colOuter);
 draw_line_width_colour(headX + vx2, headY + vy2, headX + vx3, headY + vy3, lw, colOuter, colOuter);
-draw_line_width_colour(headX + vx3 + lengthdir_x(1, dir + 90), 
-    headY + vy3 + lengthdir_y(1, dir + 90), spikeX, spikeY, lw, colOuter, colOuter);
+draw_line_width_colour(headX + vx3 + lengthdir_x(1.5, dir + 90), 
+    headY + vy3 + lengthdir_y(1.5, dir + 90), spikeX, spikeY, lw, colOuter, colOuter);
 draw_line_width_colour(spikeX, spikeY, headX - vx3, headY - vy3, lw, colOuter, colOuter);
 draw_line_width_colour(headX - vx3 - lengthdir_x(1, dir + 90), headY - vy3 - lengthdir_y(1, dir + 90), headX - vx2, headY - vy2, lw, colOuter, colOuter);
 draw_line_width_colour(headX - vx2, headY - vy2, x1 - vx1, y1 - vy1, lw, colOuter, colOuter);
