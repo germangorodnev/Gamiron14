@@ -109,10 +109,10 @@ case CARS.__ORANGE:
     
     // parameters
     spdMaxForward = 250;
-    spdAccelForward = 1.5;
-    spdAccelBrake = 1.6;
-    spdAccelBackward = 1
-    angleTorque = .35;
+    spdAccelForward = 2;
+    spdAccelBrake = 2.5;
+    spdAccelBackward = 2;
+    angleTorque = .8;
     
     // particles
     part_type_sprite(ptyre, sPlayerCar3Tyre, 0, 0, 0);
@@ -230,9 +230,11 @@ case CARS.__POLICE:
 
     // parameters
     spdMaxForward = 190;
-    spdAccelForward = 1.6;
-    spdAccelBrake = 2;
-    spdAccelBackward = 1.5;
+    spdAccelForward = 1.5;
+    spdAccelBrake = 1.6;
+    spdAccelBackward = 1
+    angleTorque = .45;
+    
     
     weaponsCount = 1;
     break;

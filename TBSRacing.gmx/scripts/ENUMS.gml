@@ -64,10 +64,20 @@ enum PL_CAR_ST
     __MOVE_TO_POINT
 }
 
+enum ZONES
+{
+    __GRASS = 0,
+    __ASPHALT
+}   
+
 /////////////// ENEMIES
 enum EN_CAR_ST
 {
-    __INACTIVE
+    __INACTIVE,
+    __MOVE_TO_POINT,
+    __MOEV_IN_DIRECTION,
+    __EVADE_OBJECT,
+    __PURSUIT_OBJECT
 }
 
 /////////////// CARS
@@ -106,6 +116,17 @@ enum WEAPON_STATES
     __SIMPLE_ATTACK,
     __ROCKET_ATTACK
 }
+
+/////////////// HUMAN
+enum HUMAN_STATES
+{
+    __IDLE,
+    __MOVE_POINT,
+    __AVOID,
+    __WANDER,
+    __FLY_AWAY,
+    __DIE
+}   
 
 /////////////// CAMERA
 enum CAM_STATES

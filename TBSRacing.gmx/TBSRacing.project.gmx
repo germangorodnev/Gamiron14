@@ -126,13 +126,33 @@
     <sprites name="Weahte">
       <sprite>sprites\sWeatherRain</sprite>
     </sprites>
+    <sprites name="People">
+      <sprite>sprites\sHead</sprite>
+      <sprite>sprites\sTorso</sprite>
+      <sprite>sprites\sHand</sprite>
+      <sprite>sprites\sHandFall1</sprite>
+      <sprite>sprites\sLeg</sprite>
+      <sprite>sprites\sLegFall1</sprite>
+    </sprites>
+    <sprites name="Particles">
+      <sprite>sprites\sGrassDirt</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background">
     <background>background\tls1</background>
     <background>background\background2</background>
   </backgrounds>
   <paths name="paths">
-    <path>paths\pEmbankment1</path>
+    <paths name="Embankment1">
+      <paths name="AI Path">
+        <path>paths\pEmbankment1</path>
+      </paths>
+      <paths name="Human Paths">
+        <path>paths\pEmbankment1Human1</path>
+        <path>paths\pEmbankment1Human2</path>
+        <path>paths\pEmbankment1Human3</path>
+      </paths>
+    </paths>
   </paths>
   <scripts name="scripts">
     <script>scripts\ENUMS.gml</script>
@@ -216,6 +236,7 @@
       <script>scripts\carBrakePress.gml</script>
       <script>scripts\carCollideWalls.gml</script>
       <script>scripts\carDrawShadow.gml</script>
+      <script>scripts\carCollidePeople.gml</script>
     </scripts>
     <scripts name="GAME CONTROLLER">
       <scripts name="STATE">
@@ -251,7 +272,30 @@
       <script>scripts\cycle.gml</script>
       <script>scripts\objectInView.gml</script>
       <script>scripts\approach.gml</script>
+      <script>scripts\pointInRoom.gml</script>
     </scripts>
+    <scripts name="ENEMY">
+      <scripts name="SITUATIONS">
+        <script>scripts\enemyDetermineSituation.gml</script>
+        <script>scripts\enemyCarPoliceDetermineSituation.gml</script>
+      </scripts>
+    </scripts>
+    <scripts name="HUMAN">
+      <scripts name="GENERATOR">
+        <script>scripts\humanGeneratorGenerate.gml</script>
+      </scripts>
+      <scripts name="WANDER">
+        <script>scripts\humanGetNextWanderPoint.gml</script>
+      </scripts>
+      <script>scripts\humanGenerate.gml</script>
+      <script>scripts\humanStartMovementByRandomPath.gml</script>
+      <script>scripts\humanGetNextPathPoint.gml</script>
+      <script>scripts\humanSetState.gml</script>
+      <script>scripts\humanUpdatePartsMoving.gml</script>
+      <script>scripts\humanSetSprite.gml</script>
+      <script>scripts\humanDrawDebug.gml</script>
+    </scripts>
+    <script>scripts\zoneInit.gml</script>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\shdBlack.shader</shader>
@@ -320,12 +364,15 @@
     </objects>
     <object>objects\oControl</object>
     <object>objects\oGameController</object>
+    <object>objects\oHumanGenerator</object>
     <object>objects\oCamera</object>
     <object>objects\oLightDepth</object>
+    <object>objects\oHuman</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rInit</room>
     <room>rooms\rEmbankment</room>
+    <room>rooms\rIntro</room>
     <room>rooms\rField</room>
     <room>rooms\rMainMenu</room>
   </rooms>

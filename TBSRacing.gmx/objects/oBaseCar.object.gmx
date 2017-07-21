@@ -102,6 +102,13 @@ part_type_life(smoke, 10, 160);
 part_type_alpha2(smoke, .1, 0);
 part_type_speed(smoke, 2, 3, 0, 0);
 
+dirt = part_type_create();
+part_type_sprite(dirt, sGrassDirt, 0, 0, 1);
+part_type_size(dirt, .1, 1, .1, .1);
+part_type_orientation(dirt, 0, 359, 1, 1, 0);
+part_type_life(dirt, 50, 120);
+part_type_alpha2(dirt, .1, 0);
+part_type_speed(dirt, 2, 3, 0, 0);
 
 // lights
 forwLightX = 0;
@@ -136,6 +143,7 @@ path_delete(pathMove);
 part_emitter_destroy(psys, pem);
 part_type_destroy(ptyre);
 part_type_destroy(smoke);
+part_type_destroy(dirt);
 
 part_system_destroy(psys);
 

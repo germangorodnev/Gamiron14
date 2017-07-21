@@ -41,7 +41,7 @@ friction = .4;
 
 state = CAM_STATES.__FREE;
 
-movSpd = 5;
+movSpd = 10;
 
 x = global.guiW div 2;
 y = global.guiH div 2;

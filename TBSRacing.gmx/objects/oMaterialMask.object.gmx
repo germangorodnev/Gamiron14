@@ -34,6 +34,8 @@ flagSet(OBJ_PAR.UPDATABLE
     | OBJ_PAR.IMPACTABLE_TURN 
     | OBJ_PAR.PHYSICAL, 1);  
 
+zone = -1;
+zoneInit();
 </string>
           </argument>
         </arguments>

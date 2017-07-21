@@ -32,6 +32,7 @@ image_speed = 0;
 flagSet(OBJ_PAR.IMPACTABLE_TURN | OBJ_PAR.IMPACTABLE_PAUSE, 0);
 
 instance_create(oPlayerCar.x, oPlayerCar.y, oCamera);
+instance_create(0, 0, oHumanGenerator);
 
 controlBit = CONTROL.__KEYMOUSE;
 key[KEY.CNT] = 0;

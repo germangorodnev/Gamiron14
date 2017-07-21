@@ -1,4 +1,4 @@
-var xbeg = oGameController.carhpx + sprite_get_width(sCarHP) / 2 + 45,
+var xbeg = oGameController.carhpx + sprite_get_width(sCarHP) / 2 + 65,
     ybeg = oGameController.guiy1 + 50;
 for (var i = 0, cnt = selectedCar.weaponsCount; i < cnt; i++)
 {

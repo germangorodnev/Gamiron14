@@ -72,3 +72,4 @@ weapon[pos] = instance_create(phy_position_x + lengthdir_x(ll, phy_rotation + aa
 phy_position_y + lengthdir_y(ll, phy_rotation + aa), obj);
 weapon[pos].lenoff = ll;
 weapon[pos].angleoff = aa;
+weapon[pos].depth = depth - 1;

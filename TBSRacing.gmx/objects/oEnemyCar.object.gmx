@@ -374,12 +374,7 @@ draw_sprite_ext(sLightPoint, 0, sx - ldx - view_xview,
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (oGameController.selectedCar == id)
-    drawBigArrow(phy_position_x, phy_position_y, 
-        phy_position_x + lengthdir_x(arrowLen, arrowDir),
-        phy_position_y + lengthdir_y(arrowLen, arrowDir),
-        colArrowInner, colArrowOuter, image_alpha);
-//carDrawShadow();
+            <string>//carDrawShadow();
 draw_self();
 carDebugDraw();
 </string>

@@ -14,4 +14,18 @@ if (phy_speed > 1)
         part_type_direction(smoke, -inertiaDir, -inertiaDir, 0, 0);
         part_emitter_burst(psys, pem, smoke, 1);
     }
+    // zone collision
+    var zone = instance_place(phy_position_x, phy_position_y, oMaterialMask);
+    if (zone != noone)
+    {   
+        switch (zone.zone)
+        {
+        case ZONES.__GRASS:
+            // some dirt
+            part_type_direction(dirt, -forwardDir, -forwardDir, 0, 0);
+            part_emitter_burst(psys, pem, dirt, 1);        
+            break;
+        }
+    }
 }
+

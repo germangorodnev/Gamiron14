@@ -3,7 +3,7 @@
   <spriteName>sPlayerCar1</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>-1</depth>
   <persistent>0</persistent>
   <parentName>oBaseCar</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -167,6 +167,8 @@ case PL_CAR_ST.__MOVE_TO_POINT:
         
     break;
 }
+
+//carCollidePeople();
 
 
 /*case CONTROL_TYPES.POINTS:
