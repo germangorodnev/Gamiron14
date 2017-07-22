@@ -3,9 +3,9 @@
   <spriteName>sTorso</spriteName>
   <solid>0</solid>
   <visible>0</visible>
-  <depth>0</depth>
+  <depth>3</depth>
   <persistent>0</persistent>
-  <parentName>oBasePhysicalMovable</parentName>
+  <parentName>oStateObject</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -38,6 +38,8 @@ flagSet(OBJ_PAR.UPDATABLE
 spd = .6;
 angleSpeed = 2;
 
+setOnPath = 1;
+
 moveTime = 0;
 maxMoveTime = random_range(1.5, 2.5) * room_speed;
 wanderLen = 150;
@@ -47,7 +49,8 @@ collideTriggerTreshold = room_speed * .75;
 
 circleFix = -1;
 colFixFix = -1;
-collisionFix = -1;
+collider = instance_create(x, y, oHumanCarCollider);
+collider.human = id;
 
 torsoSpr = sTorso;
 torsoI = 0;
@@ -59,11 +62,20 @@ torsoState = 0;
 headSpr = sHead;
 headI = -1;
 headSpd = 0;
-headNumb = sprite_get_number(sHead);
+headNumb = sprite_get_number(headSpr);
 headCol = c_white;
-headL = 3;
+headL = 0;
 headD = 0;
 headState = 0;
+
+hairSpr = sHairs;
+hairI = 0;
+hairSpd = 0;
+hairNumb = sprite_get_number(hairSpr);
+hairCol = c_white;
+hairL = headL;
+hairD = 0;
+hairState = 0;
 
 handLSpr = sHand;
 handLI = 0;
@@ -120,8 +132,15 @@ bloodsR[bloodsCount - 1] = 0;
 bloodCol2 = make_colour_hsv(0, 240, 190);
 bloodCol1 = bloodCol2;
 
+// blood emitter
+psys = part_system_create();
+part_system_automatic_update(psys, 0);
+part_system_depth(psys, depth - 1);
+
+pem = part_emitter_create(psys);
+
 humanGenerate();
-humanStartMovementByRandomPath();
+
 </string>
           </argument>
         </arguments>
@@ -149,6 +168,10 @@ if (path != -1)
     path_delete(path);
 physics_fixture_delete(colFixFix);
 
+part_emitter_destroy(psys, pem);
+part_system_destroy(psys);
+
+instance_destroy(collider);
 </string>
           </argument>
         </arguments>
@@ -174,6 +197,16 @@ physics_fixture_delete(colFixFix);
             <string>///update
 if (!(flags &amp; OBJ_PAR.UPDATABLE))
     exit;
+
+part_system_update(psys);
+
+if (collider != noone)
+{
+    collider.phy_position_x = phy_position_x;
+    collider.phy_position_y = phy_position_y;
+    collider.phy_rotation = phy_rotation;
+}
+
 
 switch (state)
 {
@@ -215,12 +248,6 @@ case HUMAN_STATES.__WANDER:
     
 case HUMAN_STATES.__FLY_AWAY:
     humanUpdatePartsMoving();
-    /*var dx = lengthdir_x(spd, -phy_rotation),    
-        dy = lengthdir_y(spd, -phy_rotation);
-    phy_position_x += dx;
-    phy_position_y += dy; 
-    phy_speed_x /= 1.05;
-    phy_speed_y /= 1.05;  */ 
     if (phy_speed &lt;= .05)
         humanSetState(HUMAN_STATES.__DIE);
     break;
@@ -299,35 +326,6 @@ phy_position_y += dy;
     collideTrigger++;
     if (collideTrigger &gt;= collideTriggerTreshold)
         humanGetNextWanderPoint();
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="4" ename="oPlayerCar">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// proceed
-if (other.phy_speed &gt; .1)
-{
-    // oooh
-    
-    humanSetState(HUMAN_STATES.__FLY_AWAY);    
 }
 </string>
           </argument>
@@ -450,7 +448,13 @@ image_speed = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>instance_destroy();
+            <string>if (!path_get_closed(path))
+    instance_destroy();
+else
+{
+    pathInd = -1;
+    humanGetNextPathPoint();
+}
 </string>
           </argument>
         </arguments>
@@ -513,6 +517,11 @@ draw_sprite_ext(headSpr, clamp(headI, 0, headNumb - 1),
     phy_position_x + lengthdir_x(headL, realrot + headD),
     phy_position_y + lengthdir_y(headL, realrot + headD), 
     1, 1, realrot, headCol, image_alpha);
+// hair
+draw_sprite_ext(hairSpr, clamp(hairI, 0, hairNumb - 1), 
+    phy_position_x + lengthdir_x(hairL, realrot + hairD),
+    phy_position_y + lengthdir_y(hairL, realrot + hairD), 
+    1, 1, realrot, hairCol, image_alpha);
 
 humanDrawDebug();
 </string>

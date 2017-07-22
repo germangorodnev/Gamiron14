@@ -232,6 +232,47 @@ case PL_CAR_ST.__MOVE_TO_POINT:
         </arguments>
       </action>
     </event>
+    <event eventtype="4" ename="oHumanCarCollider">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// proceed
+var car = id;
+with (other.human)
+{
+    if (state &gt;= HUMAN_STATES.__FLY_AWAY)
+        exit;
+    if (car.phy_speed &gt; .1)
+    {
+        // oooh
+        part_emitter_region(psys, pem, x - 3, x + 3, y - 3, y + 3, ps_shape_ellipse, ps_distr_gaussian);
+        part_emitter_burst(psys, pem, oGameController.blood, irandom_range(22, 40));
+        physics_apply_impulse(phy_position_x, phy_position_y, 
+            lengthdir_x(car.phy_speed * 30, car.phy_rotation),
+            lengthdir_y(car.phy_speed * 30, car.phy_rotation));
+        physics_apply_angular_impulse(phy_speed * 50);
+        humanSetState(HUMAN_STATES.__FLY_AWAY);
+        popupInit(phy_position_x, phy_position_y - 20, string(15));    
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="7" enumb="16">
       <action>
         <libid>1</libid>
@@ -386,7 +427,7 @@ draw_sprite_ext(sLightPoint, 0, sx - ldx - view_xview,
         phy_position_x + lengthdir_x(arrowLen, arrowDir),
         phy_position_y + lengthdir_y(arrowLen, arrowDir),
         colArrowInner, colArrowOuter, image_alpha);
-//carDrawShadow();
+carDrawShadow();
 draw_self();
 carDebugDraw();
 </string>

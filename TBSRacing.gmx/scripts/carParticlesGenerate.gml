@@ -22,7 +22,7 @@ if (phy_speed > 1)
         {
         case ZONES.__GRASS:
             // some dirt
-            part_type_direction(dirt, -forwardDir, -forwardDir, 0, 0);
+            part_type_direction(dirt, phy_rotation, phy_rotation, 0, 0);
             part_emitter_burst(psys, pem, dirt, 1);        
             break;
         }

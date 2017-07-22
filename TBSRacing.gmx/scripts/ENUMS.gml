@@ -67,7 +67,8 @@ enum PL_CAR_ST
 enum ZONES
 {
     __GRASS = 0,
-    __ASPHALT
+    __ASPHALT,
+    __WATER
 }   
 
 /////////////// ENEMIES

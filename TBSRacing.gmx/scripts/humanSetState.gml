@@ -10,7 +10,9 @@ case HUMAN_STATES.__MOVE_POINT:
 case HUMAN_STATES.__AVOID:
     break;
 case HUMAN_STATES.__FLY_AWAY:
-    physics_remove_fixture(id, circleFix);
+    instance_destroy(collider);
+    collider = noone;
+    //physics_remove_fixture(id, circleFix);
     humanSetSprite(1, sHandFall1);
     humanSetSprite(2, sHandFall1);
     humanSetSprite(3, sLegFall1);
@@ -27,7 +29,7 @@ case HUMAN_STATES.__FLY_AWAY:
     handRState = 5;
     handLScale = 1;
     handRScale = handLScale;
-    handLL /= 1.2;
+    handLL /= 1.3;
     handRL = handLL;
     // legs
     legLI = 0;
@@ -51,9 +53,12 @@ case HUMAN_STATES.__WANDER:
     break;
     
 case HUMAN_STATES.__DIE:   
-    physics_remove_fixture(id, collisionFix);
-    physics_fixture_set_sensor(colFixFix, 1);
-    collisionFix = physics_fixture_bind(colFixFix, id);
+    //instance_destroy(collider);
+    //collider = noone;
+    physics_remove_fixture(id, circleFix);
+    //physics_remove_fixture(id, collisionFix);
+    //physics_fixture_set_sensor(colFixFix, 1);
+    //collisionFix = physics_fixture_bind(colFixFix, id);
     depth = 5;
     phy_speed_x = 0;
     phy_speed_y = 0;

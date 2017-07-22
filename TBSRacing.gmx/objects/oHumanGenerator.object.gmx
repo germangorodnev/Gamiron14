@@ -114,7 +114,7 @@ if (tmr &amp;&amp; !--tmr)
             <kind>1</kind>
             <string>/// off pause
 image_speed = imgspdstop;
-flagSet(OBJ_PAR.UPDATABLE, 1);
+
 </string>
           </argument>
         </arguments>
@@ -140,7 +140,7 @@ flagSet(OBJ_PAR.UPDATABLE, 1);
             <string>/// on pause
 imgspdstop = image_speed;
 image_speed = 0;
-flagSet(OBJ_PAR.UPDATABLE, 0);
+
 </string>
           </argument>
         </arguments>

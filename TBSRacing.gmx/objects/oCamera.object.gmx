@@ -146,32 +146,6 @@ if (camFlags &amp; CAM_FLAGS.DARKEN)
 switch (state)
 {
 case CAM_STATES.__FREE:
-    /*var mscreenx = mouse_x - view_xview,
-        mscreeny = mouse_y - view_yview;
-    friction = 0;
-    if ((abs(mouse_x - x) &gt;= (global.guiW / 2 - 40)) || (abs(mouse_y - y) &gt;= (global.guiH / 2 - 40)))
-    {
-        move_towards_point(mouse_x, mouse_y, movSpd); //(distance_to_point(mouse_x, mouse_y) / 4) * (global.guiW / global.guiH));
-    }
-    /*if (!point_in_rectangle(mscreenx, mscreeny, 
-        mdeadx1, mdeady1, mdeadx2, mdeady2))
-    {
-        targX = mouse_x;
-        targY = mouse_y;
-        if (distance_to_point(targX, targY) &lt; movSpd)
-        {
-            speed = 0;
-            x = targX;
-            y = targY;
-        }
-        else
-        {
-            var dd = point_direction(x, y, targX, targY);
-            x += lengthdir_x(movSpd, dd);   
-            y += lengthdir_y(movSpd, dd);  
-        }
-    }
-    else*/
     var ymove = oGameController.key[KEY.CAM_BOTTOM] - oGameController.key[KEY.CAM_TOP],
         xmove = oGameController.key[KEY.CAM_RIGHT] - oGameController.key[KEY.CAM_LEFT],
         spdmove = movSpd;
@@ -233,6 +207,8 @@ case CAM_STATES.__PARTICULAR_OBJ:
           <argument>
             <kind>1</kind>
             <string>///pause off
+if (global.gameState == GAME_STATES.__GAME)
+    flagSet(OBJ_PAR.UPDATABLE, 1);
 </string>
           </argument>
         </arguments>
@@ -257,6 +233,8 @@ case CAM_STATES.__PARTICULAR_OBJ:
             <kind>1</kind>
             <string>///pause on
 speed = 0;
+if (global.gameState == GAME_STATES.__GAME)
+    flagSet(OBJ_PAR.UPDATABLE, 1);
 </string>
           </argument>
         </arguments>

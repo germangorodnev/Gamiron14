@@ -128,6 +128,7 @@
     </sprites>
     <sprites name="People">
       <sprite>sprites\sHead</sprite>
+      <sprite>sprites\sHairs</sprite>
       <sprite>sprites\sTorso</sprite>
       <sprite>sprites\sHand</sprite>
       <sprite>sprites\sHandFall1</sprite>
@@ -136,11 +137,16 @@
     </sprites>
     <sprites name="Particles">
       <sprite>sprites\sGrassDirt</sprite>
+      <sprite>sprites\sHumanBlood</sprite>
     </sprites>
+    <sprites name="Explosions">
+      <sprite>sprites\sExplosion1</sprite>
+    </sprites>
+    <sprite>sprites\sWater</sprite>
+    <sprite>sprites\sBall</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\tls1</background>
-    <background>background\background2</background>
   </backgrounds>
   <paths name="paths">
     <paths name="Embankment1">
@@ -151,6 +157,15 @@
         <path>paths\pEmbankment1Human1</path>
         <path>paths\pEmbankment1Human2</path>
         <path>paths\pEmbankment1Human3</path>
+        <path>paths\pEmbankment1Human4</path>
+      </paths>
+    </paths>
+    <paths name="Field">
+      <paths name="AI Path">
+        <path>paths\pField1</path>
+      </paths>
+      <paths name="HumanPaths">
+        <path>paths\pFieldHuman1</path>
       </paths>
     </paths>
   </paths>
@@ -279,6 +294,7 @@
         <script>scripts\enemyDetermineSituation.gml</script>
         <script>scripts\enemyCarPoliceDetermineSituation.gml</script>
       </scripts>
+      <script>scripts\enemiesMakeTurn.gml</script>
     </scripts>
     <scripts name="HUMAN">
       <scripts name="GENERATOR">
@@ -289,6 +305,7 @@
       </scripts>
       <script>scripts\humanGenerate.gml</script>
       <script>scripts\humanStartMovementByRandomPath.gml</script>
+      <script>scripts\humanStartRandomMadePath.gml</script>
       <script>scripts\humanGetNextPathPoint.gml</script>
       <script>scripts\humanSetState.gml</script>
       <script>scripts\humanUpdatePartsMoving.gml</script>
@@ -296,6 +313,8 @@
       <script>scripts\humanDrawDebug.gml</script>
     </scripts>
     <script>scripts\zoneInit.gml</script>
+    <script>scripts\physicalDrawShadow.gml</script>
+    <script>scripts\popupInit.gml</script>
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\shdBlack.shader</shader>
@@ -304,11 +323,13 @@
     <font>fonts\fSpeed</font>
     <font>fonts\fQuestion</font>
     <font>fonts\fTurnEnd</font>
+    <font>fonts\fPopup</font>
   </fonts>
   <objects name="objects">
     <objects name="Base">
       <object>objects\oStateObject</object>
       <object>objects\oBaseDerivable</object>
+      <object>objects\oExplosion</object>
       <object>objects\oBaseButton</object>
       <objects name="Physics">
         <object>objects\oBasePhysicalMovable</object>
@@ -368,12 +389,16 @@
     <object>objects\oCamera</object>
     <object>objects\oLightDepth</object>
     <object>objects\oHuman</object>
+    <object>objects\oBall</object>
+    <object>objects\oHumanCarCollider</object>
+    <object>objects\oAnimatedWater</object>
+    <object>objects\oPopupText</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rInit</room>
     <room>rooms\rEmbankment</room>
-    <room>rooms\rIntro</room>
     <room>rooms\rField</room>
+    <room>rooms\rIntro</room>
     <room>rooms\rMainMenu</room>
   </rooms>
   <help>

@@ -32,7 +32,6 @@ image_speed = 0;
 flagSet(OBJ_PAR.IMPACTABLE_TURN | OBJ_PAR.IMPACTABLE_PAUSE, 0);
 
 instance_create(oPlayerCar.x, oPlayerCar.y, oCamera);
-instance_create(0, 0, oHumanGenerator);
 
 controlBit = CONTROL.__KEYMOUSE;
 key[KEY.CNT] = 0;
@@ -153,6 +152,15 @@ part_type_orientation(rocketsmoke, 0, 359, 0, 2, 0);
 part_type_alpha2(rocketsmoke, .1, 0);
 part_type_speed(rocketsmoke, .2, .3, 0, 0);
 
+// human blood
+blood = part_type_create();
+part_type_sprite(blood, sHumanBlood, 0, 0, 0);
+part_type_life(blood, room_speed * 1.5, room_speed * 3);
+part_type_orientation(blood, 0, 359, 0, 2, 0);
+part_type_direction(blood, 0, 359, 0, .03);
+part_type_alpha2(blood, 1, 0);
+part_type_speed(blood, .3, .6, 0, 0);
+
 // light system
 lightsurf = surface_create(global.guiW, global.guiH);
 gameLightAlpha = .5;
@@ -195,6 +203,7 @@ part_system_destroy(psysrain);
 surface_free(lightsurf);
 
 part_type_destroy(rocketsmoke);
+part_type_destroy(blood);
 </string>
           </argument>
         </arguments>
@@ -292,6 +301,30 @@ case INGAME_STATES.GAME:
         </arguments>
       </action>
     </event>
+    <event eventtype="8" enumb="65">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>global.guiW = window_get_width();
+global.guiH = window_get_height();
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="8" enumb="64">
       <action>
         <libid>1</libid>
@@ -349,7 +382,7 @@ case INGAME_STATES.TURN:
             draw_set_font(fSpeed);
             draw_set_halign(fa_left);
             draw_set_valign(fa_top);
-            draw_text_colour(kmhtx, kmhty, string_format(selectedCar.phy_speed * 50, 1, 0), black, black, black, black, 1);
+            draw_text_colour(kmhtx, kmhty, string_format(selectedCar.phy_speed * 40, 1, 0), black, black, black, black, 1);
             
             // car hitpoints
             // base

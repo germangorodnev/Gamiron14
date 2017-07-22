@@ -168,10 +168,10 @@ case CARS.__SCOOL_BUS:
 
     // parameters
     spdMaxForward = 220;
-    spdAccelForward = 1.4;
-    spdAccelBrake = 2;
-    spdAccelBackward = 1.5
-    angleTorque = .16;
+    spdAccelForward = 1.6;
+    spdAccelBrake = 2.5;
+    spdAccelBackward = 2;
+    angleTorque = .6;
     
     // particles
     part_type_sprite(ptyre, sPlayerCar4Tyre, 0, 0, 0);
@@ -229,11 +229,11 @@ case CARS.__POLICE:
     physics_fixture_delete(fix);
 
     // parameters
-    spdMaxForward = 190;
-    spdAccelForward = 1.5;
-    spdAccelBrake = 1.6;
-    spdAccelBackward = 1
-    angleTorque = .45;
+    spdMaxForward = 220;
+    spdAccelForward = 1.6;
+    spdAccelBrake = 2.5;
+    spdAccelBackward = 2;
+    angleTorque = .6;
     
     
     weaponsCount = 1;

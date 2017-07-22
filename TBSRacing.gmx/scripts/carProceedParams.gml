@@ -5,8 +5,6 @@ engineTemperature = clamp(
     engineMaxTemperature);
 if (engineTemperature >= engineMaxTemperature)
 {
-    show_message("BOOM");
-    game_restart();
 }
 
 /////// SPEED CHANGING /////////
