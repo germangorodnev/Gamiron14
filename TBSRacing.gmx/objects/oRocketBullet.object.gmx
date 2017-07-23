@@ -3,7 +3,7 @@
   <spriteName>sGunRocketBullet</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>-1</depth>
+  <depth>-3</depth>
   <persistent>0</persistent>
   <parentName>oBaseBullet</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -133,6 +133,38 @@ part_emitter_burst(psys, pem, particles, 3);
             <kind>1</kind>
             <string>///delete
 instance_destroy();
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="oBaseCar">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///deal some damage
+if (other.team == team)
+    exit;
+    
+var ex = instance_create(phy_position_x, phy_position_y, oExplosion);
+ex.dmg = dmg;
+ex.team = team;
+
+instance_destroy();
+
 </string>
           </argument>
         </arguments>

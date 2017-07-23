@@ -48,6 +48,11 @@ turnEndApproval = 0;
 
 yesno = 0;
 
+
+SCORE = 0;
+SCORE_STR = "";
+gameScoreIncrease(0);
+
 // cars
 selectedCar = noone;
 selectedCarInd = -1;
@@ -128,6 +133,15 @@ carhpenx2 = carhpenx1 + 47;
 carhpeny2 = carhpeny1 + 44;
 carhpenx = carhpenx1 + (carhpenx2 - carhpenx1) / 2;
 carhpeny = carhpeny1 + (carhpeny2 - carhpeny1) / 2;
+
+// score
+scoreX = global.guiW - 15;
+scoreY = 10;
+scoreXoff = 6;
+scoreCol1 = make_colour_hsv(0, 162, 235);
+scoreCol2 = make_colour_hsv(0, 178, 109); 
+scoreCol3 = make_colour_hsv(0, 162, 100);
+scoreCol4 = make_colour_hsv(0, 200, 120);
 
 weather = WEAHTER.__RAINY;
 // rain
@@ -403,9 +417,9 @@ case INGAME_STATES.TURN:
             // engine
             var pc = selectedCar.engineHP / selectedCar.engineMaxHP,
                 coldraw = -1;
-            if (percent &gt;= .75)
+            if (pc &gt;= .75)
                 coldraw = make_colour_hsv(90, 204, 70);
-            else if (percent &gt;= .35)
+            else if (pc &gt;= .35)
                 coldraw = make_colour_hsv(14, 208, 70);
             else
                 coldraw = make_colour_hsv(254, 255, 72)
@@ -425,6 +439,15 @@ case INGAME_STATES.GAME:
     draw_text_colour(turnTimerX, turnTimerY, string(round(turnTimer / room_speed)), black, black, black, black, 1);
     break;
 }
+
+// SCORE
+draw_set_font(fSCORE);
+draw_set_halign(fa_right);
+draw_set_valign(fa_top);
+var off = scoreXoff * sin(global.ctime / 20);
+draw_text_colour(scoreX + off, scoreY, SCORE_STR, c_black, c_black, c_black, c_black, 1);
+draw_text_colour(scoreX, scoreY, SCORE_STR, scoreCol1, scoreCol2, scoreCol3, scoreCol4, 1);
+
 </string>
           </argument>
         </arguments>

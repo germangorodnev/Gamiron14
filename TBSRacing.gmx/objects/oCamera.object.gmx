@@ -38,7 +38,7 @@ view_hborder = view_wview / 2;
 view_vborder = view_hview / 2;
 view_visible = 1;
 friction = .4;
-
+view_angle = 0;
 state = CAM_STATES.__FREE;
 
 movSpd = 10;
@@ -176,8 +176,8 @@ case CAM_STATES.__PARTICULAR_OBJ:
     else
     {
         var dd = point_direction(x, y, targX, targY);
-        x += lengthdir_x(min(dd, movSpd), dd);   
-        y += lengthdir_y(min(dd, movSpd), dd);  
+        x += lengthdir_x(max(dist / 8, movSpd), dd);   
+        y += lengthdir_y(max(dist / 8, movSpd), dd);  
     }
     x = clamp(x, view_wview div 2, room_width - view_wview div 2);
     y = clamp(y, view_hview div 2, room_height - view_hview div 2);

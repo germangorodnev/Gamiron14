@@ -4,4 +4,5 @@ if (!surface_exists(lightsurf))
     exit;
 }
 with (oLightDepth)
-    draw_surface(oGameController.lightsurf, view_xview, view_yview);
+    event_user(0);
+    

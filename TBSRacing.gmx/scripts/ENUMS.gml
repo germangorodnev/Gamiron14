@@ -55,7 +55,7 @@ enum OBJ_PAR
     HAVE_LIGHT = 1 << 3,
     IMPACTABLE_PAUSE = 1 << 4,
     IMPACTABLE_TURN = 1 << 5,
-    SELECTED = 1 << 6
+    DAMAGABLE = 1 << 6,
 }
 
 enum PL_CAR_ST

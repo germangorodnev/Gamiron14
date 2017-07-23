@@ -10,6 +10,8 @@ case WEAPON_STATES.__SIMPLE_ATTACK:
         phy_position_y + lengthdir_y(60, -phy_rotation),
         BULLETS.__SIMPLE);
     bullet.phy_rotation = phy_rotation;
+    bullet.dmg = 4;
+    bullet.team = car.team;
     with (bullet)
         physics_apply_local_impulse(0, 0, 1500, 0);
         
@@ -25,7 +27,8 @@ case WEAPON_STATES.__ROCKET_ATTACK:
         phy_position_y + lengthdir_y(ldll, -phy_rotation + lddir),
         BULLETS.__ROCKET);
     bullet.phy_rotation = phy_rotation;
-
+    bullet.dmg = 12;
+    bullet.team = car.team;
         
     canShoot = canShootTmrSteps;
     //needShoot = 0;

@@ -52,9 +52,6 @@ wheelsCount = 4;
 wheelHP[3] = 0;
 wheelMaxHP[3] = 0;
 
-engineHP = 350;
-engineMaxHP = engineHP;
-
 // colour
 colArrowInner = make_colour_hsv(135, 195, 170);
 colArrowOuter = make_colour_hsv(135, 195, 121);
@@ -249,8 +246,7 @@ case PL_CAR_ST.__MOVE_TO_POINT:
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// proceed
-var car = id;
+            <string>var car = id;
 with (other.human)
 {
     if (state &gt;= HUMAN_STATES.__FLY_AWAY)
@@ -265,7 +261,9 @@ with (other.human)
             lengthdir_y(car.phy_speed * 30, car.phy_rotation));
         physics_apply_angular_impulse(phy_speed * 50);
         humanSetState(HUMAN_STATES.__FLY_AWAY);
-        popupInit(phy_position_x, phy_position_y - 20, string(15));    
+        var val = irandom_range(20, 50) div 5 * 5;
+        popupInit(phy_position_x, phy_position_y - 20, string(val));    
+        gameScoreIncrease(val);
     }
 }
 </string>

@@ -19,11 +19,11 @@ legLD = 82;
 legRL = legLL;
 legRD = -legLD;
 
-// collision with others, sphere
+// collision with others
 with (collider)
 {
     colFixFix = physics_fixture_create();
-    physics_fixture_set_density(colFixFix, .3);
+    physics_fixture_set_density(colFixFix, .05);
     physics_fixture_set_collision_group(colFixFix, 3);
     physics_fixture_set_linear_damping(colFixFix, .9);
     physics_fixture_set_angular_damping(colFixFix, 2);
@@ -44,7 +44,7 @@ with (collider)
     collisionFix = physics_fixture_bind(colFixFix, id);
     physics_fixture_delete(colFixFix);
 }
-
+alarm[0] = 3;
 
 var collideFix = physics_fixture_create();
 physics_fixture_set_density(collideFix, .3);

@@ -35,6 +35,8 @@ flagSet(OBJ_PAR.UPDATABLE
     | OBJ_PAR.IMPACTABLE_TURN
     | OBJ_PAR.PHYSICAL, 1);  
 
+dmg = 0;
+team = -1;
 
 </string>
           </argument>

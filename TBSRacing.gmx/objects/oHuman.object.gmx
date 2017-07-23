@@ -51,6 +51,7 @@ circleFix = -1;
 colFixFix = -1;
 collider = instance_create(x, y, oHumanCarCollider);
 collider.human = id;
+joint = -1;
 
 torsoSpr = sTorso;
 torsoI = 0;
@@ -170,8 +171,32 @@ physics_fixture_delete(colFixFix);
 
 part_emitter_destroy(psys, pem);
 part_system_destroy(psys);
-
+physics_joint_delete(joint);
 instance_destroy(collider);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>joint = physics_joint_distance_create(id, collider, phy_position_x, phy_position_y, collider.phy_position_x, collider.phy_position_y, 0);
+
 </string>
           </argument>
         </arguments>
@@ -202,8 +227,8 @@ part_system_update(psys);
 
 if (collider != noone)
 {
-    collider.phy_position_x = phy_position_x;
-    collider.phy_position_y = phy_position_y;
+//    collider.phy_position_x = phy_position_x;
+//    collider.phy_position_y = phy_position_y;
     collider.phy_rotation = phy_rotation;
 }
 

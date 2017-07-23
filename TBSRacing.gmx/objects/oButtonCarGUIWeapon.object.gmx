@@ -120,13 +120,14 @@ if (oGameController.key[KEY.MOUSE_LEFT] == 0)
         if (point_in_rectangle(mouse_x - view_xview, mouse_y - view_yview, nsx1, nsy1, nsx2, nsy2))
         {
             // clicked attack bt  
-            weap.needShoot = !weap.needShoot; 
+            with (weap)
+                weaponSetShootNecessity(!needShoot);
         }
         else
         {
             if (mouseOnUs())
             {
-            // well, maybe shoot
+                // well, maybe shoot
                 with (oGameController)  
                     gameControllerGuistateSet(GUI_STATES.__WEAPON_TARGET);
                 oGameController.weaponTargeting = id;            

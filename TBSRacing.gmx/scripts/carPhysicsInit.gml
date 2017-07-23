@@ -1,6 +1,7 @@
 ///carPhysicsInit(type)
 var ad = .7,
-    rest = .05;
+    rest = .05,
+    densityBase = .5;
     
 // wheels
 for (var i = 0; i < wheelsCount; i++)
@@ -16,7 +17,7 @@ case CARS.__MINI_VAN:
     // make the fixture
     var fix = physics_fixture_create();
     physics_fixture_set_collision_group(fix, 0);    
-    physics_fixture_set_density(fix, .2);  
+    physics_fixture_set_density(fix, densityBase);  
     physics_fixture_set_restitution(fix, rest);  
     physics_fixture_set_linear_damping(fix, .5);  
     physics_fixture_set_angular_damping(fix, ad);  
@@ -51,7 +52,7 @@ case CARS.__MINI_TRUCK:
     // make the fixture
     var fix = physics_fixture_create();
     physics_fixture_set_collision_group(fix, 0);    
-    physics_fixture_set_density(fix, .3);  
+    physics_fixture_set_density(fix, densityBase);  
     physics_fixture_set_restitution(fix, rest);  
     physics_fixture_set_linear_damping(fix, .4);  
     physics_fixture_set_angular_damping(fix, ad);  
@@ -86,7 +87,7 @@ case CARS.__ORANGE:
     // make the fixture
     var fix = physics_fixture_create();
     physics_fixture_set_collision_group(fix, 0);    
-    physics_fixture_set_density(fix, .5);  
+    physics_fixture_set_density(fix, densityBase);  
     physics_fixture_set_restitution(fix, rest);  
     physics_fixture_set_linear_damping(fix, .3);  
     physics_fixture_set_angular_damping(fix, ad);  
@@ -125,7 +126,7 @@ case CARS.__SCOOL_BUS:
     // make the fixture
     // left
     var fix = physics_fixture_create();
-    var density = .7
+    var density = .7;
     physics_fixture_set_collision_group(fix, 0);    
     physics_fixture_set_density(fix, density);  
     physics_fixture_set_restitution(fix, .01);  
@@ -179,6 +180,11 @@ case CARS.__SCOOL_BUS:
     weaponsCount = 3;
     break;
     
+    
+    
+    
+    
+    
 ////////////////// POLICE //////////////////////
 case CARS.__POLICE:
     sprite_index = sPoliceCar1;
@@ -231,9 +237,9 @@ case CARS.__POLICE:
     // parameters
     spdMaxForward = 220;
     spdAccelForward = 1.6;
-    spdAccelBrake = 2.5;
-    spdAccelBackward = 2;
-    angleTorque = .6;
+    spdAccelBrake = 3.5;
+    spdAccelBackward = 3;
+    angleTorque = .8;
     
     
     weaponsCount = 1;

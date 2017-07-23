@@ -12,11 +12,14 @@ if (!brake)
     //    angleval = 0;        
 
     var signMult = (-1 + 2 * (phy_speed < 0));
-    var ad = angle_difference(phy_rotation, arrowDir * signMult);
-    if (abs(ad) > 7)
+    var ad = angle_difference(phy_rotation, arrowDir * signMult),
+        adabs = abs(ad);
+    if (adabs > 10)
         physics_apply_torque((angleTorque * 350) * -sign(ad));
-    else
+    else if (adabs > 7)
         physics_apply_torque((angleTorque * 50) * -sign(ad));
+    else
+        physics_apply_torque((angleTorque * 10) * -sign(ad));
 
     dx = lengthdir_x(spd, -phy_rotation);
     dy = lengthdir_y(spd, -phy_rotation);

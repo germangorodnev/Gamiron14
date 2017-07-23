@@ -39,9 +39,12 @@ scale = .05;
 xspd = .3 * choose(-1, 1);
 yspd = .2;
 
+xoff = -5;
+yoff = 0;
+
 col1 = make_colour_hsv(0, 141, 114);
 col2 = make_colour_hsv(0, 185, 88);
-col3 = make_colour_hsv(0, 164, 101);
+col3 = make_colour_hsv(0, 164, 25);
 col4 = col2;
 </string>
           </argument>
@@ -172,10 +175,10 @@ image_speed = 0;
 draw_set_font(fPopup);
 draw_set_halign(fa_center);
 draw_set_valign(fa_middle);
-draw_text_transformed_colour(x, y, text, scale * 1.03, scale * 1.03, 0, 
-    c_black, c_black, c_black, c_black, alpha);
+draw_text_transformed_colour(x + xoff, y + yoff, text, scale, scale, 0, 
+    col3, col4, col3, col4, alpha);
 draw_text_transformed_colour(x, y, text, scale, scale, 0, 
-    col1, col2, col3, col4, alpha);
+    col1, col2, col1, col2, alpha);
 
 </string>
           </argument>

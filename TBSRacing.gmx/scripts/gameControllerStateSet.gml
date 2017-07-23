@@ -27,6 +27,8 @@ case INGAME_STATES.GAME:
         flagSet(OBJ_PAR.UPDATABLE, 1);
     with (oPopupText)
         flagSet(OBJ_PAR.UPDATABLE, 1);
+    with (oBasePhysicalMovable)
+        flagSet(OBJ_PAR.UPDATABLE, 1);
     break;
     
 case INGAME_STATES.TURN:

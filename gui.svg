@@ -249,9 +249,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.087500003"
-     inkscape:cx="1357.6963"
-     inkscape:cy="-1231.9219"
+     inkscape:zoom="0.24748738"
+     inkscape:cx="800.3272"
+     inkscape:cy="964.31666"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -13148,5 +13148,21 @@ RK5CYII=
        id="path8950"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cccc" />
+    <path
+       style="opacity:1;fill:#af1f1f;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 1008.2545,389.75279 a 35.355339,35.355339 0 0 0 -35.14457,31.8457 35.355339,35.355339 0 0 0 -15.36328,-3.56054 35.355339,35.355339 0 0 0 -11.25782,1.875 35.355339,35.355339 0 0 0 -28.13671,-13.9961 35.355339,35.355339 0 0 0 -32.82032,22.24805 35.355339,35.355339 0 0 0 -0.51562,-0.0254 35.355339,35.355339 0 0 0 -35.35547,35.35547 35.355339,35.355339 0 0 0 35.35547,35.35547 35.355339,35.355339 0 0 0 8.27344,-1.03126 35.355339,35.355339 0 0 0 34.15234,26.28516 35.355339,35.355339 0 0 0 23.35547,-8.85547 35.355339,35.355339 0 0 0 28.70312,14.76367 35.355339,35.355339 0 0 0 29.30665,-15.64648 35.355339,35.355339 0 0 0 10.5586,1.65625 35.355339,35.355339 0 0 0 35.3554,-35.35547 35.355339,35.355339 0 0 0 -0.014,-0.41406 35.355339,35.355339 0 0 0 18.1972,-30.90039 35.355339,35.355339 0 0 0 -31.0332,-35.0586 35.355339,35.355339 0 0 0 -33.6171,-24.54101 z"
+       id="path17841"
+       inkscape:connector-curvature="0" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:25px;line-height:125%;font-family:'Realize My Passion';-inkscape-font-specification:'Realize My Passion';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="893.57141"
+       y="452.36224"
+       id="text17991"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan17993"
+         x="893.57141"
+         y="452.36224" /></text>
   </g>
 </svg>

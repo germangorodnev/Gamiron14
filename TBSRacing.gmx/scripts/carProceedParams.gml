@@ -32,6 +32,11 @@ else
     spd -= min(spdAccelBrake * sign(spd), abs(spd) * sign(spd));
     spd = clamp(spd, -spdMaxBackward, spdMaxForward);  
     // change speed too  
+    if (phy_speed < .03)
+    {
+        phy_speed_x = 0;
+        phy_speed_y = 0;
+    }
 }
 
 

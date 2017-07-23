@@ -37,6 +37,8 @@ flagSet(OBJ_PAR.UPDATABLE
 state = WEAPON_STATES.__FREE;
 
 phy_rotation = -irandom(360);
+
+car = noone;
     
 // some params
 wType = WEAPONS.__SIMPLE;

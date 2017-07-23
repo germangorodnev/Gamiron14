@@ -67,9 +67,18 @@ case WEAPONS.__ROCKET:
     obj = oWeaponRocket;
     break;
 }
-var pos = weaponsCount++;
+var pos = -1;
+for (var i = 0; i < weaponsCount; i++)
+{
+    if (weapon[i] == noone)
+    {
+        pos = i;
+        break;
+    }
+}
 weapon[pos] = instance_create(phy_position_x + lengthdir_x(ll, phy_rotation + aa), 
-phy_position_y + lengthdir_y(ll, phy_rotation + aa), obj);
+    phy_position_y + lengthdir_y(ll, phy_rotation + aa), obj);
 weapon[pos].lenoff = ll;
 weapon[pos].angleoff = aa;
-weapon[pos].depth = depth - 1;
+weapon[pos].depth = depth - 2;
+weapon[pos].car = id;
