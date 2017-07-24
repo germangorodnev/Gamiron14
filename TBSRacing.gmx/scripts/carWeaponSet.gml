@@ -22,12 +22,12 @@ case CARS.__MINI_VAN:
     switch (argument[0])
     {
     case 0:
-        ll = 45;
-        aa = 180;    
+        ll = 46;
+        aa = 178;    
         break;
     case 1:
         ll = 4;
-        aa = 0;
+        aa = -14;
         break;
     }
     break;

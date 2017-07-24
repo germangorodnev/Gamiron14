@@ -95,7 +95,7 @@ if (oGameController.selectedCar.engineArrowH != -1)
 if (!(flags &amp; OBJ_PAR.UPDATABLE))
     exit;
 
-if (oGameController.key[KEY.MOUSE_LEFT] == 1)
+if (oControl.key[KEY.MOUSE_LEFT] == 1)
 {
     if (mouseOnUs())
     {

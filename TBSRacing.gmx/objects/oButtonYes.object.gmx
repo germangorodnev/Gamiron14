@@ -101,7 +101,7 @@ image_yscale = hh / 32;
 if (!(flags &amp; OBJ_PAR.UPDATABLE))
     exit;
 
-if (oGameController.key[KEY.MOUSE_LEFT] == 0)
+if (oControl.key[KEY.MOUSE_LEFT] == 0)
 {
     if (mouseOnUs())
     {

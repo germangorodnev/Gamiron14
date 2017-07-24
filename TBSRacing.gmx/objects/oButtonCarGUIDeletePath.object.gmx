@@ -107,9 +107,8 @@ if (!(flags &amp; OBJ_PAR.UPDATABLE))
 if (mouseOnUs())
 {
     cc = colHover;
-    if (oGameController.key[KEY.MOUSE_LEFT] == 0)
-    {
-        // delte path
+    if (oControl.key[KEY.MOUSE_LEFT] == 0)
+    {        // delte path
         with (oGameController.selectedCar)
             carPathDelete();
     }

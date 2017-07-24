@@ -82,7 +82,7 @@ OutFile "${INSTALLER_FILENAME}"
 ; The default installation directory
 InstallDir "$PROFILE\${APP_NAME}"
 
-; Registry key to check for directory (so if you install again, it will 
+; Registry oControl.key to check for directory (so if you install again, it will 
 ; overwrite the old one automatically)
 InstallDirRegKey HKCU "Software\Runner" "Install_Dir"
 

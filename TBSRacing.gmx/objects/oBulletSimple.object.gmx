@@ -93,6 +93,46 @@ lightscale = .5;
         </arguments>
       </action>
     </event>
+    <event eventtype="4" ename="oHumanCarCollider">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>var hit = id;
+with (other.human)
+{
+    if (state &gt;= HUMAN_STATES.__FLY_AWAY)
+        exit;
+    // oooh
+    humanGenerateBlood();
+    var dir = -point_direction(hit.phy_position_x, hit.phy_position_y,
+        phy_position_x, phy_position_y);
+    physics_apply_impulse(phy_position_x, phy_position_y, 
+        lengthdir_x(phy_speed * 30, -dir),
+        lengthdir_y(phy_speed * 30, -dir));
+    physics_apply_angular_impulse(phy_speed * 25);
+    humanSetState(HUMAN_STATES.__FLY_AWAY);  
+    var val = irandom_range(15, 35) div 5 * 5;
+    popupInit(phy_position_x, phy_position_y - 20, string(val));    
+    gameScoreIncrease(val);
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="4" ename="oBaseWall">
       <action>
         <libid>1</libid>

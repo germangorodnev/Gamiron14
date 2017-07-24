@@ -1,7 +1,7 @@
-var forwX = lengthdir_x(1, phy_rotation),
-    forwY = lengthdir_y(1, phy_rotation),
-    rightX = lengthdir_x(1, phy_rotation - 90),
-    rightY = lengthdir_y(1, phy_rotation - 90);
+var forwX = lengthdir_x(1, -phy_rotation),
+    forwY = lengthdir_y(1, -phy_rotation),
+    rightX = lengthdir_x(1, -phy_rotation - 90),
+    rightY = lengthdir_y(1, -phy_rotation - 90);
 var dp = dot_product(phy_linear_velocity_x, phy_linear_velocity_y, forwX, forwY);
 var forwVelX = forwX * dp,
     forwVelY = forwY * dp;

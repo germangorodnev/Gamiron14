@@ -35,6 +35,8 @@ flagSet(OBJ_PAR.UPDATABLE
     | OBJ_PAR.IMPACTABLE_TURN
     | OBJ_PAR.PHYSICAL, 1);  
     
+gener = noone;
+    
 spd = .6;
 angleSpeed = 2;
 
@@ -227,8 +229,8 @@ part_system_update(psys);
 
 if (collider != noone)
 {
-//    collider.phy_position_x = phy_position_x;
-//    collider.phy_position_y = phy_position_y;
+    collider.phy_position_x = phy_position_x;
+    collider.phy_position_y = phy_position_y;
     collider.phy_rotation = phy_rotation;
 }
 
@@ -319,8 +321,8 @@ if ((phy_position_x == other.phy_position_x)
 }
 
 var dir = point_direction(other.phy_position_x, other.phy_position_x, phy_position_x, phy_position_x);
-var dx = lengthdir_x(1, dir),
-    dy = lengthdir_y(1, dir);
+var dx = lengthdir_x(spd, dir),
+    dy = lengthdir_y(spd, dir);
 phy_position_x += dx;
 phy_position_y += dy;
 
@@ -451,35 +453,6 @@ image_speed = imgspdstop;
             <string>/// on pause
 imgspdstop = image_speed;
 image_speed = 0;
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="7" enumb="8">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>if (!path_get_closed(path))
-    instance_destroy();
-else
-{
-    pathInd = -1;
-    humanGetNextPathPoint();
-}
 </string>
           </argument>
         </arguments>

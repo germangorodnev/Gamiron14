@@ -109,7 +109,7 @@ if (mouseOnUs())
 {
     if (!oGameController.arrowBuild)
         cc = colHover;
-    if (oGameController.key[KEY.MOUSE_LEFT] == 0)
+    if (oControl.key[KEY.MOUSE_LEFT] == 0)
     {
         with (oGameController)
             gameControllerCarModeChange();

@@ -76,6 +76,8 @@ pem = part_emitter_create(psys);
             <string>event_inherited();
 part_emitter_destroy(psys, pem);
 part_system_destroy(psys);
+explosionSmallCreate();   
+
 </string>
           </argument>
         </arguments>
@@ -108,6 +110,31 @@ physics_apply_local_force(0, 0, spd, 0);
 part_type_direction(particles, -phy_rotation - 3, -phy_rotation + 3, 0, 0);
 part_emitter_region(psys, pem, x - 1, x + 1, y - 1, y + 1, ps_shape_diamond, ps_distr_linear);
 part_emitter_burst(psys, pem, particles, 3);
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="oHumanCarCollider">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///deal some damage 
+instance_destroy();
 
 </string>
           </argument>
@@ -158,11 +185,7 @@ instance_destroy();
             <string>///deal some damage
 if (other.team == team)
     exit;
-    
-var ex = instance_create(phy_position_x, phy_position_y, oExplosion);
-ex.dmg = dmg;
-ex.team = team;
-
+ 
 instance_destroy();
 
 </string>

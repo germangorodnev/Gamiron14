@@ -33,8 +33,6 @@ flagSet(OBJ_PAR.IMPACTABLE_TURN | OBJ_PAR.IMPACTABLE_PAUSE, 0);
 
 instance_create(oPlayerCar.x, oPlayerCar.y, oCamera);
 
-controlBit = CONTROL.__KEYMOUSE;
-key[KEY.CNT] = 0;
 lReleased = 1;
 
 ingameState = INGAME_STATES.TURN;
@@ -266,7 +264,6 @@ gameControllerSubstateSet(SUBSTATES.__NONE);
           <argument>
             <kind>1</kind>
             <string>/// control the game
-playerGetInput();
 switch (global.gameState)
 {
 case GAME_STATES.__TURNENDYESNO:

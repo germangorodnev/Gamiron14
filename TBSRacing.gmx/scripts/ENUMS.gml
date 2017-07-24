@@ -84,11 +84,11 @@ enum EN_CAR_ST
 /////////////// CARS
 enum CARS
 {
-    __NONE,
-    __ORANGE,
-    __MINI_TRUCK,
-    __MINI_VAN,
-    __SCOOL_BUS,
+    __NONE = -1,
+    __ORANGE = 0,
+    __MINI_TRUCK = 1,
+    __MINI_VAN = 2,
+    __SCOOL_BUS = 3,
     __POLICE
 }
 
@@ -101,8 +101,9 @@ enum CONTROL_TYPES
 /////////////// WEAPONS
 enum WEAPONS
 {
-    __SIMPLE,
-    __ROCKET
+    __NONE = -1,
+    __SIMPLE = 0,
+    __ROCKET = 1,
 }
 
 enum BULLETS
@@ -144,8 +145,8 @@ enum CAM_FLAGS
 
 enum LANG
 {
-    RUS,
-    ENG
+    RUS = 0,
+    ENG = 1
 }
 
 enum WEAHTER
@@ -153,4 +154,18 @@ enum WEAHTER
     __SUNNY = 1 << 0,
     __CLOUDY = 1 << 1,
     __RAINY = 1 << 2
+}
+
+
+
+
+
+
+
+/////////////// MAP
+enum MAP_POINT
+{
+    __GARAGE = 0,
+    __DEMOLISH,
+    __DEMOLISH_RACE,
 }

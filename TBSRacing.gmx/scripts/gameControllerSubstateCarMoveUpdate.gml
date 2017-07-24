@@ -7,7 +7,7 @@ case CONTROL_TYPES.ARROW:
     switch (guistate)
     {
     case GUI_STATES.__GUI: // just move the mouse, nothing special about path
-        if (key[KEY.SWITCH])
+        if (oControl.key[KEY.SWITCH])
         {
             if (instance_number(oPlayerCar) > 1)
             {
@@ -22,7 +22,7 @@ case CONTROL_TYPES.ARROW:
             if (arrowBuild)
             {
                 systemCursorSet(sCursorArrow);
-                if (key[KEY.MOUSE_LEFT] == 1)
+                if (oControl.key[KEY.MOUSE_LEFT] == 1)
                 {
                     with (selectedCar)
                     {
@@ -30,12 +30,12 @@ case CONTROL_TYPES.ARROW:
                         angleEqual = 0;
                     }
                 }
-                else if (key[KEY.MOUSE_LEFT] == 2)
+                else if (oControl.key[KEY.MOUSE_LEFT] == 2)
                 {
                     arrowBuild = 0;
                 }
             }
-            else if ((key[KEY.MOUSE_LEFT] == 0) 
+            else if ((oControl.key[KEY.MOUSE_LEFT] == 0) 
                 && (!position_meeting(mouse_x, mouse_y, oButtonEndTurn)))
             {
                 var osel = selectedCar;
@@ -56,7 +56,7 @@ case CONTROL_TYPES.ARROW:
         break;
         
     case GUI_STATES.__WEAPON_TARGET:
-        if (key[KEY.MOUSE_RIGHT] == 0)
+        if (oControl.key[KEY.MOUSE_RIGHT] == 0)
         {
             gameControllerGuistateSet(GUI_STATES.__GUI);    
             exit; 
@@ -64,7 +64,7 @@ case CONTROL_TYPES.ARROW:
         if (!systemMouseInGUI())
         {
             systemCursorSet(sCursorTarget);
-            if (key[KEY.MOUSE_LEFT] == 0)
+            if (oControl.key[KEY.MOUSE_LEFT] == 0)
             {
                 // set target direction
                 with (weaponTargeting.weap)
@@ -92,7 +92,7 @@ case CONTROL_TYPES.POINTS:
         if (!systemMouseInGUI())
         {
             systemCursorSet(sCursorPointer);
-            if (key[KEY.MOUSE_LEFT] == 0)
+            if (oControl.key[KEY.MOUSE_LEFT] == 0)
             {
                 var clickCar = gameControllerGotCarClick();
             }
@@ -108,12 +108,12 @@ case CONTROL_TYPES.POINTS:
         if (!systemMouseInGUI())
         {
             systemCursorSet(sCursorPointEdit);
-            if (key[KEY.MOUSE_RIGHT] == 0)
+            if (oControl.key[KEY.MOUSE_RIGHT] == 0)
             {
                 gameControllerGuistateSet(GUI_STATES.__GUI);
                 exit;        
             }
-            else if (key[KEY.MOUSE_LEFT] == 0)
+            else if (oControl.key[KEY.MOUSE_LEFT] == 0)
             {
                 // check the points
                 var f = 0;
@@ -143,7 +143,7 @@ case CONTROL_TYPES.POINTS:
                     pathPointTrack = path_get_number(pathId) - 1;
                 }
             }
-            else if (key[KEY.MOUSE_LEFT] == 1)
+            else if (oControl.key[KEY.MOUSE_LEFT] == 1)
             {
                 if (pathPointTrack != -1)
                 {
@@ -151,7 +151,7 @@ case CONTROL_TYPES.POINTS:
                     path_change_point(pathId, pathPointTrack, mouse_x, mouse_y, path_get_speed(pathId, pathPointTrack));
                 }
             }
-            else if (key[KEY.MOUSE_LEFT] == 2) // rel
+            else if (oControl.key[KEY.MOUSE_LEFT] == 2) // rel
             {
                 pathPointTrack = -1;
             }
@@ -167,12 +167,12 @@ case CONTROL_TYPES.POINTS:
         if (!systemMouseInGUI())
         {
             systemCursorSet(sCursorPointErase);
-            if (key[KEY.MOUSE_RIGHT] == 0)
+            if (oControl.key[KEY.MOUSE_RIGHT] == 0)
             {
                 gameControllerGuistateSet(GUI_STATES.__GUI);
                 exit;        
             }
-            else if (key[KEY.MOUSE_LEFT] == 0)
+            else if (oControl.key[KEY.MOUSE_LEFT] == 0)
             {
                 // check the points
                 for (var i = 0, pc = path_get_number(pathId); i < pc; i++)

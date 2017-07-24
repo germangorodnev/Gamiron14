@@ -6,7 +6,7 @@ case EN_CAR_ST.__MOEV_IN_DIRECTION:
     var dist = distance_to_object(nearest),
         pdir = point_direction(phy_position_x, phy_position_y, 
             nearest.phy_position_x, nearest.phy_position_y)
-    if (dist < 300)
+    if (dist < 450)
     {
         carSetDesiredSpeedByPercent(0);
         arrowDir = pdir - 90;
@@ -19,7 +19,7 @@ case EN_CAR_ST.__MOEV_IN_DIRECTION:
     }
     else
     {
-        carSetDesiredSpeedByPercent(clamp(dist / 400, .36, 1));
+        carSetDesiredSpeedByPercent(clamp(dist / 400, .18, 1));
         arrowDir = pdir;
         with (weapon[0])
         {

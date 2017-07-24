@@ -146,8 +146,8 @@ if (camFlags &amp; CAM_FLAGS.DARKEN)
 switch (state)
 {
 case CAM_STATES.__FREE:
-    var ymove = oGameController.key[KEY.CAM_BOTTOM] - oGameController.key[KEY.CAM_TOP],
-        xmove = oGameController.key[KEY.CAM_RIGHT] - oGameController.key[KEY.CAM_LEFT],
+    var ymove = oControl.key[KEY.CAM_BOTTOM] - oControl.key[KEY.CAM_TOP],
+        xmove = oControl.key[KEY.CAM_RIGHT] - oControl.key[KEY.CAM_LEFT],
         spdmove = movSpd;
     x += spdmove * xmove;
     y += spdmove * ymove;
@@ -156,10 +156,10 @@ case CAM_STATES.__FREE:
     break;
     
 case CAM_STATES.__PARTICULAR_OBJ:
-    if (oGameController.key[KEY.CAM_TOP] == 1
-        || oGameController.key[KEY.CAM_BOTTOM] == 1
-        || oGameController.key[KEY.CAM_RIGHT] == 1
-        || oGameController.key[KEY.CAM_LEFT] == 1)
+    if (oControl.key[KEY.CAM_TOP] == 1
+        || oControl.key[KEY.CAM_BOTTOM] == 1
+        || oControl.key[KEY.CAM_RIGHT] == 1
+        || oControl.key[KEY.CAM_LEFT] == 1)
     {
         camSetState(CAM_STATES.__FREE);
         speed = 0;

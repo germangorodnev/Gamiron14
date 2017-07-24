@@ -1,0 +1,86 @@
+{
+	"language": 1,
+	"sound": 1,	
+	"levelsPassed": 0,
+	"carsCount": 1,
+
+
+	"cars": [
+		{
+			"type": 0,
+			"slots": [
+				{
+					"type": -1,
+
+				}
+			]
+		},
+
+
+
+
+	],
+
+	"places": {
+		"garage": {
+			"x": 0.64375, 
+			"y": 0.2787
+		},
+
+		"shop": {
+			"x": 0.3695,
+			"y": 0.2798
+		}
+	},
+
+	"levels": [
+		{
+			"name": [
+				"Центр",
+				"Centre"
+			],
+			"desc": [
+				"Перекресток одного из центральных районов",
+				"Crossroads of one of the central districts"
+			],
+			"DONE": 0,
+			"type": 1,
+			"room": "rStreets1",
+			"x": 0.52343,
+			"y": 0.4936
+		},
+
+		{
+			"name": [
+				"Парк",
+				"Park"
+			],
+			"desc": [
+				"Стадион в парковой зоне",
+				"Stadium in the park zone"
+			],
+			"DONE": 0,
+			"type": 1,
+			"room": "rField",
+			"x": 0.639,
+			"y": 0.6633
+		},
+
+		{
+			"name": [
+				"Набережная",
+				"Embankment"
+			],
+			"desc": [
+				"Людное место в городском парке",
+				"Crowded place in a city park"
+			],
+			"DONE": 0,
+			"type": 1,
+			"room": "rEmbankment",
+			"x": 0.5234,
+			"y": 0.5707
+		}
+	]
+
+}

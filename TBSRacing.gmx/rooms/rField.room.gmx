@@ -12,7 +12,7 @@
   <showcolour>-1</showcolour>
   <code>with (oHuman)
 {
-    humanStartRandomMadePath();
+    humanStartRandomMadePath(pFieldHuman1, 1);
     visible = 1;
     phy_position_x = xstart;
     phy_position_y = ystart;
@@ -68,11 +68,6 @@ with (oGameController)
   </views>
   <instances>
     <instance objName="oGameController" x="0" y="0" name="inst_A8C2A80B" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="oBaseWall" x="384" y="368" name="inst_20A65975" locked="0" code="" scaleX="100" scaleY="0.5" colour="4294967295" rotation="0"/>
-    <instance objName="oBaseWall" x="3568" y="384" name="inst_24E32032" locked="0" code="" scaleX="0.5" scaleY="40.375" colour="4294967295" rotation="0"/>
-    <instance objName="oBaseWall" x="384" y="1664" name="inst_D457C4FE" locked="0" code="" scaleX="100" scaleY="0.379999995231628" colour="4294967295" rotation="0"/>
-    <instance objName="oBaseWall" x="384" y="376" name="inst_7501BC5B" locked="0" code="" scaleX="0.5" scaleY="40.375" colour="4294967295" rotation="0"/>
-    <instance objName="oMaterialMask" x="384" y="384" name="inst_28E72C56" locked="0" code="zone = ZONES.__GRASS;&#xA;&#xA;" scaleX="100" scaleY="40" colour="4294967295" rotation="0"/>
     <instance objName="oPlayerCar" x="512" y="512" name="inst_E517445E" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="oBall" x="773" y="589" name="inst_DE1967F1" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="oBall" x="1114" y="1033" name="inst_AE78D945" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
@@ -92,6 +87,11 @@ with (oGameController)
     <instance objName="oEnemyCar" x="2720" y="572" name="inst_BF93031B" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="175"/>
     <instance objName="oEnemyCar" x="3250" y="885" name="inst_C22B0D6B" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="220"/>
     <instance objName="oEnemyCar" x="2872" y="1228" name="inst_D197C951" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="75"/>
+    <instance objName="oHumanGeneratorPeriodic" x="3918" y="252" name="inst_BE7F2E54" locked="0" code="tmr = room_speed * 1.5;&#xA;tmrMin = room_speed * 1.5;&#xA;tmrMax = room_speed * 3;&#xA;path = pFieldHuman2;&#xA;canreverse = 0;&#xA;xshiftmax = 0;&#xA;yshiftmax = 80;&#xA;peoplemin = 1;&#xA;peoplemax = 1;&#xA;speedcoeffmin = 2.0;&#xA;speedcoeffmax = 4.0;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="oWallBulletWalkable" x="384" y="371" name="inst_C09A99D3" locked="0" code="" scaleX="100" scaleY="0.387096762657166" colour="4294967295" rotation="0"/>
+    <instance objName="oWallBulletWalkable" x="3571" y="384" name="inst_F7F0A725" locked="0" code="" scaleX="0.419354826211929" scaleY="40.4193534851074" colour="4294967295" rotation="0"/>
+    <instance objName="oWallBulletWalkable" x="384" y="1663" name="inst_97C24431" locked="0" code="" scaleX="99.870002746582" scaleY="0.483870953321457" colour="4294967295" rotation="0"/>
+    <instance objName="oWallBulletWalkable" x="384" y="382" name="inst_9AF811DE" locked="0" code="" scaleX="0.439999997615814" scaleY="40.310001373291" colour="4294967295" rotation="0"/>
   </instances>
   <tiles>
     <tile bgName="tls1" x="384" y="384" w="128" h="128" xo="0" yo="256" id="10000995" name="inst_D4BB84DE" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>
