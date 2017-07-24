@@ -46,6 +46,7 @@ active = 0;
 
 colActive = oButtonCarGUIEditPoints.colActive;
 colInactive = oButtonCarGUIEditPoints.colInactive;
+colMayBeActive = oButtonCarGUIEditPoints.colMayBeActive;
 col = colInactive;
 
 rtx = rx1 + (rx2 - rx1) div 2;
@@ -104,9 +105,11 @@ image_yscale = hh / 32;
 if (!(flags &amp; OBJ_PAR.UPDATABLE))
     exit;
 
-if (oGameController.key[KEY.MOUSE_LEFT] == 0)
+if (mouseOnUs())
 {
-    if (mouseOnUs())
+    if (!active)
+        col = colMayBeActive;
+    if (oControl.key[KEY.MOUSE_LEFT] == 0)
     {
         // edit points
         switch (active)
@@ -123,8 +126,10 @@ if (oGameController.key[KEY.MOUSE_LEFT] == 0)
         }
     }
 }
-
-
+else
+    if (!active)
+        col = colInactive;
+    
 x = view_xview + rx1;
 y = view_yview + ry1;
 

@@ -34,8 +34,14 @@ flagSet(OBJ_PAR.UPDATABLE
     | OBJ_PAR.IMPACTABLE_PAUSE 
     | OBJ_PAR.IMPACTABLE_TURN, 1);  
 
-xx = oGameController.spplatex - 45 - sprite_get_width(sBrake) div 2;
+xx = oGameController.spplatex - 45 - sprite_get_width(sBrake);
+xdr = xx + sprite_get_width(sBrake) div 2;
 yy = oGameController.spplatey + 18;
+
+pressed = oGameController.selectedCar.brake;
+sind = sBrake;
+if (pressed)
+    sind = sBrakePressed;
 
 image_xscale = sprite_get_width(sBrake) / 32;
 image_yscale = sprite_get_height(sBrake) / 32;
@@ -88,11 +94,18 @@ image_yscale = sprite_get_height(sBrake) / 32;
 if (!(flags &amp; OBJ_PAR.UPDATABLE))
     exit;
 
-if (oGameController.key[KEY.MOUSE_LEFT] == 0)
+if (oControl.key[KEY.MOUSE_LEFT] == 0)
 {
     if (mouseOnUs())
     {
         // clicked - brake
+        pressed = !pressed;
+        sind = sBrakePressed;
+        if (!pressed)
+            sind = sBrake;
+        var pr = pressed;
+        with (oGameController.selectedCar)
+            carBrakePress(pr);
     }
 }
 
@@ -173,7 +186,7 @@ image_speed = 0;
           <argument>
             <kind>1</kind>
             <string>/// draw
-draw_sprite_ext(sBrake, 0, xx, yy, 1, 1, 0, image_blend, image_alpha);  
+draw_sprite_ext(sind, 0, xdr, yy, 1, 1, 0, image_blend, image_alpha);  
 
 </string>
           </argument>

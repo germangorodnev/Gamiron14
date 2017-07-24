@@ -31,7 +31,8 @@ event_inherited();
 flagSet(OBJ_PAR.UPDATABLE 
     | OBJ_PAR.DRAWABLE
     | OBJ_PAR.IMPACTABLE_PAUSE 
-    | OBJ_PAR.IMPACTABLE_TURN, 1);  
+    | OBJ_PAR.IMPACTABLE_TURN, 1);
+    //| OBJ_PAR.HAVE_LIGHT, 1);  
 
 team = 0; // 0 - player, 1 - enemy
 
@@ -43,30 +44,79 @@ fixturesCnt = 0;
 spd = 0;
 spdMaxForward = 135;
 spdMaxBackward = 55;
-spdAccelForward = .07;
-spdBrakeForward = .08;
-spdAccelBackward = .02;
-spdAccelBrake = .12;
+spdAccelForward = .4;
+spdBrakeForward = .6;
+spdAccelBackward = .3;
+spdAccelBrake = .2;
 spdDesiredPercent = 0;
 spdDesired = 0;
 
 engineTemperature = 0;
 engineTemperatureIncr = .003;
 engineMaxTemperature = 60;
+engineHP = 350;
+engineMaxHP = engineHP;
+
 
 desiredAngle = 0;
-angleTorque = .2;
+angleTorque = .24;
+angleIncr = .14;
+angleStep = 0;
+angleEqual = 0;
+
+brake = 0;
+
+inertiaDir = 0;
+forwardDir = 0;
+angleDif = 0;
 
 type = CARS.__NONE;
 
 weapon[0] = noone; // weapon objects
 weaponsCount = 0;
 
+// path
 pathMove = path_add();
 path_set_closed(pathMove, 0);
 //path_set_kind(pathMove, 1);
 //path_set_precision(pathMove, 2);
 
+
+// particles
+psys = part_system_create();
+part_system_automatic_update(psys, 0);
+part_system_depth(psys, 300);
+part_system_automatic_draw(psys, 1);
+part_system_position(psys, 0, 0);
+
+pem = part_emitter_create(psys);
+
+// tyre effect
+ptyre = part_type_create();
+part_type_life(ptyre, 30, 60);
+part_type_alpha2(ptyre, .1, 0);
+
+// car smoke
+smoke = part_type_create();
+part_type_sprite(smoke, sCarSmoke, 0, 0, 0);
+part_type_size(smoke, .1, 1, .1, .1);
+part_type_orientation(smoke, 0, 359, 1, 1, 0);
+part_type_life(smoke, 10, 160);
+part_type_alpha2(smoke, .1, 0);
+part_type_speed(smoke, 2, 3, 0, 0);
+
+dirt = part_type_create();
+part_type_sprite(dirt, sGrassDirt, 0, 0, 1);
+part_type_size(dirt, .1, 1, .1, .1);
+part_type_orientation(dirt, 0, 359, 1, 1, 0);
+part_type_life(dirt, 50, 90);
+part_type_alpha2(dirt, .1, 0);
+part_type_speed(dirt, 2, 3, 0, 0);
+
+// lights
+forwLightX = 0;
+forwLightY = 0;
+forwLightCol = c_yellow;
 </string>
           </argument>
         </arguments>
@@ -92,6 +142,14 @@ path_set_closed(pathMove, 0);
             <string>event_inherited();
 
 path_delete(pathMove);
+part_system_clear(psys);
+part_emitter_destroy(psys, pem);
+part_type_destroy(ptyre);
+part_type_destroy(smoke);
+part_type_destroy(dirt);
+
+part_system_destroy(psys);
+
 </string>
           </argument>
         </arguments>

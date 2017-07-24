@@ -24,7 +24,8 @@ enum GUI_STATES
 {
     __GUI,
     __PATH_EDIT,
-    __PATH_ERASE
+    __PATH_ERASE,
+    __WEAPON_TARGET
 }
 
 enum KEY
@@ -35,6 +36,7 @@ enum KEY
     CAM_TOP,
     CAM_RIGHT,
     CAM_BOTTOM,
+    SWITCH,
     CNT
 }   
 
@@ -53,7 +55,7 @@ enum OBJ_PAR
     HAVE_LIGHT = 1 << 3,
     IMPACTABLE_PAUSE = 1 << 4,
     IMPACTABLE_TURN = 1 << 5,
-    SELECTED = 1 << 6
+    DAMAGABLE = 1 << 6,
 }
 
 enum PL_CAR_ST
@@ -62,26 +64,71 @@ enum PL_CAR_ST
     __MOVE_TO_POINT
 }
 
+enum ZONES
+{
+    __GRASS = 0,
+    __ASPHALT,
+    __WATER
+}   
+
+/////////////// ENEMIES
+enum EN_CAR_ST
+{
+    __INACTIVE,
+    __MOVE_TO_POINT,
+    __MOEV_IN_DIRECTION,
+    __EVADE_OBJECT,
+    __PURSUIT_OBJECT
+}
+
 /////////////// CARS
 enum CARS
 {
-    __NONE,
-    __ORANGE,
-    __MINI_TRUCK,
-    __MINI_VAN,
+    __NONE = -1,
+    __ORANGE = 0,
+    __MINI_TRUCK = 1,
+    __MINI_VAN = 2,
+    __SCOOL_BUS = 3,
     __POLICE
+}
+
+enum CONTROL_TYPES
+{
+    POINTS,
+    ARROW
 }
 
 /////////////// WEAPONS
 enum WEAPONS
 {
-    __SIMPLE
+    __NONE = -1,
+    __SIMPLE = 0,
+    __ROCKET = 1,
+}
+
+enum BULLETS
+{
+    __SIMPLE,
+    __ROCKET
 }
 
 enum WEAPON_STATES
 {
-    __FREE
+    __FREE,
+    __SIMPLE_ATTACK,
+    __ROCKET_ATTACK
 }
+
+/////////////// HUMAN
+enum HUMAN_STATES
+{
+    __IDLE,
+    __MOVE_POINT,
+    __AVOID,
+    __WANDER,
+    __FLY_AWAY,
+    __DIE
+}   
 
 /////////////// CAMERA
 enum CAM_STATES
@@ -98,6 +145,27 @@ enum CAM_FLAGS
 
 enum LANG
 {
-    RUS,
-    ENG
+    RUS = 0,
+    ENG = 1
+}
+
+enum WEAHTER
+{
+    __SUNNY = 1 << 0,
+    __CLOUDY = 1 << 1,
+    __RAINY = 1 << 2
+}
+
+
+
+
+
+
+
+/////////////// MAP
+enum MAP_POINT
+{
+    __GARAGE = 0,
+    __DEMOLISH,
+    __DEMOLISH_RACE,
 }

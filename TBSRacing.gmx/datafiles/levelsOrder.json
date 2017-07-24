@@ -1,0 +1,33 @@
+{
+	"levels": [
+		{
+			"name": [
+				"Центр",
+				"Centre"
+			],
+			"desc": [
+				"Перекресток одного из центральных районов",
+				"Crossroads of one of the central districts"
+			],
+			"type": 1,
+			"room": "rStreets1",
+			"x": 0.52343,
+			"y": 0.4936
+		},
+
+		{
+			"name": [
+				"Парк",
+				"Park"
+			],
+			"desc": [
+				"Стадион в парковой зоне",
+				"Stadium in the park zone"
+			],
+			"type": 1,
+			"room": "rField",
+			"x": 0.639,
+			"y": 0.6633
+		}
+	]
+}

@@ -33,8 +33,7 @@ flagSet(OBJ_PAR.IMPACTABLE_TURN | OBJ_PAR.IMPACTABLE_PAUSE, 0);
 
 instance_create(oPlayerCar.x, oPlayerCar.y, oCamera);
 
-controlBit = CONTROL.__KEYMOUSE;
-key[KEY.CNT] = 0;
+lReleased = 1;
 
 ingameState = INGAME_STATES.TURN;
 substate = SUBSTATES.__NONE;
@@ -47,8 +46,14 @@ turnEndApproval = 0;
 
 yesno = 0;
 
+
+SCORE = 0;
+SCORE_STR = "";
+gameScoreIncrease(0);
+
 // cars
 selectedCar = noone;
+selectedCarInd = -1;
 
 guix1 = 0;
 guiy1 = global.guiH - (global.guiH div 4);
@@ -74,19 +79,143 @@ pathPointRad = 5;
 pathPointTrack = -1;
 pathId = -1;
 
+// control arrow
+arrowBuild = 0;
+arrowColInner = make_colour_hsv(38, 195, 170);
+arrowColOuter = make_colour_hsv(38, 106, 86);
+
+// weapon
+weaponTargeting = noone;
+
 kmhx = spidx;
 kmhy = spplatey;
 kmhtx = kmhx + 8;
 kmhty = kmhy + 1;
 black = c_black;
 
+selectedSignYoff = 35;
+selectedSignMaxH = 25;
+selectedSignXscale = 1;
+selectedSignXpath = 0; // 0 - to -1, 1 - to 1
+selectedSignMaxXscale = 1.7;
 
 // time
 turnTimerX = global.guiW div 2;
 turnTimerY = global.guiH div 8;
 
+// car hp
+carhpind = 0;
+carhpx = guix1 + 130;
+carhpy = guiy1 + (guiy2 - guiy1) div 2;
+
+wheelsCount = 4;
+wheelsind = 0;
+wheelX[wheelsCount - 1] = 0;
+wheelY[wheelsCount - 1] = 0; 
+var wx = sprite_get_xoffset(sCarHP),   
+    wy = sprite_get_yoffset(sCarHP);
+wheelX[0] = carhpx + 3 - wx;
+wheelY[0] = carhpy + 33 - wy;
+wheelX[1] = carhpx + 81 - wx;
+wheelY[1] = wheelY[0];
+
+wheelX[2] = wheelX[0];
+wheelY[2] = carhpy + 125 - wy;
+wheelX[3] = wheelX[1];
+wheelY[3] = wheelY[2];
+
+// engine
+carhpenx1 = carhpx + 18 - wx;
+carhpeny1 = carhpy + 13 - wy;
+carhpenx2 = carhpenx1 + 47;
+carhpeny2 = carhpeny1 + 44;
+carhpenx = carhpenx1 + (carhpenx2 - carhpenx1) / 2;
+carhpeny = carhpeny1 + (carhpeny2 - carhpeny1) / 2;
+
+// score
+scoreX = global.guiW - 15;
+scoreY = 10;
+scoreXoff = 6;
+scoreCol1 = make_colour_hsv(0, 162, 235);
+scoreCol2 = make_colour_hsv(0, 178, 109); 
+scoreCol3 = make_colour_hsv(0, 162, 100);
+scoreCol4 = make_colour_hsv(0, 200, 120);
+
+weather = WEAHTER.__RAINY;
+// rain
+psysrain = part_system_create();
+part_system_depth(psysrain, depth);
+part_system_automatic_update(psysrain, 0);
+// emitter
+rainemm = part_emitter_create(psysrain);
+
+// rain
+raintype = part_type_create();
+part_type_sprite(raintype, sWeatherRain, 0, 0, 0);
+part_type_life(raintype, room_speed * 1.5, room_speed * 2);
+part_type_speed(raintype, 2, 4, 0, 0);
+
+
+// rocket smoke effect
+rocketsmoke = part_type_create();
+part_type_sprite(rocketsmoke, sCarSmoke, 0, 0, 0);
+part_type_life(rocketsmoke, room_speed / 4, room_speed / 2);
+part_type_orientation(rocketsmoke, 0, 359, 0, 2, 0);
+part_type_alpha2(rocketsmoke, .1, 0);
+part_type_speed(rocketsmoke, .2, .3, 0, 0);
+
+// human blood
+blood = part_type_create();
+part_type_sprite(blood, sHumanBlood, 0, 0, 0);
+part_type_life(blood, room_speed * 1.5, room_speed * 3);
+part_type_orientation(blood, 0, 359, 0, 2, 0);
+part_type_direction(blood, 0, 359, 0, .03);
+part_type_alpha2(blood, 1, 0);
+part_type_speed(blood, .3, .6, 0, 0);
+
+// light system
+lightsurf = surface_create(global.guiW, global.guiH);
+gameLightAlpha = .5;
+instance_create(0, 0, oLightDepth);
+
+weatherInit(weather);
+playerGUISetSelectedCar(noone);
+
+
 alarm[0] = room_speed / 2;
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="1" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// clear
+part_type_destroy(raintype);
+part_emitter_destroy(psysrain, rainemm);
+part_system_destroy(psysrain);
+
+/// light
+surface_free(lightsurf);
+
+part_type_destroy(rocketsmoke);
+part_type_destroy(blood);
 </string>
           </argument>
         </arguments>
@@ -135,14 +264,19 @@ gameControllerSubstateSet(SUBSTATES.__NONE);
           <argument>
             <kind>1</kind>
             <string>/// control the game
-// updatable
-// exit
+switch (global.gameState)
+{
+case GAME_STATES.__TURNENDYESNO:
+case GAME_STATES.__PAUSE:
+    exit;
+    break;
+}
 
 switch (ingameState)
 {
 case INGAME_STATES.TURN:
-    playerGetInput();
     // determine actions
+    gameLightUpdate();
     switch (substate)
     {
     case SUBSTATES.__NONE:
@@ -152,6 +286,9 @@ case INGAME_STATES.TURN:
     case SUBSTATES.__CAR_MOVE:
         gameControllerSubstateCarMoveUpdate();        
         break;
+        
+    //case SUBSTATES.__CAR_WEAPONS:
+    //    gameControllerSubstateCarWeaponsUpdate();
     }
     break;
     
@@ -160,8 +297,9 @@ case INGAME_STATES.TURN:
     
     
 case INGAME_STATES.GAME:
-    playerGetInput();
     // performing
+    weatherUpdate();
+    gameLightUpdate();
     if (turnTimer &amp;&amp; !--turnTimer)
     {
         // end, pause
@@ -169,6 +307,30 @@ case INGAME_STATES.GAME:
     }
     break;
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="65">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>global.guiW = window_get_width();
+global.guiH = window_get_height();
 </string>
           </argument>
         </arguments>
@@ -200,6 +362,17 @@ case INGAME_STATES.TURN:
     case SUBSTATES.__NONE:
         break;
         
+    case SUBSTATES.__CAR_WEAPONS:
+        if (instance_exists(selectedCar))
+        {
+            // draw car control interface
+            drawCroppedRect(guix1 - 5, guiy1 - 5, guix2 + 5, guiy2 + 5, black, 1, 3);
+            drawCroppedRect(guix1, guiy1, guix2, guiy2, guicol, 1, 3);
+            // all weapons
+            
+        }
+        break;
+        
     case SUBSTATES.__CAR_MOVE:
         if (instance_exists(selectedCar))
         {
@@ -220,7 +393,37 @@ case INGAME_STATES.TURN:
             draw_set_font(fSpeed);
             draw_set_halign(fa_left);
             draw_set_valign(fa_top);
-            draw_text_colour(kmhtx, kmhty, string_format(selectedCar.spd * 15, 1, 0), black, black, black, black, 1);
+            draw_text_colour(kmhtx, kmhty, string_format(selectedCar.phy_speed * 40, 1, 0), black, black, black, black, 1);
+            
+            // car hitpoints
+            // base
+            draw_sprite_ext(sCarHP, carhpind, carhpx, carhpy, 1, 1, 0, image_blend, image_alpha);
+            // 4 wheels
+            for (var i = 0; i &lt; wheelsCount; i ++)
+            {
+                var percent = selectedCar.wheelHP[i] / selectedCar.wheelMaxHP[i],
+                    coldraw = -1;
+                if (percent &gt;= .75)
+                    coldraw = make_colour_hsv(90, 204, 70);
+                else if (percent &gt;= .35)
+                    coldraw = make_colour_hsv(14, 208, 70);
+                else
+                    coldraw = make_colour_hsv(254, 255, 72);
+                draw_sprite_ext(sCarHPWheel, wheelsind, wheelX[i], wheelY[i], 1, 1, 0, coldraw, image_alpha);
+            }
+            // engine
+            var pc = selectedCar.engineHP / selectedCar.engineMaxHP,
+                coldraw = -1;
+            if (pc &gt;= .75)
+                coldraw = make_colour_hsv(90, 204, 70);
+            else if (pc &gt;= .35)
+                coldraw = make_colour_hsv(14, 208, 70);
+            else
+                coldraw = make_colour_hsv(254, 255, 72)
+                
+            drawCroppedRect(carhpenx1 - 2, carhpeny1 - 2, carhpenx2 + 2, carhpeny2 + 2, c_black, image_alpha, 8);
+            drawCroppedRect(carhpenx1, carhpeny1, carhpenx2, carhpeny2, coldraw, image_alpha, 8);
+            draw_sprite_ext(sCarHPEngine, 0, carhpenx, carhpeny, 1, 1, 0, image_blend, image_alpha);
         }
         break;
     }
@@ -233,6 +436,15 @@ case INGAME_STATES.GAME:
     draw_text_colour(turnTimerX, turnTimerY, string(round(turnTimer / room_speed)), black, black, black, black, 1);
     break;
 }
+
+// SCORE
+draw_set_font(fSCORE);
+draw_set_halign(fa_right);
+draw_set_valign(fa_top);
+var off = scoreXoff * sin(global.ctime / 20);
+draw_text_colour(scoreX + off, scoreY, SCORE_STR, c_black, c_black, c_black, c_black, 1);
+draw_text_colour(scoreX, scoreY, SCORE_STR, scoreCol1, scoreCol2, scoreCol3, scoreCol4, 1);
+
 </string>
           </argument>
         </arguments>
@@ -257,21 +469,35 @@ case INGAME_STATES.GAME:
             <kind>1</kind>
             <string>/// draw things
 ///Draw game gui
+draw_text_colour(view_xview + 30, view_yview + 30, string(fps), c_red, c_blue, c_red, c_yellow, 1);
+
 switch (substate)
 {
 case SUBSTATES.__NONE:
     break;
     
 case SUBSTATES.__CAR_MOVE:
+case SUBSTATES.__CAR_WEAPONS:
     if (instance_exists(selectedCar))
     {
+        // "selected" arrow
+        draw_sprite_ext(sSelectedSign, 0, selectedCar.phy_position_x, selectedCar.phy_position_y - selectedSignYoff - abs(sin(global.ctime / 75)) * selectedSignMaxH, clamp(selectedSignXscale, -1, 1), 1, 0, c_white, 1);
         with (selectedCar)
         {
-            event_perform(ev_other, ev_user4);
+            if (control == CONTROL_TYPES.ARROW)
+            {
+                if (oGameController.arrowBuild)
+                    drawBigArrow(phy_position_x, phy_position_y, mouse_x, mouse_y,
+                        oGameController.arrowColInner, oGameController.arrowColOuter, 1);
+            }
         }
     }
     break;
 }
+
+// light surf
+gameLightDraw();
+
 
 /*var gst;
 switch (global.gameState)

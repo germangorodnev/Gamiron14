@@ -3,7 +3,7 @@
   <spriteName>sPlayerCar1</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>-1</depth>
   <persistent>0</persistent>
   <parentName>oBaseCar</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -30,8 +30,8 @@ image_speed = 0;
 
 path_clear_points(pathMove);
 
-type = choose(CARS.__MINI_VAN, CARS.__ORANGE, CARS.__MINI_TRUCK);
-
+type = choose(CARS.__MINI_VAN, CARS.__ORANGE, CARS.__MINI_TRUCK, CARS.__SCOOL_BUS);
+control = CONTROL_TYPES.ARROW;
 state = PL_CAR_ST.__INACTIVE;
 
 pointId = -1;
@@ -42,12 +42,35 @@ engineArrowH = -1;
 // target to chase
 targetId = instance_create(x, y, oCarTarget);
 
-dDir = 0;
+angleAdd = 0;
+
+// new control form
+arrowDir = 0;
+
+// hp
+wheelsCount = 4;
+wheelHP[3] = 0;
+wheelMaxHP[3] = 0;
+
+// colour
+colArrowInner = make_colour_hsv(135, 195, 170);
+colArrowOuter = make_colour_hsv(135, 195, 121);
+arrowLen = 150;
 
 carPhysicsInit(type);
-if (type == CARS.__ORANGE)
+if (weaponsCount == 1)
     carWeaponSet(0, WEAPONS.__SIMPLE);
-
+else if (weaponsCount == 2)
+{
+    carWeaponSet(0, WEAPONS.__SIMPLE);
+    carWeaponSet(1, WEAPONS.__ROCKET);
+}
+else if (weaponsCount == 3)
+{
+    carWeaponSet(0, WEAPONS.__SIMPLE);
+    carWeaponSet(1, WEAPONS.__ROCKET);
+    carWeaponSet(2, choose(WEAPONS.__ROCKET, WEAPONS.__SIMPLE));
+}
 carInitEnd();
 
 </string>
@@ -100,8 +123,10 @@ instance_destroy(targetId);
 for (var i = 0; i &lt; weaponsCount; i++)
 {
     var ww = weapon[i];
-    ww.x = phy_position_x + lengthdir_x(ww.xoff, -phy_rotation);
-    ww.y = phy_position_y + lengthdir_y(ww.yoff, -phy_rotation);     
+    if (ww == noone)
+        continue;
+    ww.phy_position_x = phy_position_x + lengthdir_x(ww.lenoff, -phy_rotation + ww.angleoff);
+    ww.phy_position_y = phy_position_y + lengthdir_y(ww.lenoff, -phy_rotation + ww.angleoff);     
 }
 </string>
           </argument>
@@ -128,57 +153,118 @@ for (var i = 0; i &lt; weaponsCount; i++)
             <string>/// Update
 if (!(flags &amp; OBJ_PAR.UPDATABLE))
     exit;
-    
 switch (state)
 {
 case PL_CAR_ST.__INACTIVE:
-    carProceedParams();
-    // take the point
-    if (path_get_number(pathMove))
-    {
-        carPathGetNextPoint();
-        exit;
-    }
-    else
-        carMoveDirection(-phy_rotation);
-    break;
-    
 case PL_CAR_ST.__MOVE_TO_POINT:
-    // change variables
     carProceedParams();
-    
-    // update position
-    if (!path_get_number(pathMove))
-    {
-        // well, stop
-        carSetState(PL_CAR_ST.__INACTIVE);
-    }
-    else
-    {
-        carTargetSetPoint(path_get_point_x(pathMove, pointId), path_get_point_y(pathMove, pointId));
-    }
-    
-    carMoveToPoint(targetId.phy_position_x, targetId.phy_position_y);
+    part_system_update(psys);
+    carMoveArrow();  
+    //physics_apply_impulse(phy_position_x, phy_position_y,
         
-    if (physics_test_overlap(phy_position_x, phy_position_y, phy_rotation, targetId))
+    break;
+}
+
+//carCollidePeople();
+
+
+/*case CONTROL_TYPES.POINTS:
+    switch (state)
     {
-        // get next point
-        show_debug_message("POINT DONE!");
-        path_delete_point(pathMove, pointId);
+    case PL_CAR_ST.__INACTIVE:
+        carProceedParams();
+        part_system_update(psys);
+        
+        // take the point
         if (path_get_number(pathMove))
         {
-            carTargetSetPoint(path_get_point_x(pathMove, pointId), path_get_point_y(pathMove, pointId));
+            carPathGetNextPoint();
+            exit;
+        }
+        else
+            carMoveDirection(-phy_rotation);
+        break;
+        
+    case PL_CAR_ST.__MOVE_TO_POINT:
+        // change variables
+        carProceedParams();
+        part_system_update(psys);
+        
+        // update position
+        if (!path_get_number(pathMove))
+        {
+            // well, stop
+            carSetState(PL_CAR_ST.__INACTIVE);
         }
         else
         {
-            carPathDelete();
-            carSetState(PL_CAR_ST.__INACTIVE);
+            carTargetSetPoint(path_get_point_x(pathMove, pointId), path_get_point_y(pathMove, pointId));
         }
+        
+        carMoveToPoint(targetId.phy_position_x, targetId.phy_position_y);
+            
+        if (physics_test_overlap(phy_position_x, phy_position_y, phy_rotation, targetId))
+        {
+            // get next point
+            show_debug_message("POINT DONE!");
+            path_delete_point(pathMove, pointId);
+            if (path_get_number(pathMove))
+            {
+                carTargetSetPoint(path_get_point_x(pathMove, pointId), path_get_point_y(pathMove, pointId));
+            }
+            else
+            {
+                carPathDelete();
+                carSetState(PL_CAR_ST.__INACTIVE);
+            }
+        }
+        break;
     }
     break;
 }
-    
+        
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="oHumanCarCollider">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>var car = id;
+with (other.human)
+{
+    if (state &gt;= HUMAN_STATES.__FLY_AWAY)
+        exit;
+    if (car.phy_speed &gt; .1)
+    {
+        // oooh
+        humanGenerateBlood();
+        physics_apply_impulse(phy_position_x, phy_position_y, 
+            lengthdir_x(car.phy_speed * 30, car.phy_rotation),
+            lengthdir_y(car.phy_speed * 30, car.phy_rotation));
+        physics_apply_angular_impulse(phy_speed * 50);
+        humanSetState(HUMAN_STATES.__FLY_AWAY);
+        var val = irandom_range(20, 50) div 5 * 5;
+        popupInit(phy_position_x, phy_position_y - 20, string(val));    
+        gameScoreIncrease(val);
+    }
+}
 </string>
           </argument>
         </arguments>
@@ -234,40 +320,6 @@ flagSet(OBJ_PAR.UPDATABLE, 0);
         </arguments>
       </action>
     </event>
-    <event eventtype="7" enumb="14">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// draw path
-if (!path_get_number(pathMove))
-    exit;
-var pc = path_get_number(pathMove);
-for (var i = 0; i &lt; pc - 1; i++)
-{
-    playerPathDrawLine(path_get_point_x(pathMove, i), path_get_point_y(pathMove, i),
-        path_get_point_x(pathMove, i + 1), path_get_point_y(pathMove, i + 1));
-    playerPathDrawPoint(pathMove, i);
-}
-playerPathDrawPoint(pathMove, pc - 1);
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
     <event eventtype="7" enumb="13">
       <action>
         <libid>1</libid>
@@ -286,7 +338,17 @@ playerPathDrawPoint(pathMove, pc - 1);
           <argument>
             <kind>1</kind>
             <string>/// draw light
-
+// forward lights
+if (!objectInView())
+    exit;
+var sx = phy_position_x + lengthdir_x(forwLightX, phy_rotation),
+    sy = phy_position_y + lengthdir_y(forwLightX, phy_rotation);
+var ldx = lengthdir_x(forwLightY, -phy_rotation + 90),
+    ldy = lengthdir_y(forwLightY, -phy_rotation + 90);
+draw_sprite_ext(sLightPoint, 0, sx + ldx - view_xview, 
+    sy + ldy - view_yview, 1, 1, 0, forwLightCol, image_alpha);
+draw_sprite_ext(sLightPoint, 0, sx - ldx - view_xview, 
+    sy - ldy - view_yview, 1, 1, 0, forwLightCol, image_alpha);
 </string>
           </argument>
         </arguments>
@@ -357,7 +419,13 @@ playerPathDrawPoint(pathMove, pc - 1);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_self();
+            <string>if (oGameController.selectedCar == id)
+    drawBigArrow(phy_position_x, phy_position_y, 
+        phy_position_x + lengthdir_x(arrowLen, arrowDir),
+        phy_position_y + lengthdir_y(arrowLen, arrowDir),
+        colArrowInner, colArrowOuter, image_alpha);
+carDrawShadow();
+draw_self();
 carDebugDraw();
 </string>
           </argument>

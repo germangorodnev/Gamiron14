@@ -52,4 +52,39 @@ case 1: //
         break;    
     }
     break;
+    
+case 2: // map
+    switch (index)
+    {
+    case 0:
+        switch (global.lang)
+        {
+        case LANG.RUS: return "Гараж"; break;
+        case LANG.ENG: return "Garage"; break;
+        }
+        break;
+    case 1:
+        switch (global.lang)
+        {
+        case LANG.RUS: return "Настройте свою команду"; break;
+        case LANG.ENG: return "Setup your team"; break;
+        }
+        break;
+
+    case 2:
+        switch (global.lang)
+        {
+        case LANG.RUS: return "Мастерская"; break;
+        case LANG.ENG: return "Body shop"; break;
+        }
+        break;
+    case 3:
+        switch (global.lang)
+        {
+        case LANG.RUS: return "Купите машины и оружия"; break;
+        case LANG.ENG: return "Buy cars and weapons"; break;
+        }
+        break;
+    }
+    break;
 }

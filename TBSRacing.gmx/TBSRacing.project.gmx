@@ -3,9 +3,9 @@
   <Configs name="configs">
     <Config>Configs\Default</Config>
   </Configs>
-  <datafiles number="1" name="datafiles">
+  <datafiles number="4" name="datafiles">
     <datafile>
-      <name>gamesave.json</name>
+      <name>gamesavedef.json</name>
       <exists>-1</exists>
       <size>0</size>
       <exportAction>2</exportAction>
@@ -19,19 +19,41 @@
           <CopyToMask>9223372036854775807</CopyToMask>
         </Config>
       </ConfigOptions>
-      <filename>gamesave.json</filename>
+      <filename>gamesavedef.json</filename>
     </datafile>
   </datafiles>
-  <NewExtensions/>
+  <NewExtensions>
+    <extension index="0">extensions\TrueLight2D</extension>
+  </NewExtensions>
   <sounds name="sound"/>
   <sprites name="sprites">
     <sprites name="Cars">
       <sprites name="Things">
         <sprite>sprites\sTaran</sprite>
       </sprites>
-      <sprite>sprites\sPlayerCar1</sprite>
-      <sprite>sprites\sPlayerCar2</sprite>
-      <sprite>sprites\sPlayerCar3</sprite>
+      <sprites name="Player">
+        <sprites name="1">
+          <sprite>sprites\sPlayerCar1</sprite>
+          <sprite>sprites\sPlayerCar1Tyre</sprite>
+        </sprites>
+        <sprites name="2">
+          <sprite>sprites\sPlayerCar2</sprite>
+          <sprite>sprites\sPlayerCar2Tyre</sprite>
+        </sprites>
+        <sprites name="3">
+          <sprite>sprites\sPlayerCar3</sprite>
+          <sprite>sprites\sPlayerCar3Tyre</sprite>
+        </sprites>
+        <sprites name="4">
+          <sprite>sprites\sPlayerCar4</sprite>
+          <sprite>sprites\sPlayerCar4Tyre</sprite>
+        </sprites>
+      </sprites>
+      <sprites name="Police">
+        <sprite>sprites\sPoliceCar1</sprite>
+      </sprites>
+      <sprite>sprites\sSelectedSign</sprite>
+      <sprite>sprites\sCarSmoke</sprite>
     </sprites>
     <sprites name="GUI">
       <sprites name="Car Control">
@@ -43,6 +65,7 @@
         <sprite>sprites\sSpeedometer</sprite>
         <sprite>sprites\sSpeedometerArrow</sprite>
         <sprite>sprites\sBrake</sprite>
+        <sprite>sprites\sBrakePressed</sprite>
         <sprite>sprites\sSpeedPlate</sprite>
         <sprite>sprites\sSpeedPlateArrow</sprite>
         <sprite>sprites\sKmh</sprite>
@@ -51,10 +74,20 @@
         <sprite>sprites\sCursorPointer</sprite>
         <sprite>sprites\sCursorPointEdit</sprite>
         <sprite>sprites\sCursorPointErase</sprite>
+        <sprite>sprites\sCursorArrow</sprite>
+        <sprite>sprites\sCursorTarget</sprite>
+      </sprites>
+      <sprites name="Car HP">
+        <sprite>sprites\sCarHP</sprite>
+        <sprite>sprites\sCarHPWheel</sprite>
+        <sprite>sprites\sCarHPEngine</sprite>
+        <sprite>sprites\sCarHPWeaponIcon</sprite>
       </sprites>
     </sprites>
     <sprites name="Masks">
       <sprite>sprites\sMask32x32</sprite>
+      <sprite>sprites\sMaskGrass</sprite>
+      <sprite>sprites\sMaskAllyCar</sprite>
     </sprites>
     <sprites name="Guns">
       <sprites name="Simple">
@@ -63,14 +96,118 @@
         <sprite>sprites\sGunSimpleBullet</sprite>
         <sprite>sprites\sGunSimpleIco</sprite>
       </sprites>
+      <sprites name="Rocket">
+        <sprite>sprites\sGunRocket</sprite>
+        <sprite>sprites\sGunRocketEffect</sprite>
+        <sprite>sprites\sGunRocketBullet</sprite>
+        <sprite>sprites\sGunRocketIco</sprite>
+      </sprites>
+      <sprite>sprites\sShootSign</sprite>
     </sprites>
+    <sprites name="Obstacles">
+      <sprites name="Trash">
+        <sprite>sprites\sCans</sprite>
+        <sprite>sprites\sPaper</sprite>
+      </sprites>
+      <sprite>sprites\sUmbrella</sprite>
+      <sprite>sprites\sTree</sprite>
+      <sprite>sprites\sTrashcanBig</sprite>
+      <sprite>sprites\sTrashcanSmall</sprite>
+      <sprite>sprites\sTrashcanPark</sprite>
+      <sprite>sprites\sBank</sprite>
+    </sprites>
+    <sprites name="Lights">
+      <sprite>sprites\spr_light_spot</sprite>
+      <sprite>sprites\spr_light_point</sprite>
+      <sprite>sprites\spr_light_spark</sprite>
+      <sprite>sprites\sLightPoint</sprite>
+      <sprite>sprites\sLantern1</sprite>
+    </sprites>
+    <sprites name="Weahte">
+      <sprite>sprites\sWeatherRain</sprite>
+    </sprites>
+    <sprites name="People">
+      <sprite>sprites\sHead</sprite>
+      <sprite>sprites\sHairs</sprite>
+      <sprite>sprites\sTorso</sprite>
+      <sprite>sprites\sHand</sprite>
+      <sprite>sprites\sHandFall1</sprite>
+      <sprite>sprites\sLeg</sprite>
+      <sprite>sprites\sLegFall1</sprite>
+    </sprites>
+    <sprites name="Particles">
+      <sprite>sprites\sGrassDirt</sprite>
+      <sprite>sprites\sHumanBlood</sprite>
+    </sprites>
+    <sprites name="Explosions">
+      <sprite>sprites\sExplosion1</sprite>
+    </sprites>
+    <sprites name="MAP">
+      <sprite>sprites\sMap</sprite>
+      <sprite>sprites\sMapIcos</sprite>
+      <sprite>sprites\sMapIcosImages</sprite>
+    </sprites>
+    <sprite>sprites\sWater</sprite>
+    <sprite>sprites\sBall</sprite>
+    <sprite>sprites\sFinish</sprite>
   </sprites>
   <backgrounds name="background">
-    <background>background\background0</background>
+    <background>background\tls1</background>
   </backgrounds>
-  <paths name="paths"/>
+  <paths name="paths">
+    <paths name="Embankment1">
+      <paths name="AI Path">
+        <path>paths\pEmbankment1</path>
+      </paths>
+      <paths name="Human Paths">
+        <path>paths\pEmbankment1Human1</path>
+        <path>paths\pEmbankment1Human2</path>
+        <path>paths\pEmbankment1Human3</path>
+        <path>paths\pEmbankment1Human4</path>
+      </paths>
+    </paths>
+    <paths name="Field">
+      <paths name="AI Path">
+        <path>paths\pField1</path>
+      </paths>
+      <paths name="HumanPaths">
+        <path>paths\pFieldHuman1</path>
+        <path>paths\pFieldHuman2</path>
+      </paths>
+    </paths>
+    <paths name="Street 1">
+      <paths name="AI">
+        <path>paths\pStreets1</path>
+      </paths>
+      <paths name="Human Paths">
+        <path>paths\pStreets1Human1</path>
+        <path>paths\pStreets1Human2</path>
+        <path>paths\pStreets1Human3</path>
+      </paths>
+    </paths>
+  </paths>
   <scripts name="scripts">
     <script>scripts\ENUMS.gml</script>
+    <scripts name="GAME">
+      <scripts name="WEATHER">
+        <script>scripts\weatherInit.gml</script>
+        <script>scripts\weatherUpdate.gml</script>
+      </scripts>
+      <scripts name="LIGHT">
+        <script>scripts\gameLightUpdate.gml</script>
+        <script>scripts\gameLightDraw.gml</script>
+      </scripts>
+      <scripts name="GUI">
+        <script>scripts\popupInit.gml</script>
+      </scripts>
+      <scripts name="SAVELOAD">
+        <script>scripts\gameLoad.gml</script>
+        <script>scripts\gameSave.gml</script>
+      </scripts>
+      <script>scripts\gameSetState.gml</script>
+      <script>scripts\gameBulletCreate.gml</script>
+      <script>scripts\gameScoreIncrease.gml</script>
+    </scripts>
     <scripts name="FLAGS">
       <script>scripts\flagSet.gml</script>
       <script>scripts\flagIsActive.gml</script>
@@ -84,7 +221,7 @@
       <script>scripts\systemGetPhrase.gml</script>
       <script>scripts\systemCursorSet.gml</script>
       <script>scripts\systemMouseInGUI.gml</script>
-      <script>scripts\gameSetState.gml</script>
+      <script>scripts\drawBigArrow.gml</script>
     </scripts>
     <scripts name="GUI">
       <script>scripts\drawCroppedRect.gml</script>
@@ -114,18 +251,37 @@
         <script>scripts\carPathGetNextPoint.gml</script>
       </scripts>
       <scripts name="MOVING">
+        <script>scripts\carProceedParams.gml</script>
         <script>scripts\carMoveToPoint.gml</script>
         <script>scripts\carMoveDirection.gml</script>
+        <script>scripts\carMoveArrow.gml</script>
+        <script>scripts\carKillLateralVelocity.gml</script>
       </scripts>
       <scripts name="WEAPONS">
         <script>scripts\carWeaponSet.gml</script>
+        <script>scripts\weaponSetState.gml</script>
+        <script>scripts\weaponSetTargetDirection.gml</script>
+        <script>scripts\weaponSetShootNecessity.gml</script>
+        <script>scripts\explosionSmallCreate.gml</script>
+      </scripts>
+      <scripts name="EFFECTS">
+        <script>scripts\carParticlesGenerate.gml</script>
+      </scripts>
+      <scripts name="PHYSICS">
+        <script>scripts\getLateralVelocity.gml</script>
+      </scripts>
+      <scripts name="DAMAGE">
+        <script>scripts\carTakeDamage.gml</script>
       </scripts>
       <script>scripts\carInMouse.gml</script>
       <script>scripts\carPhysicsInit.gml</script>
       <script>scripts\carInitEnd.gml</script>
-      <script>scripts\carProceedParams.gml</script>
       <script>scripts\carSetDesiredSpeedByPercent.gml</script>
       <script>scripts\carTargetSetPoint.gml</script>
+      <script>scripts\carBrakePress.gml</script>
+      <script>scripts\carCollideWalls.gml</script>
+      <script>scripts\carDrawShadow.gml</script>
+      <script>scripts\carCollidePeople.gml</script>
     </scripts>
     <scripts name="GAME CONTROLLER">
       <scripts name="STATE">
@@ -135,6 +291,7 @@
         <script>scripts\gameControllerSubstateSet.gml</script>
         <script>scripts\gameControllerSubstateNoneUpdate.gml</script>
         <script>scripts\gameControllerSubstateCarMoveUpdate.gml</script>
+        <script>scripts\gameControllerSubstateCarWeaponsUpdate.gml</script>
       </scripts>
       <scripts name="ACTIONS">
         <script>scripts\gameControllerGuistateSet.gml</script>
@@ -145,20 +302,73 @@
       </scripts>
       <script>scripts\gameControllerGotCarClick.gml</script>
       <script>scripts\gameControllerApproveTurnEnd.gml</script>
+      <script>scripts\gameControllerCarModeChange.gml</script>
+      <script>scripts\gameControllerSelectSignUpdate.gml</script>
+      <script>scripts\gameControllerCarWeaponButtonsInit.gml</script>
     </scripts>
     <scripts name="CAMERA">
       <script>scripts\camDebug.gml</script>
+      <script>scripts\camSetTarget.gml</script>
+      <script>scripts\camSetState.gml</script>
     </scripts>
     <scripts name="USEFUL">
       <script>scripts\mouseOnUs.gml</script>
       <script>scripts\angleRotate.gml</script>
       <script>scripts\cycle.gml</script>
+      <script>scripts\objectInView.gml</script>
+      <script>scripts\approach.gml</script>
+      <script>scripts\pointInRoom.gml</script>
+      <script>scripts\addTrailingZeroes.gml</script>
+      <script>scripts\physicalDrawShadow.gml</script>
+      <script>scripts\nextRoomEffectInit.gml</script>
+    </scripts>
+    <scripts name="ENEMY">
+      <scripts name="SITUATIONS">
+        <script>scripts\enemyDetermineSituation.gml</script>
+        <script>scripts\enemyCarPoliceDetermineSituation.gml</script>
+      </scripts>
+      <script>scripts\enemiesMakeTurn.gml</script>
+    </scripts>
+    <scripts name="HUMAN">
+      <scripts name="GENERATOR">
+        <script>scripts\humanGeneratorGenerate.gml</script>
+        <script>scripts\humanCountOfMe.gml</script>
+      </scripts>
+      <scripts name="WANDER">
+        <script>scripts\humanGetNextWanderPoint.gml</script>
+      </scripts>
+      <script>scripts\humanGenerate.gml</script>
+      <script>scripts\humanStartMovementByRandomPath.gml</script>
+      <script>scripts\humanStartRandomMadePath.gml</script>
+      <script>scripts\humanGetNextPathPoint.gml</script>
+      <script>scripts\humanSetState.gml</script>
+      <script>scripts\humanUpdatePartsMoving.gml</script>
+      <script>scripts\humanSetSprite.gml</script>
+      <script>scripts\humanDrawDebug.gml</script>
+      <script>scripts\humanGenerateBlood.gml</script>
+    </scripts>
+    <scripts name="ZONES">
+      <script>scripts\zoneInit.gml</script>
+    </scripts>
+    <scripts name="MAP">
+      <scripts name="POINTS">
+        <script>scripts\mapPointGUIApproachFull.gml</script>
+        <script>scripts\mapPointGUIApproachZero.gml</script>
+        <script>scripts\mapPointDrawImageHeadAndDesc.gml</script>
+        <script>scripts\mapLevelPointInitByMap.gml</script>
+      </scripts>
+      <script>scripts\mapInit.gml</script>
     </scripts>
   </scripts>
+  <shaders name="shaders">
+    <shader type="GLSLES">shaders\shdBlack.shader</shader>
+  </shaders>
   <fonts name="fonts">
     <font>fonts\fSpeed</font>
     <font>fonts\fQuestion</font>
     <font>fonts\fTurnEnd</font>
+    <font>fonts\fPopup</font>
+    <font>fonts\fSCORE</font>
   </fonts>
   <objects name="objects">
     <objects name="Base">
@@ -170,12 +380,16 @@
         <object>objects\oBasePhysicalStatic</object>
       </objects>
       <object>objects\oBaseCar</object>
-      <object>objects\oBaseWeapon</object>
-      <object>objects\oWeaponSimple</object>
+      <object>objects\oBaseBullet</object>
       <object>objects\oCarTarget</object>
+      <object>objects\oAllyCarPlace</object>
+      <object>objects\oBaseCollidable</object>
     </objects>
     <objects name="Player">
       <object>objects\oPlayerCar</object>
+    </objects>
+    <objects name="Enemies">
+      <object>objects\oEnemyCar</object>
     </objects>
     <objects name="GUI">
       <objects name="Path Editing">
@@ -191,18 +405,62 @@
       <object>objects\oEngineArrow</object>
       <object>objects\oButtonEndTurn</object>
       <object>objects\oButtonCarGUIBrake</object>
+      <object>objects\oButtonCarGUIWeapon</object>
       <object>objects\oButtonCarGUIWeaponCarMode</object>
     </objects>
     <objects name="Obstacles">
       <object>objects\oBaseWall</object>
+      <object>objects\oWallBulletWalkable</object>
+      <object>objects\oMaterialMask</object>
+      <object>objects\oUmbrella</object>
+      <object>objects\oTree</object>
+      <object>objects\oLoveka</object>
+      <object>objects\oLantern1</object>
+      <object>objects\oTrashcanSmall</object>
+      <object>objects\oTrashcanPark</object>
+      <object>objects\oTrashacnBig</object>
+    </objects>
+    <objects name="Guns">
+      <object>objects\oBaseWeapon</object>
+      <object>objects\oWeaponSimple</object>
+      <object>objects\oBulletSimple</object>
+      <object>objects\oWeaponRocket</object>
+      <object>objects\oRocketBullet</object>
+      <object>objects\oExplosion</object>
+    </objects>
+    <objects name="Human">
+      <object>objects\oHumanGenerator</object>
+      <object>objects\oHumanGeneratorPeriodic</object>
+      <object>objects\oHuman</object>
+      <object>objects\oHumanCarCollider</object>
+    </objects>
+    <objects name="Map">
+      <object>objects\oMap</object>
+      <object>objects\oMapPoint</object>
+      <object>objects\oGaragePoint</object>
+      <object>objects\oShopPoint</object>
+      <object>objects\oMapLevelPoint</object>
+    </objects>
+    <objects name="Race Triggers">
+      <object>objects\oRaceTrigger</object>
     </objects>
     <object>objects\oControl</object>
     <object>objects\oGameController</object>
     <object>objects\oCamera</object>
+    <object>objects\oLightDepth</object>
+    <object>objects\oBall</object>
+    <object>objects\oAnimatedWater</object>
+    <object>objects\oPopupText</object>
+    <object>objects\oNextRoom</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rInit</room>
+    <room>rooms\rWorldMap</room>
     <room>rooms\rEmbankment</room>
+    <room>rooms\rField</room>
+    <room>rooms\rStreets1</room>
+    <room>rooms\rNightRace1</room>
+    <room>rooms\rIntro</room>
     <room>rooms\rMainMenu</room>
   </rooms>
   <help>

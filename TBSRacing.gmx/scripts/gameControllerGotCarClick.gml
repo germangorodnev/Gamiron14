@@ -1,5 +1,7 @@
 // check the car
-var curr = selectedCar;
+var curr = selectedCar, 
+    flag = 0;
+arrowBuild = 0;
 with (oBaseCar)
 {
     if (team == 0) // only our cars
@@ -8,13 +10,20 @@ with (oBaseCar)
             if (curr != id)
             {
                 playerGUISetSelectedCar(id);
-                return 1;
+                return id;
+            }
+            else
+            {
+                flag = 1;
+                return id;
             }
     }
 }
-if (curr = selectedCar && (curr != noone)) // nothing changed, maybe free position
-{
-    playerGUISetSelectedCar(noone);
-    return 0;
-}
+if (!flag)
+    if (curr = selectedCar && (curr != noone)) // nothing changed, maybe free position
+    {
+        playerGUISetSelectedCar(noone);
+        return noone;
+    }
+return noone;
 

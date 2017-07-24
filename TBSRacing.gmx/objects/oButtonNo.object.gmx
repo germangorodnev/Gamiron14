@@ -34,7 +34,7 @@ flagSet(OBJ_PAR.UPDATABLE
     | OBJ_PAR.IMPACTABLE_PAUSE 
     | OBJ_PAR.IMPACTABLE_TURN, 1);  
 
-var ww = 70,
+var ww = 90,
     hh = 44;
 rx1 = x - ww / 2; 
 ry1 = y - hh / 2;
@@ -101,7 +101,7 @@ image_yscale = hh / 32;
 if (!(flags &amp; OBJ_PAR.UPDATABLE))
     exit;
 
-if (oGameController.key[KEY.MOUSE_LEFT] == 0)
+if (oControl.key[KEY.MOUSE_LEFT] == 0)
 {
     if (mouseOnUs())
     {

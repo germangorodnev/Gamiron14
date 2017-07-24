@@ -34,16 +34,22 @@ flagSet(OBJ_PAR.UPDATABLE
     | OBJ_PAR.IMPACTABLE_PAUSE 
     | OBJ_PAR.IMPACTABLE_TURN, 1);  
 
-
-rx1 = global.guiW div 2 - 150;
-ry1 = oCamera.mdeady1 + 15;
-rx2 = rx1 + 300;
-ry2 = ry1 + 80;
+var ww = 300,
+    hh = 80;
+rx1 = 350;
+ry1 = oGameController.guiy1 - hh / 2;
+rx2 = rx1 + ww;
+ry2 = ry1 + hh;
 col = make_colour_hsv(0, 0, 12);
+colHover = make_colour_hsv(82, 75, 91);
+cc = col;
 
-rtx = rx1 + 150;
-rty = ry1 + 40;
-rtxt = systemGetPhrase(0, 0);
+rtx = rx1 + ww / 2;
+rty = ry1 + hh / 2;
+if (oGameController.substate == SUBSTATES.__CAR_MOVE)
+    rtxt = systemGetPhrase(0, 1);
+else
+    rtxt = systemGetPhrase(0, 2);
 tcol = c_white;
 
 var ww = (rx2 - rx1),
@@ -99,17 +105,22 @@ image_yscale = hh / 32;
 if (!(flags &amp; OBJ_PAR.UPDATABLE))
     exit;
 
-if (oGameController.key[KEY.MOUSE_LEFT] == 0)
+if (mouseOnUs())
 {
-    if (mouseOnUs())
+    if (!oGameController.arrowBuild)
+        cc = colHover;
+    if (oControl.key[KEY.MOUSE_LEFT] == 0)
     {
-        // clicked - brake
+        with (oGameController)
+            gameControllerCarModeChange();
     }
 }
+else
+    cc = col;
 
 
-x = view_xview + xx;
-y = view_yview + yy;
+x = view_xview + rx1;
+y = view_yview + ry1;
 
     
 </string>
@@ -184,8 +195,11 @@ image_speed = 0;
           <argument>
             <kind>1</kind>
             <string>/// draw
-draw_sprite_ext(sBrake, 0, xx, yy, 1, 1, 0, image_blend, image_alpha);  
-
+drawCroppedRect(rx1, ry1, rx2, ry2, cc, 1, 6);
+draw_set_font(fTurnEnd);
+draw_set_halign(fa_center);
+draw_set_valign(fa_middle);
+draw_text_colour(rtx, rty, rtxt, tcol, tcol, tcol, tcol, 1);
 </string>
           </argument>
         </arguments>

@@ -37,10 +37,11 @@ view_hport = global.guiH;
 view_hborder = view_wview / 2;
 view_vborder = view_hview / 2;
 view_visible = 1;
-
+friction = .4;
+view_angle = 0;
 state = CAM_STATES.__FREE;
 
-movSpd = 5;
+movSpd = 10;
 
 x = global.guiW div 2;
 y = global.guiH div 2;
@@ -117,8 +118,11 @@ shY = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//if (!(flags &amp; OBJ_PAR.UPDATABLE))
-//    exit;
+            <string>if (!(flags &amp; OBJ_PAR.UPDATABLE))
+{
+    speed = 0;
+    exit;
+}
     
 if (camFlags &amp; CAM_FLAGS.SHAKING)
 {
@@ -142,62 +146,41 @@ if (camFlags &amp; CAM_FLAGS.DARKEN)
 switch (state)
 {
 case CAM_STATES.__FREE:
-    var mscreenx = mouse_x - view_xview,
-        mscreeny = mouse_y - view_yview;
-    if (!point_in_rectangle(mscreenx, mscreeny, 
-        mdeadx1, mdeady1, mdeadx2, mdeady2))
-    {
-        targX = mouse_x;
-        targY = mouse_y;
-        if (distance_to_point(targX, targY) &lt; movSpd)
-        {
-            speed = 0;
-            x = targX;
-            y = targY;
-        }
-        else
-        {
-            var dd = point_direction(x, y, targX, targY);
-            x += lengthdir_x(movSpd, dd);   
-            y += lengthdir_y(movSpd, dd);  
-        }
-    }
-    else
-    {
-        var ymove = oGameController.key[KEY.CAM_BOTTOM] - oGameController.key[KEY.CAM_TOP],
-            xmove = oGameController.key[KEY.CAM_RIGHT] - oGameController.key[KEY.CAM_LEFT],
-            spdmove = movSpd;
-        if ((xmove != 0) &amp;&amp; (ymove != 0))
-            spdmove *= .7;
-        x += spdmove * xmove;
-        y += spdmove * ymove;
-    }
+    var ymove = oControl.key[KEY.CAM_BOTTOM] - oControl.key[KEY.CAM_TOP],
+        xmove = oControl.key[KEY.CAM_RIGHT] - oControl.key[KEY.CAM_LEFT],
+        spdmove = movSpd;
+    x += spdmove * xmove;
+    y += spdmove * ymove;
+    x = clamp(x, view_wview div 2, room_width - view_wview div 2);
+    y = clamp(y, view_hview div 2, room_height - view_hview div 2);
     break;
     
-default: //case CAM_STATES.__PLAYER:
-    var dd = point_direction(oPlayer.x, oPlayer.y, mouse_x, mouse_y);
-    targX = oPlayer.x + lengthdir_x(camMaxDist, dd);
-    targY = oPlayer.y + lengthdir_y(camMaxDist, dd);
-    if (distance_to_point(targX, targY) &lt; movSpd)
+case CAM_STATES.__PARTICULAR_OBJ:
+    if (oControl.key[KEY.CAM_TOP] == 1
+        || oControl.key[KEY.CAM_BOTTOM] == 1
+        || oControl.key[KEY.CAM_RIGHT] == 1
+        || oControl.key[KEY.CAM_LEFT] == 1)
+    {
+        camSetState(CAM_STATES.__FREE);
+        speed = 0;
+        exit;
+    }
+    var dist = distance_to_point(targX, targY);
+    if (dist &lt; movSpd)
     {
         speed = 0;
         x = targX;
         y = targY;
+        camSetState(CAM_STATES.__FREE);
     }
     else
-        move_towards_point(targX, targY, movSpd);
-    /*if (shake)
     {
-        var cl = min(view_xview, shX),
-            cr = min(room_width - view_xview, shX);
-        if (cl &gt;= shX &amp;&amp; cr &gt;= shX)
-            view_xview += choose(irandom_range(1, shX) * -1, irandom_range(1, shX));
-        else if (cl &gt;= shX)
-            view_xview += irandom_range(1, shX) * -1;
-        else
-            view_xview += irandom_range(1, shX);
-        y += irandom_range(-1 * min(view_yview, shY), min(room_height - view_yview, shY)); //irandom_range(-shY, shY);
-    }*/
+        var dd = point_direction(x, y, targX, targY);
+        x += lengthdir_x(max(dist / 8, movSpd), dd);   
+        y += lengthdir_y(max(dist / 8, movSpd), dd);  
+    }
+    x = clamp(x, view_wview div 2, room_width - view_wview div 2);
+    y = clamp(y, view_hview div 2, room_height - view_hview div 2);
     break;
 }
 
@@ -224,6 +207,8 @@ default: //case CAM_STATES.__PLAYER:
           <argument>
             <kind>1</kind>
             <string>///pause off
+if (global.gameState == GAME_STATES.__GAME)
+    flagSet(OBJ_PAR.UPDATABLE, 1);
 </string>
           </argument>
         </arguments>
@@ -248,6 +233,8 @@ default: //case CAM_STATES.__PLAYER:
             <kind>1</kind>
             <string>///pause on
 speed = 0;
+if (global.gameState == GAME_STATES.__GAME)
+    flagSet(OBJ_PAR.UPDATABLE, 1);
 </string>
           </argument>
         </arguments>

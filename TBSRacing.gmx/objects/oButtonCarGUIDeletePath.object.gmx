@@ -45,6 +45,8 @@ ry2 = ry1 + 70;
 active = 0;
 
 col = oButtonCarGUIEditPoints.colInactive;
+colHover = make_colour_hsv(0, 166, 89);
+cc = col;
 
 rtx = rx1 + (rx2 - rx1) div 2;
 rty = ry1 + 35;
@@ -102,15 +104,17 @@ image_yscale = hh / 32;
 if (!(flags &amp; OBJ_PAR.UPDATABLE))
     exit;
 
-if (oGameController.key[KEY.MOUSE_LEFT] == 0)
+if (mouseOnUs())
 {
-    if (mouseOnUs())
-    {
-        // delte path
+    cc = colHover;
+    if (oControl.key[KEY.MOUSE_LEFT] == 0)
+    {        // delte path
         with (oGameController.selectedCar)
             carPathDelete();
     }
 }
+else
+    cc = col;
 
 x = view_xview + rx1;
 y = view_yview + ry1;
@@ -188,7 +192,7 @@ image_speed = 0;
           <argument>
             <kind>1</kind>
             <string>/// draw
-drawCroppedRect(rx1, ry1, rx2, ry2, col, 1, 8);
+drawCroppedRect(rx1, ry1, rx2, ry2, cc, 1, 8);
 draw_sprite_ext(sDeletePath, 0, rtx, rty, 1, 1, 0, image_blend, image_alpha);
 </string>
           </argument>
