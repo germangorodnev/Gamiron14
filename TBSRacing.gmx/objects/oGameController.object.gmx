@@ -31,7 +31,6 @@ image_speed = 0;
 
 flagSet(OBJ_PAR.IMPACTABLE_TURN | OBJ_PAR.IMPACTABLE_PAUSE, 0);
 
-instance_create(oPlayerCar.x, oPlayerCar.y, oCamera);
 
 lReleased = 1;
 
@@ -46,6 +45,17 @@ turnEndApproval = 0;
 
 yesno = 0;
 
+//drift
+drift = 0;
+driftTmr = -1;
+driftTmrCd = room_speed;
+driftScore = 0;
+
+driftx = global.guiW - 250;
+drifty = 150;
+driftsc = 1;
+drifttx = driftx;
+driftty = drifty + 55;
 
 SCORE = 0;
 SCORE_STR = "";
@@ -177,12 +187,45 @@ part_type_speed(blood, .3, .6, 0, 0);
 lightsurf = surface_create(global.guiW, global.guiH);
 gameLightAlpha = .5;
 instance_create(0, 0, oLightDepth);
+instance_create(0, 0, oShadeDepth);
 
 weatherInit(weather);
 playerGUISetSelectedCar(noone);
 
 
+
+// create player's cars on 
+var plcars = oControl.json[? "cars"];
+for (var i = 0, cnt = global.carsCount; i &lt; cnt; i++)
+{
+    var oo = instance_find(oAllyCarPlace, i);
+    if (oo == noone)
+    {
+        // no place
+        break;
+    }
+    var c = instance_create(oo.x, oo.y, oPlayerCar),
+        cdict = plcars[| i];
+    c.type = cdict[? "type"];
+    with (c)
+        carPhysicsInit(type);
+    // now add weapos
+    var slots = cdict[? "slots"];
+    for (var sl = 0, slc = c.weaponsCount; sl &lt; slc; sl++)
+    {
+        var slot = slots[| sl];
+        if (slot[? "type"] == -1)
+            continue;
+        with (c)
+            carWeaponSet(sl, slot[? "type"]);
+    }
+}
+with (oAllyCarPlace)
+    instance_destroy();
+instance_create(oPlayerCar.x, oPlayerCar.y, oCamera);
+
 alarm[0] = room_speed / 2;
+
 
 </string>
           </argument>
@@ -272,6 +315,7 @@ case GAME_STATES.__PAUSE:
     break;
 }
 
+
 switch (ingameState)
 {
 case INGAME_STATES.TURN:
@@ -298,6 +342,7 @@ case INGAME_STATES.TURN:
     
 case INGAME_STATES.GAME:
     // performing
+    driftScoreUpdate();
     weatherUpdate();
     gameLightUpdate();
     if (turnTimer &amp;&amp; !--turnTimer)
@@ -442,8 +487,23 @@ draw_set_font(fSCORE);
 draw_set_halign(fa_right);
 draw_set_valign(fa_top);
 var off = scoreXoff * sin(global.ctime / 20);
-draw_text_colour(scoreX + off, scoreY, SCORE_STR, c_black, c_black, c_black, c_black, 1);
+draw_text_colour(scoreX + off, scoreY, SCORE_STR, scoreCol4, scoreCol4, scoreCol4, scoreCol4, 1);
 draw_text_colour(scoreX, scoreY, SCORE_STR, scoreCol1, scoreCol2, scoreCol3, scoreCol4, 1);
+
+
+// drift
+if (drift)
+{
+    draw_sprite_ext(sDriftStar, 0, driftx, drifty, driftsc, driftsc, sin(global.ctime / 30) * 220, image_blend, image_alpha);
+    draw_sprite_ext(sDriftSign, 0, driftx, drifty, 1, 1, 0, image_blend, image_alpha);
+    draw_set_font(fSCORE);
+    draw_set_halign(fa_center);
+    draw_set_valign(fa_middle);
+    var drstr = string(driftScore);
+    draw_text_colour(drifttx - 4, driftty, drstr, scoreCol4, scoreCol4, scoreCol4, scoreCol4, 1);
+    draw_text_colour(drifttx, driftty, drstr, scoreCol1, scoreCol2, scoreCol1, scoreCol2, 1);
+        
+}
 
 </string>
           </argument>

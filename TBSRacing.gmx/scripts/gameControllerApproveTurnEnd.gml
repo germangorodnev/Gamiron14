@@ -1,2 +1,2 @@
-gameControllerYesNoInit("Do you really want to end the turn?");
+gameControllerYesNoInit(systemGetPhrase(0, 3));
 

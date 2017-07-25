@@ -10,7 +10,19 @@
   <persistent>0</persistent>
   <colour>12632256</colour>
   <showcolour>-1</showcolour>
-  <code>oGameController.gameLightAlpha = .6;</code>
+  <code>oGameController.gameLightAlpha = .6;
+
+with (oBlackCar)
+{
+    carPhysicsInit(type);
+    carInitEnd();
+    enemyRacingInit();
+}
+
+with (oHuman)
+{
+
+}</code>
   <enableViews>-1</enableViews>
   <clearViewBackground>-1</clearViewBackground>
   <clearDisplayBuffer>-1</clearDisplayBuffer>
@@ -70,9 +82,10 @@
     <instance objName="oAnimatedWater" x="1920" y="0" name="inst_529F784E" locked="0" code="" scaleX="56" scaleY="76" colour="4294967295" rotation="0"/>
     <instance objName="oTree" x="512" y="128" name="inst_50A12DD4" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="oBaseWall" x="1900" y="0" name="inst_0FF2F595" locked="0" code="" scaleX="0.625" scaleY="76" colour="4294967295" rotation="0"/>
-    <instance objName="oPlayerCar" x="196" y="516" name="inst_2CF220F0" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="oPlayerCar" x="212" y="644" name="inst_CDD08896" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="oRaceTrigger" x="3616" y="2432" name="inst_CECECC45" locked="0" code="" scaleX="3.09677410125732" scaleY="20.125" colour="4286578943" rotation="0"/>
+    <instance objName="oRaceController" x="36" y="4" name="inst_62450213" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="oAllyCarPlace" x="128" y="696" name="inst_585F2C27" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="oBlackCar" x="140" y="452" name="inst_CC548206" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles>
     <tile bgName="tls1" x="0" y="512" w="128" h="128" xo="640" yo="128" id="10002698" name="inst_F24F7E6F" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>

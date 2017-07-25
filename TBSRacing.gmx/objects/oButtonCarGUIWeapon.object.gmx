@@ -127,10 +127,17 @@ if (oControl.key[KEY.MOUSE_LEFT] == 0)
         {
             if (mouseOnUs())
             {
-                // well, maybe shoot
-                with (oGameController)  
-                    gameControllerGuistateSet(GUI_STATES.__WEAPON_TARGET);
-                oGameController.weaponTargeting = id;            
+                switch (spr)
+                {
+                case sGunShieldIco:
+                    break;
+                default:
+                    // well, maybe shoot
+                    with (oGameController)  
+                        gameControllerGuistateSet(GUI_STATES.__WEAPON_TARGET);
+                    oGameController.weaponTargeting = id; 
+                    break;         
+                }  
             }
         }
     }   

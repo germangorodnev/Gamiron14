@@ -43,10 +43,11 @@ col = c_red;
 imageSpr = sMapIcosImages;
 imageI = 1;
 
-h1w = 220;
-h1h = 55;
 
 h1text = systemGetPhrase(2, 2);
+draw_set_font(fTurnEnd);
+h1w = 15 + string_width(h1text);
+h1h = 55;
 
 dtext = systemGetPhrase(2, 3);
 dy1 = h1y1 + h1h + 15;
@@ -109,6 +110,12 @@ else
 if (mouseOnUs())
 {
     mapPointGUIApproachFull(.05, .05, .05);
+    if (oControl.key[KEY.MOUSE_LEFT] == 0)
+    {
+        if (!instance_exists(oNextRoom))
+            with (instance_create(view_xview, view_yview, oNextRoom))
+                nextRoomEffectInit(0, rShop, 1);
+    }
 }
 else
 {

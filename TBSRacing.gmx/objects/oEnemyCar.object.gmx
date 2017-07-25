@@ -41,7 +41,7 @@ pointId = -1;
 engineArrowH = -1;
 
 // target to chase
-targetId = instance_create(x, y, oCarTarget);
+targetId = noone; //instance_create(x, y, oCarTarget);
 
 angleAdd = 0;
 
@@ -56,11 +56,8 @@ wheelMaxHP[3] = 0;
 engineHP = 350;
 engineMaxHP = engineHP;
 
-// colour
-colArrowInner = make_colour_hsv(135, 195, 170);
-colArrowOuter = make_colour_hsv(135, 195, 121);
-arrowLen = 150;
 
+/*
 carPhysicsInit(type);
 if (weaponsCount == 1)
     carWeaponSet(0, choose(WEAPONS.__SIMPLE, WEAPONS.__ROCKET));
@@ -70,6 +67,7 @@ else if (weaponsCount == 2)
 //    carWeaponSet(1, WEAPONS.__SIMPLE);
 }
 carInitEnd();
+*/
 
 </string>
           </argument>

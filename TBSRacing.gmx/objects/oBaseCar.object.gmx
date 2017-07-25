@@ -76,10 +76,7 @@ weapon[0] = noone; // weapon objects
 weaponsCount = 0;
 
 // path
-pathMove = path_add();
-path_set_closed(pathMove, 0);
-//path_set_kind(pathMove, 1);
-//path_set_precision(pathMove, 2);
+pathMove = -1;
 
 
 // particles
@@ -141,7 +138,8 @@ forwLightCol = c_yellow;
             <kind>1</kind>
             <string>event_inherited();
 
-path_delete(pathMove);
+if (pathMove != -1) 
+    path_delete(pathMove);
 part_system_clear(psys);
 part_emitter_destroy(psys, pem);
 part_type_destroy(ptyre);

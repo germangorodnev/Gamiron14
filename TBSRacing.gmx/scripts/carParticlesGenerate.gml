@@ -10,6 +10,10 @@ if (phy_speed > 1)
         part_type_orientation(ptyre, -phy_rotation, -phy_rotation, 0, 0, 0);
         part_emitter_burst(psys, pem, ptyre, 1);
         
+        // if player -- add scores
+        if (team == 0)
+            driftScoreAppend(2);
+        
         // smoke
         part_type_direction(smoke, -inertiaDir, -inertiaDir, 0, 0);
         part_emitter_burst(psys, pem, smoke, 1);

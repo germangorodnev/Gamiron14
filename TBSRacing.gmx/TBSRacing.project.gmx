@@ -51,6 +51,10 @@
       </sprites>
       <sprites name="Police">
         <sprite>sprites\sPoliceCar1</sprite>
+        <sprite>sprites\sPoliceCar2</sprite>
+      </sprites>
+      <sprites name="Blacks">
+        <sprite>sprites\sBlacksCar1</sprite>
       </sprites>
       <sprite>sprites\sSelectedSign</sprite>
       <sprite>sprites\sCarSmoke</sprite>
@@ -83,6 +87,8 @@
         <sprite>sprites\sCarHPEngine</sprite>
         <sprite>sprites\sCarHPWeaponIcon</sprite>
       </sprites>
+      <sprite>sprites\sDriftSign</sprite>
+      <sprite>sprites\sDriftStar</sprite>
     </sprites>
     <sprites name="Masks">
       <sprite>sprites\sMask32x32</sprite>
@@ -101,6 +107,10 @@
         <sprite>sprites\sGunRocketEffect</sprite>
         <sprite>sprites\sGunRocketBullet</sprite>
         <sprite>sprites\sGunRocketIco</sprite>
+      </sprites>
+      <sprites name="Shield">
+        <sprite>sprites\sGunShield</sprite>
+        <sprite>sprites\sGunShieldIco</sprite>
       </sprites>
       <sprite>sprites\sShootSign</sprite>
     </sprites>
@@ -185,6 +195,11 @@
         <path>paths\pStreets1Human3</path>
       </paths>
     </paths>
+    <paths name="Night Street 1">
+      <paths name="AI">
+        <path>paths\pNightStreet1AI1</path>
+      </paths>
+    </paths>
   </paths>
   <scripts name="scripts">
     <script>scripts\ENUMS.gml</script>
@@ -207,6 +222,8 @@
       <script>scripts\gameSetState.gml</script>
       <script>scripts\gameBulletCreate.gml</script>
       <script>scripts\gameScoreIncrease.gml</script>
+      <script>scripts\gameLevelEnd.gml</script>
+      <script>scripts\gameEnd.gml</script>
     </scripts>
     <scripts name="FLAGS">
       <script>scripts\flagSet.gml</script>
@@ -273,6 +290,10 @@
       <scripts name="DAMAGE">
         <script>scripts\carTakeDamage.gml</script>
       </scripts>
+      <scripts name="DRIFT SCORE -- PLAYER ONLY">
+        <script>scripts\driftScoreAppend.gml</script>
+        <script>scripts\driftScoreUpdate.gml</script>
+      </scripts>
       <script>scripts\carInMouse.gml</script>
       <script>scripts\carPhysicsInit.gml</script>
       <script>scripts\carInitEnd.gml</script>
@@ -325,9 +346,20 @@
     <scripts name="ENEMY">
       <scripts name="SITUATIONS">
         <script>scripts\enemyDetermineSituation.gml</script>
-        <script>scripts\enemyCarPoliceDetermineSituation.gml</script>
+        <scripts name="POLICE">
+          <script>scripts\enemyCarPoliceDetermineSituation.gml</script>
+        </scripts>
+        <scripts name="BLACKS">
+          <script>scripts\enemyCarBlacksJeepDetermineSituation.gml</script>
+        </scripts>
+      </scripts>
+      <scripts name="RACES">
+        <script>scripts\enemyRacingInit.gml</script>
+        <script>scripts\enemyPathGetNextPoint.gml</script>
       </scripts>
       <script>scripts\enemiesMakeTurn.gml</script>
+      <script>scripts\enemySetState.gml</script>
+      <script>scripts\enemySetupVelocityAndDirectionForPoint.gml</script>
     </scripts>
     <scripts name="HUMAN">
       <scripts name="GENERATOR">
@@ -390,6 +422,7 @@
     </objects>
     <objects name="Enemies">
       <object>objects\oEnemyCar</object>
+      <object>objects\oBlackCar</object>
     </objects>
     <objects name="GUI">
       <objects name="Path Editing">
@@ -407,6 +440,8 @@
       <object>objects\oButtonCarGUIBrake</object>
       <object>objects\oButtonCarGUIWeapon</object>
       <object>objects\oButtonCarGUIWeaponCarMode</object>
+      <object>objects\oLevelEnd</object>
+      <object>objects\oButtonOk</object>
     </objects>
     <objects name="Obstacles">
       <object>objects\oBaseWall</object>
@@ -427,6 +462,7 @@
       <object>objects\oWeaponRocket</object>
       <object>objects\oRocketBullet</object>
       <object>objects\oExplosion</object>
+      <object>objects\oWeaponShield</object>
     </objects>
     <objects name="Human">
       <object>objects\oHumanGenerator</object>
@@ -442,12 +478,17 @@
       <object>objects\oMapLevelPoint</object>
     </objects>
     <objects name="Race Triggers">
+      <object>objects\oRaceController</object>
       <object>objects\oRaceTrigger</object>
+    </objects>
+    <objects name="Shop">
+      <object>objects\oShopController</object>
     </objects>
     <object>objects\oControl</object>
     <object>objects\oGameController</object>
     <object>objects\oCamera</object>
     <object>objects\oLightDepth</object>
+    <object>objects\oShadeDepth</object>
     <object>objects\oBall</object>
     <object>objects\oAnimatedWater</object>
     <object>objects\oPopupText</object>
@@ -462,6 +503,7 @@
     <room>rooms\rNightRace1</room>
     <room>rooms\rIntro</room>
     <room>rooms\rMainMenu</room>
+    <room>rooms\rShop</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

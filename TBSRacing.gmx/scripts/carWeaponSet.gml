@@ -56,6 +56,12 @@ case CARS.__POLICE:
     ll = 12;
     aa = 175;
     break;
+    
+case CARS.__BLACKS_JEEP:
+    // 1 slot
+    ll = 19;
+    aa = 177;
+    break;
 }
 
 switch (argument[1])
@@ -66,14 +72,20 @@ case WEAPONS.__SIMPLE:
 case WEAPONS.__ROCKET:
     obj = oWeaponRocket;
     break;
+case WEAPONS.__SHIELD:
+    obj = oWeaponShield;
+    break;
 }
-var pos = -1;
-for (var i = 0; i < weaponsCount; i++)
+var pos = argument[0];
+if (argument[0] == -1)
 {
-    if (weapon[i] == noone)
+    for (var i = 0; i < weaponsCount; i++)
     {
-        pos = i;
-        break;
+        if (weapon[i] == noone)
+        {
+            pos = i;
+            break;
+        }
     }
 }
 weapon[pos] = instance_create(phy_position_x + lengthdir_x(ll, phy_rotation + aa), 

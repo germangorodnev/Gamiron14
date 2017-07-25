@@ -3,8 +3,8 @@
   <caption></caption>
   <width>3000</width>
   <height>3000</height>
-  <vsnap>1</vsnap>
-  <hsnap>1</hsnap>
+  <vsnap>32</vsnap>
+  <hsnap>32</hsnap>
   <isometric>0</isometric>
   <speed>60</speed>
   <persistent>0</persistent>
@@ -112,12 +112,12 @@
     <instance objName="oEnemyCar" x="2472" y="576" name="inst_846F4354" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="-90"/>
     <instance objName="oMaterialMask" x="0" y="0" name="inst_36F00685" locked="0" code="zone = ZONES.__GRASS;&#xA;" scaleX="20" scaleY="32" colour="4294967295" rotation="0"/>
     <instance objName="oMaterialMask" x="1280" y="0" name="inst_A9073BE3" locked="0" code="zone = ZONES.__GRASS&#xA;" scaleX="28" scaleY="32" colour="4294967295" rotation="0"/>
-    <instance objName="oPlayerCar" x="128" y="256" name="inst_3459E939" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="oPlayerCar" x="144" y="720" name="inst_68E85FA8" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="oPlayerCar" x="128" y="512" name="inst_5D735702" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="oAnimatedWater" x="0" y="1024" name="inst_74F929AD" locked="0" code="" scaleX="20" scaleY="32" colour="4278190208" rotation="0"/>
     <instance objName="oAnimatedWater" x="1280" y="1024" name="inst_01979EE7" locked="0" code="" scaleX="56" scaleY="32" colour="4278190208" rotation="0"/>
-    <instance objName="oHumanGenerator" x="20" y="4" name="inst_9F269181" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="oHumanGeneratorPeriodic" x="-44" y="2491" name="inst_03C4D542" locked="0" code="tmr = room_speed / 2;&#xA;tmrMin = room_speed;&#xA;tmrMax = room_speed * 2;&#xA;path = pEmbankment1Human1;&#xA;canreverse = 1;&#xA;xshiftmax = 0;&#xA;yshiftmax = 180;&#xA;peoplemin = 1;&#xA;peoplemax = 1;&#xA;speedcoeffmin = 1.0;&#xA;speedcoeffmax = 2.0;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="oAllyCarPlace" x="96" y="288" name="inst_66965F1D" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="oAllyCarPlace" x="96" y="448" name="inst_ED999D2C" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="oAllyCarPlace" x="96" y="640" name="inst_77A25597" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles>
     <tile bgName="&lt;undefined&gt;" x="288" y="512" w="220" h="220" xo="0" yo="230" id="10000008" name="inst_FB43D67D" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>

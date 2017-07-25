@@ -1,6 +1,9 @@
 enum GAME_STATES
 {
     __MENU,
+    __MAP,
+    __SHOP,
+    __GARAGE,
     __GAME,
     __TURNENDYESNO,
     __PAUSE
@@ -9,7 +12,8 @@ enum GAME_STATES
 enum INGAME_STATES
 {
     TURN,
-    GAME
+    GAME,
+    ENDLEVEL,
 }
 
 enum SUBSTATES
@@ -89,7 +93,9 @@ enum CARS
     __MINI_TRUCK = 1,
     __MINI_VAN = 2,
     __SCOOL_BUS = 3,
-    __POLICE
+    __POLICE,
+    __POLICE_HARD,
+    __BLACKS_JEEP
 }
 
 enum CONTROL_TYPES
@@ -104,6 +110,7 @@ enum WEAPONS
     __NONE = -1,
     __SIMPLE = 0,
     __ROCKET = 1,
+    __SHIELD = 2
 }
 
 enum BULLETS
@@ -116,7 +123,8 @@ enum WEAPON_STATES
 {
     __FREE,
     __SIMPLE_ATTACK,
-    __ROCKET_ATTACK
+    __ROCKET_ATTACK,
+    __SHIELD_ACTIVE
 }
 
 /////////////// HUMAN

@@ -6,6 +6,7 @@ dtext = ds_list_find_value(mp[? "desc"], global.lang);
 draw_set_font(fTurnEnd);
 h1w = 15 + string_width(h1text);
 index = argument[2];
+leveltype = mp[? "type"];
 switch (argument[1])
 {
     case MAP_POINT.__DEMOLISH:
@@ -14,5 +15,6 @@ switch (argument[1])
     case MAP_POINT.__DEMOLISH_RACE:
         imageI = 3;
         col = make_colour_hsv(220, 187, 127);
+        pulseCol = make_colour_hsv(220, 186, 148);
         break;
 }

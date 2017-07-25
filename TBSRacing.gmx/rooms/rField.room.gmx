@@ -26,7 +26,13 @@
 // create circular human
 
 with (oGameController)
-    gameLightAlpha = .1;</code>
+    gameLightAlpha = .1;
+    
+with (oEnemyCar)
+{
+    carPhysicsInit(type);
+    carInitEnd();
+}</code>
   <enableViews>-1</enableViews>
   <clearViewBackground>-1</clearViewBackground>
   <clearDisplayBuffer>-1</clearDisplayBuffer>

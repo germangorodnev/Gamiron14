@@ -3,23 +3,26 @@
 	"sound": 1,	
 	"levelsPassed": 0,
 	"carsCount": 1,
-
+	"money": 0,
+	"tutorialPassed": 0,
 
 	"cars": [
 		{
 			"type": 0,
 			"slots": [
 				{
-					"type": -1,
+					"type": 1,
 
 				}
 			]
 		},
 
-
-
-
 	],
+
+	"garage": {
+		"weapons": [],
+		"cars": []
+	},
 
 	"places": {
 		"garage": {
@@ -40,8 +43,8 @@
 				"Centre"
 			],
 			"desc": [
-				"Перекресток одного из центральных районов",
-				"Crossroads of one of the central districts"
+				"Перекресток одного из#центральных районов",
+				"Crossroads of one of the#central districts"
 			],
 			"DONE": 0,
 			"type": 1,
@@ -72,14 +75,30 @@
 				"Embankment"
 			],
 			"desc": [
-				"Людное место в городском парке",
-				"Crowded place in a city park"
+				"Людное место в городском#парке",
+				"Crowded place in a city#park"
 			],
 			"DONE": 0,
 			"type": 1,
 			"room": "rEmbankment",
 			"x": 0.5234,
 			"y": 0.5707
+		},
+
+		{
+			"name": [
+				"Центр",
+				"Centre"
+			],
+			"desc": [
+				"Короткая ночная гонка#по центральной улице",
+				"Short night race in a#central street"
+			],
+			"DONE": 0,
+			"type": 2,
+			"room": "rNightRace1",
+			"x": 0.5546,
+			"y": 0.6187
 		}
 	]
 

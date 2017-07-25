@@ -127,10 +127,19 @@ with (other.human)
         lengthdir_y(phy_speed * 30, -dir));
     physics_apply_angular_impulse(phy_speed * 25);
     humanSetState(HUMAN_STATES.__FLY_AWAY);  
+}
+if (team == 0)
+{
     var val = irandom_range(15, 35) div 5 * 5;
     popupInit(phy_position_x, phy_position_y - 20, string(val));    
     gameScoreIncrease(val);
 }
+
+
+
+
+
+
 </string>
           </argument>
         </arguments>

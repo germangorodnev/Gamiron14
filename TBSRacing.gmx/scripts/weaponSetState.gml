@@ -33,4 +33,8 @@ case WEAPON_STATES.__ROCKET_ATTACK:
     canShoot = canShootTmrSteps;
     //needShoot = 0;
     break;
+    
+case WEAPON_STATES.__SHIELD_ACTIVE:
+
+    break;
 }

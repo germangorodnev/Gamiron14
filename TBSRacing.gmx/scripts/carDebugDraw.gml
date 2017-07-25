@@ -16,7 +16,7 @@ draw_text_colour(phy_position_x + 20, phy_position_y - 40, "Speed: " + string(sp
     c_black, c_black, c_black, c_black, 1);
 draw_text_colour(phy_position_x + 20, phy_position_y - 20, "HP: " + string(engineHP / engineMaxHP), 
     c_black, c_red, c_black, c_red, 1);
-draw_text_colour(phy_position_x + 20, phy_position_y, "Angle: " + string(phy_rotation) + "; Arrow: " + string(-arrowDir), 
+draw_text_colour(phy_position_x + 20, phy_position_y, "Speed: " + string(phy_speed) + "; Velocity: " + string(sqrt(sqr(phy_linear_velocity_x) + sqr(phy_linear_velocity_y))), 
     c_black, c_black, c_black, c_black, 1);
 draw_text_colour(phy_position_x + 20, phy_position_y + 20, "Spd Desired: " + string(spdDesired), 
     c_black, c_black, c_black, c_black, 1);

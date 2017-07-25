@@ -40,7 +40,7 @@ pointId = -1;
 engineArrowH = -1;
 
 // target to chase
-targetId = instance_create(x, y, oCarTarget);
+targetId = noone; //instance_create(x, y, oCarTarget);
 
 angleAdd = 0;
 
@@ -57,6 +57,8 @@ colArrowInner = make_colour_hsv(135, 195, 170);
 colArrowOuter = make_colour_hsv(135, 195, 121);
 arrowLen = 150;
 
+
+/*
 carPhysicsInit(type);
 if (weaponsCount == 1)
     carWeaponSet(0, WEAPONS.__SIMPLE);
@@ -72,7 +74,7 @@ else if (weaponsCount == 3)
     carWeaponSet(2, choose(WEAPONS.__ROCKET, WEAPONS.__SIMPLE));
 }
 carInitEnd();
-
+*/
 </string>
           </argument>
         </arguments>
@@ -424,7 +426,6 @@ draw_sprite_ext(sLightPoint, 0, sx - ldx - view_xview,
         phy_position_x + lengthdir_x(arrowLen, arrowDir),
         phy_position_y + lengthdir_y(arrowLen, arrowDir),
         colArrowInner, colArrowOuter, image_alpha);
-carDrawShadow();
 draw_self();
 carDebugDraw();
 </string>

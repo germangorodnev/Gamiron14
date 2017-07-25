@@ -11,7 +11,12 @@
   <colour>12632256</colour>
   <showcolour>-1</showcolour>
   <code>with (oGameController)
-    gameLightAlpha = .4;</code>
+    gameLightAlpha = .4;
+with (oEnemyCar)
+{
+    carPhysicsInit(type);
+    carInitEnd();
+}</code>
   <enableViews>-1</enableViews>
   <clearViewBackground>-1</clearViewBackground>
   <clearDisplayBuffer>-1</clearDisplayBuffer>
@@ -91,7 +96,7 @@
     <instance objName="oHuman" x="1604" y="3488" name="inst_7CDF1B69" locked="0" code="humanStartRandomMadePath(pStreets1Human2);&#xA;visible = 1;&#xA;phy_position_x = xstart;&#xA;phy_position_y = ystart;&#xA;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="oHumanGeneratorPeriodic" x="-196" y="1816" name="inst_4676DC0E" locked="0" code="tmr = 1; //room_speed * 5;&#xA;tmrMin = room_speed;&#xA;tmrMax = room_speed * 2;&#xA;path = pStreets1Human1;&#xA;xshiftmax = 35;&#xA;yshiftmax = 100;&#xA;speedcoeffmin = 1.0;&#xA;speedcoeffmax = 2.0;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="oHumanGeneratorPeriodic" x="1528" y="3292" name="inst_A106920B" locked="0" code="path = pStreets1Human2;&#xA;xshiftmax = 100;&#xA;yshiftmax = 100;&#xA;tmrMin = irandom_range(room_speed, room_speed * 1.5);&#xA;tmrMax = tmrMin + irandom(room_speed);" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="oHumanGeneratorPeriodic" x="3116" y="956" name="inst_A27E4225" locked="0" code="tmr = 1; //room_speed * 5;&#xA;tmrMin = room_speed;&#xA;tmrMax = room_speed * 2;&#xA;path = pStreets1Human1;&#xA;xshiftmax = 35;&#xA;yshiftmax = 100;&#xA;speedcoeffmin = 1.0;&#xA;speedcoeffmax = 2.0;&#xA;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="oHumanGeneratorPeriodic" x="3116" y="956" name="inst_A27E4225" locked="0" code="tmr = 1; //room_speed * 5;&#xA;tmrMin = room_speed;&#xA;tmrMax = room_speed * 2;&#xA;path = pStreets1Human3;&#xA;xshiftmax = 35;&#xA;yshiftmax = 100;&#xA;speedcoeffmin = 1.0;&#xA;speedcoeffmax = 2.0;&#xA;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles>
     <tile bgName="tls1" x="128" y="256" w="128" h="128" xo="128" yo="768" id="10001748" name="inst_F8BA99CE" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>

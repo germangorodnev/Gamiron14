@@ -38,10 +38,22 @@ flagSet(OBJ_PAR.UPDATABLE
 type = 0; // 0 - point, 1 - sprite
 lvlto = -1; // level id
 index = 0;
+leveltype = -1;
 dstart = depth;
 
 pointR = 16;
 col = make_colour_hsv(5, 187, 127);
+
+// pulse
+pulseTmrCnt = room_speed * 1.5;
+pulseTmr = irandom_range(2, pulseTmrCnt);
+pulseR = pointR + 15;
+pulseAlpha = 1;
+pulsePercent = 0;
+pulseA = 0;
+pulseCol = make_colour_hsv(0, 186, 148);
+
+
 
 imageSpr = sMapIcosImages;
 imageI = 2;
@@ -57,6 +69,8 @@ dy1 = h1y1 + h1h + 15;
 dh = 100;
 dtextx = dx1 + 10;
 dtexty = dy1 + 10;
+
+
 
 </string>
           </argument>
@@ -110,6 +124,20 @@ if (imagea == 0)
     depth = dstart;
 else
     depth = dstart - 1;
+    
+// pulse
+if (pulseTmr &amp;&amp; !--pulseTmr)
+{
+    pulseTmr = pulseTmrCnt;
+    pulseA = 1;
+    pulsePercent = 0;
+}
+if (pulseA)
+{
+    pulsePercent += .016;
+    if (pulsePercent &gt;= 1)
+        pulseA = 0;
+}
 
 if (point_in_circle(mouse_x, mouse_y, x, y, pointR))
 {
@@ -117,6 +145,7 @@ if (point_in_circle(mouse_x, mouse_y, x, y, pointR))
     if (oControl.key[KEY.MOUSE_LEFT] == 0)
     {
         global.lvlIndex = index;
+        global.lvlType = leveltype;
         var rm = lvlto;
         with (instance_create(0, 0, oNextRoom))
             nextRoomEffectInit(0, rm, 1);
@@ -198,6 +227,13 @@ image_speed = 0;
           <argument>
             <kind>1</kind>
             <string>/// point gui
+// pulse if any
+if (pulseA)
+{
+    draw_set_alpha(max(.05, pulseAlpha - (pulseAlpha * pulsePercent)));
+    draw_circle_colour(x, y, pulseR * pulsePercent, pulseCol, pulseCol, 0);
+    draw_set_alpha(1);
+}
 draw_circle_colour(x, y, pointR, col, col, 0);
 
 mapPointDrawImageHeadAndDesc();

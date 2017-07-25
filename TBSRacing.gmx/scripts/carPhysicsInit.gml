@@ -241,6 +241,71 @@ case CARS.__POLICE:
     spdAccelBackward = 3;
     angleTorque = .8;
     
+    weaponsCount = 1;
+    
+    carWeaponSet(0, choose(WEAPONS.__SIMPLE, WEAPONS.__ROCKET));
+    break;
+    
+    
+    
+    
+    
+    
+/////////////////////// BLACKS /////////////////////////
+case CARS.__BLACKS_JEEP:
+    sprite_index = sBlacksCar1;
+    // make the fixture
+    // forward 
+    var fix = physics_fixture_create();
+    physics_fixture_set_collision_group(fix, 0);    
+    physics_fixture_set_density(fix, densityBase);  
+    physics_fixture_set_restitution(fix, rest);  
+    physics_fixture_set_linear_damping(fix, .3);  
+    physics_fixture_set_angular_damping(fix, ad);  
+    physics_fixture_set_awake(fix, 1);
+
+    var xoff = sprite_get_xoffset(sprite_index),
+        yoff = sprite_get_yoffset(sprite_index);
+    physics_fixture_set_polygon_shape(fix);
+    physics_fixture_add_point(fix, 15 - xoff, 4 - yoff);
+    physics_fixture_add_point(fix, 132 - xoff, 4 - yoff);
+    physics_fixture_add_point(fix, 145 - xoff, 18 - yoff);
+    physics_fixture_add_point(fix, 148 - xoff, 33 - yoff);
+    physics_fixture_add_point(fix, 145 - xoff, 50 - yoff);
+    physics_fixture_add_point(fix, 132 - xoff, 63 - yoff);
+    physics_fixture_add_point(fix, 15 - xoff, 63 - yoff);
+    
+    fixtures[fixturesCnt++] = physics_fixture_bind(fix, id);
+    physics_fixture_delete(fix);
+    
+    fix = physics_fixture_create();
+    physics_fixture_set_collision_group(fix, 0);    
+    physics_fixture_set_density(fix, .5);  
+    physics_fixture_set_restitution(fix, .3);  
+    physics_fixture_set_linear_damping(fix, .3);  
+    physics_fixture_set_angular_damping(fix, ad);  
+    physics_fixture_set_awake(fix, 1);
+
+    physics_fixture_set_polygon_shape(fix);
+    physics_fixture_add_point(fix, 15 - xoff, 63 - yoff);
+    physics_fixture_add_point(fix, 5 - xoff, 58 - yoff);
+    physics_fixture_add_point(fix, 0 - xoff, 51 - yoff);
+    physics_fixture_add_point(fix, 0 - xoff, 22 - yoff);
+    physics_fixture_add_point(fix, 5 - xoff, 10 - yoff);
+    physics_fixture_add_point(fix, 15 - xoff, 4 - yoff);
+    
+    fixtures[fixturesCnt++] = physics_fixture_bind(fix, id);
+    physics_fixture_delete(fix);
+    
+    // parameters
+    spdMaxForward = 250;
+    spdAccelForward = 2.4;
+    spdAccelBrake = 3.6;
+    spdAccelBackward = 3.5;
+    angleTorque = 1.3;
+    
+    // particles
+    part_type_sprite(ptyre, sPlayerCar3Tyre, 0, 0, 0);
     
     weaponsCount = 1;
     break;

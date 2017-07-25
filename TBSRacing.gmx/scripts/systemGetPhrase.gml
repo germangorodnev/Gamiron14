@@ -18,18 +18,50 @@ case 0:
     case 1:
         switch (global.lang)
         {
-        case LANG.RUS: return "Режим авто"; break;
-        case LANG.ENG: return "Car mode"; break;
+        case LANG.RUS: return "Победа"; break;
+        case LANG.ENG: return "Win"; break;
         }
         break;    
 
     case 2:
         switch (global.lang)
         {
-        case LANG.RUS: return "Режим оружия"; break;
-        case LANG.ENG: return "Weapon mode"; break;
+        case LANG.RUS: return "Поражение"; break;
+        case LANG.ENG: return "Defeat"; break;
         }
-        break;    
+        break;
+            
+    case 3:
+        switch (global.lang)
+        {
+        case LANG.RUS: return "Вы действительно хотите завершить ход?"; break;
+        case LANG.ENG: return "Do you really want to end the turn?"; break;
+        }
+        break;
+         
+    case 4:
+        switch (global.lang)
+        {
+        case LANG.RUS: return "Базовые очки"; break;
+        case LANG.ENG: return "Base score"; break;
+        }
+        break; 
+        
+    case 5:
+        switch (global.lang)
+        {
+        case LANG.RUS: return "Очки престижа"; break;
+        case LANG.ENG: return "Prestige points"; break;
+        }
+        break; 
+        
+    case 6:
+        switch (global.lang)
+        {
+        case LANG.RUS: return "ИТОГ"; break;
+        case LANG.ENG: return "Total"; break;
+        }
+        break; 
     }
     break;
     
@@ -48,6 +80,13 @@ case 1: //
         {
         case LANG.RUS: return "Нет"; break;
         case LANG.ENG: return "No"; break;
+        }
+        break;    
+    case 2:
+        switch (global.lang)
+        {
+        case LANG.RUS: return "OK"; break;
+        case LANG.ENG: return "OK"; break;
         }
         break;    
     }

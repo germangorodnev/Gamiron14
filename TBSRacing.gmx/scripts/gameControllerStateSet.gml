@@ -51,6 +51,25 @@ case INGAME_STATES.TURN:
     turnEndApproval = 0;
     instance_create(0, 0, oButtonEndTurn);
     break;
+    
+case INGAME_STATES.ENDLEVEL:
+    gameControllerSubstateSet(SUBSTATES.__NONE);
+    with (oStateObject)
+    {
+        if (flagIsActive(flags, OBJ_PAR.IMPACTABLE_TURN))
+        {
+            updWas = flags & OBJ_PAR.UPDATABLE;
+            flags &= ~OBJ_PAR.UPDATABLE;
+            flags |= OBJ_PAR.DRAWABLE;
+            event_user(0);
+            
+            if (flagIsActive(flags, OBJ_PAR.PHYSICAL))
+                event_user(5);
+        }
+    }
+    turnEndApproval = 0;
+    instance_destroy(oCamera); 
+    break;
 }
 
 
