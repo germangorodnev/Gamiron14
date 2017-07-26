@@ -110,6 +110,9 @@ if (mouseOnUs())
     if (oControl.key[KEY.MOUSE_LEFT] == 0)
     {
         // enter the garage
+        if (!instance_exists(oNextRoom))
+            with (instance_create(view_xview, view_yview, oNextRoom))
+                nextRoomEffectInit(0, rGarage, 1);
     }
 }
 else

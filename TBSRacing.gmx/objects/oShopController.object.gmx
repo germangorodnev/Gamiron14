@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>oBaseDerivable</parentName>
+  <parentName>oStateObject</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -27,14 +27,125 @@
             <kind>1</kind>
             <string>/// base
 event_inherited();
+image_speed = 0;
 
 flagSet(OBJ_PAR.UPDATABLE 
     | OBJ_PAR.DRAWABLE
     | OBJ_PAR.IMPACTABLE_PAUSE 
     | OBJ_PAR.IMPACTABLE_TURN, 1);  
 
-x1 = 20;
-y1 = 20;
+bottomw = global.guiW - 20;
+bottomh = 200;
+bottomx1 = 0;
+bottomy1 = global.guiH - bottomh;
+bottomx2 = global.guiW;
+bottomy2 = global.guiH;
+
+foldersCount = 2;
+var fin = foldersCount - 1;
+
+folderx[fin] = 0;
+foldery[fin] = 0;
+foldert[fin] = 0;
+foldera[fin] = 0;
+
+folderAInd = 0;
+
+foldercacitve = c_white;
+foldercinactive = c_black;
+
+fw = 145; fh = 40;
+var folderxoff = 10;
+    folderyoff = bottomy1 - fh + 3;
+for (var i = 0; i &lt; foldersCount; i++)
+{
+    folderx[i] = folderxoff;
+    foldery[i] = folderyoff;
+    foldert[i] = systemGetPhrase(3, i);
+    foldera[i] = 0;
+    folderxoff += fw - 15;
+}
+foldera[0] = 1;
+
+// swipe surface
+surf = surface_create(bottomw, bottomh);
+surfx = bottomx1 + 10;
+surfy = bottomy1 + 10;
+
+swipex = 0;
+swipePower = 2;
+// bottom window params
+boticow = 180;
+boticoh = boticow;
+boticobetw = 15;
+boticocol = make_colour_rgb(28, 3, 28);
+boticocolch = make_colour_rgb(70, 22, 70);
+// cars
+carsCount = CARS.__POLICE - CARS.__ORANGE;
+// weapons
+weaponsCount = WEAPONS.__COUNT;
+
+// swipe
+rightX = 0;
+mxpr = mouse_x;
+mypr = mouse_y;
+
+choosenItem = -1;
+choosenItemPrice = 0;
+
+// central
+cx1 = 200;
+cy1 = 30;
+cw = global.guiW / 2 - 30;
+ch = global.guiH - bottomh * 1.5;
+cperc = 0;
+cbcol = c_black;
+
+sItem = -1;
+cix = cx1 + cw / 2;
+ciy = cy1 + 180;
+cisc = 1;
+
+// weapon inf
+ciname = "";
+cidesc = "";
+cinamex = cix;
+cinamey = 0;
+cinc = make_colour_hsv(220, 187, 127);
+cincb = make_colour_hsv(220, 187, 80);
+
+ciparxl = cx1 + 10;
+ciparxr = cx1 + cw - 10;
+cipary = cinamey + 300;
+ciparybetw = 30;
+
+paramsCount = 0;
+cipname[2] = "";
+cipval[2] = "";
+
+// buy
+bw = 250;
+bh = 45;
+bx1 = cx1 + cw / 2 - bw / 2;
+by1 = cy1 + ch - bh - 9;
+bt = systemGetPhrase(3, 2);
+btx = bx1 + bw / 2;
+bty = by1 + bh / 2;
+bc = make_colour_hsv(86, 184, 120);
+bcon = make_colour_hsv(86, 184, 150);
+bccannot = make_colour_hsv(0, 184, 120);
+btcan = make_colour_hsv(86, 184, 80);
+btcannot = make_colour_hsv(0, 184, 80);
+onbuy = 0;
+
+// money
+mx = global.guiW - 15;
+my = 15;
+mc1 = make_colour_hsv(189, 185, 28);
+mc2 = make_colour_hsv(166, 184, 88);
+
+shopChangeFolder(0);
+
 </string>
           </argument>
         </arguments>
@@ -58,6 +169,126 @@ y1 = 20;
           <argument>
             <kind>1</kind>
             <string>event_inherited();
+surface_free(surf);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (!(flags &amp; OBJ_PAR.UPDATABLE))
+    exit;
+    
+if (choosenItem != -1)
+{
+    cperc = min(1, cperc + .05);
+}
+onbuy = point_in_rectangle(mouse_x, mouse_y, bx1, by1, bx1 + bw, by1 + bh);
+        
+        
+if (oControl.key[KEY.MOUSE_LEFT] == 0)
+{
+    // check folders
+    for (var i = 0; i &lt; foldersCount; i++)
+    {
+        var xx = folderx[i], 
+            yy = foldery[i];
+        if (point_in_rectangle(mouse_x, mouse_y, xx, yy, xx + fw, yy + fh))
+        {
+            for (var k = 0; k &lt; foldersCount; k++)
+                foldera[k] = 0;
+            foldera[i] = 1;
+            shopChangeFolder(i);
+        }
+    }
+    // check items
+    if (point_in_rectangle(mouse_x, mouse_y, surfx, surfy, surfx + bottomw, surfy + bottomh))
+    {
+        switch (folderAInd)
+        {
+        case 0: //cars
+            var rectx = 0;
+            for (var i = 0; i &lt; carsCount; i++)
+            {
+                var xbeg = surfx + swipex + rectx,
+                    ybeg = surfy;
+                if (point_in_rectangle(mouse_x, mouse_y,
+                    xbeg, ybeg, xbeg + boticow, ybeg + boticoh))
+                {
+                    shopSetSelectedCar(CARS.__ORANGE + i);
+                    break;
+                }
+                rectx += boticow + boticobetw;
+            }
+            break;
+        case 1: // weaps
+            var rectx = 0;
+            for (var i = 0; i &lt; weaponsCount; i++)
+            {
+                var xbeg = surfx + swipex + rectx,
+                    ybeg = surfy;
+                if (point_in_rectangle(mouse_x, mouse_y,
+                    xbeg, ybeg, xbeg + boticow, ybeg + boticoh))
+                {
+                    shopSetSelectedWeapon(i);
+                    break;
+                }
+                rectx += boticow + boticobetw;
+            }
+            break;
+        }
+    }
+    // check item buttons
+    if (choosenItem != -1)
+    {
+        if (onbuy)
+        {
+            if (global.money &gt;= choosenItemPrice)
+            {
+                // buy it
+                shopBuyItem();
+            }   
+        }
+    }
+}
+else if (oControl.key[KEY.MOUSE_LEFT] == 1)
+{
+    // swipe
+    if (mouse_y &gt; bottomy1)
+    {
+        var d = mouse_x - mxpr;
+        if (d &gt; 0)
+        {
+            // swipe right        
+            if (rightX &gt; surfx + bottomw)
+                swipex += swipePower;
+        }
+        else if (d &lt; 0)
+        {
+            // swipe left
+            if (rightX &gt; surfx + bottomw)
+                swipex -= swipePower;
+        }
+        mxpr = mouse_x;
+        mypr = mouse_y;
+    }
+}
 </string>
           </argument>
         </arguments>
@@ -107,6 +338,114 @@ image_speed = imgspdstop;
             <string>/// on pause
 imgspdstop = image_speed;
 image_speed = 0;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>//draw bottom screen
+drawCroppedRect(bottomx1, bottomy1, bottomx2, bottomy2, foldercinactive, 1, 1);
+
+// surf
+draw_surface(surf, surfx, surfy);
+
+
+//draw folders
+for (var i = 0; i &lt; foldersCount; i++)
+{
+    if (foldera[i])
+        continue;
+    var xx = folderx[i], 
+        yy = foldery[i],
+        cc = foldercinactive,
+        ct = foldercacitve;
+    drawCroppedRect(xx, yy, xx + fw, yy + fh, cc, 1, 8);
+    // text
+    draw_set_font(fQuestion);
+    draw_set_valign(fa_top);
+    draw_set_halign(fa_left);
+    draw_text_colour(xx + 20, yy + 5, foldert[i], ct, ct, ct, ct, 1);
+}
+    var xx = folderx[folderAInd], 
+        yy = foldery[folderAInd],
+        cc = foldercacitve,
+        ct = foldercinactive;
+// real one
+drawCroppedRect(xx, yy, xx + fw, yy + fh, cc, 1, 8);
+// text
+draw_set_font(fQuestion);
+draw_set_valign(fa_top);
+draw_set_halign(fa_left);
+draw_text_colour(xx + 15, yy + 5, foldert[folderAInd], ct, ct, ct, ct, 1);
+
+
+// CENTAR WINDOW
+drawCroppedRect(cx1, cy1, cx1 + cw * cperc, cy1 + ch * cperc, cbcol, 1, 5);
+// item itself
+if (choosenItem != -1)
+{
+    draw_sprite_ext(sItem, 0, cix, ciy, cisc, cisc, sin(global.ctime / 50) * 30, c_white, cperc);
+    draw_set_font(fTurnEnd);
+    draw_set_valign(fa_top);
+    draw_set_halign(fa_center);
+    var ctext = string_copy(ciname, 1, round(string_length(ciname) * cperc));
+    draw_text_colour(cinamex + 3 * sin(global.ctime / 30), cinamey + 5, ctext, cincb, cincb, cincb, cincb, 1);
+    draw_text_colour(cinamex, cinamey + 5, ctext, cinc, cinc, cinc, cinc, 1);
+    // desc
+    draw_set_font(fQuestion);
+    ctext = string_copy(cidesc, 1, round(string_length(cidesc) * cperc));
+    draw_text_colour(cinamex, cinamey + 43, ctext, cinc, cinc, cinc, cinc, 1);
+    // other params
+    var yoff = cipary;
+    for (var j = 0; j &lt; paramsCount; j++)
+    {
+        draw_set_halign(fa_left);
+        draw_text_colour(ciparxl, yoff, string(cipname[j]), cinc, cinc, cinc, cinc, 1);
+        draw_set_halign(fa_right);
+        draw_text_colour(ciparxr, yoff, stringThousandsDivide(string(cipval[j])), cinc, cinc, cinc, cinc, 1); 
+        yoff += ciparybetw;
+    }
+    // button buy
+    var rc = bc, tc = btcan;
+    if (global.money &lt; choosenItemPrice)
+    {
+        rc = bccannot;
+        tc = btcannot;
+    }
+    if (onbuy)
+        rc = bcon;
+    drawCroppedRect(bx1, by1, bx1 + bw * cperc, by1 + bh * cperc, rc, 1, 4);
+    draw_set_font(fTurnEnd);
+    draw_set_halign(fa_center);
+    draw_set_valign(fa_middle);
+    draw_text_colour(btx, bty, string_copy(bt, 1, round(string_length(bt) * cperc)), tc, tc, tc, tc, 1); 
+}
+
+// MANI
+draw_set_font(fTurnEnd);
+draw_set_halign(fa_right);
+draw_set_valign(fa_top);
+var mn = stringThousandsDivide(string(global.money));
+draw_text_colour(mx + 3 * sin(global.ctime / 30), my, mn, mc2, mc2, mc2, mc2, 1); 
+draw_text_colour(mx, my, mn, mc1, mc1, mc2, mc2, 1); 
+
 </string>
           </argument>
         </arguments>

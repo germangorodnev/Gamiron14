@@ -40,7 +40,7 @@ else
 
 
 physics_apply_force(phy_position_x, phy_position_y, dx, dy);  
-//physics_apply_angular_impulse(.1 * phy_inertia * -sign(phy_angular_velocity));
+//physics_apply_angular_impulse(.03 * phy_inertia * -sign(phy_angular_velocity));
 carKillLateralVelocity();
 carParticlesGenerate();
 carCollideWalls();

@@ -20,6 +20,7 @@ json = json_decode(txt);
 // system params
 global.lang = real(json[? "language"]);
 global.sound = real(json[? "sound"]);
+global.money = real(json[? "money"]);
 // game params
 global.lvlPassed = real(json[? "levelsPassed"]);
 global.carsCount = real(json[? "carsCount"]);

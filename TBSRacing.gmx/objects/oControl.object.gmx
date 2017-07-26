@@ -32,6 +32,8 @@ randomize();
 controlBit = CONTROL.__KEYMOUSE;
 key[KEY.CNT] = 0;
 
+window_set_caption("Game");
+
 global.guiW = 1280;
 global.guiH = 720;
 

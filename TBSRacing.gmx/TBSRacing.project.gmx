@@ -55,6 +55,7 @@
       </sprites>
       <sprites name="Blacks">
         <sprite>sprites\sBlacksCar1</sprite>
+        <sprite>sprites\sBlacksCar2</sprite>
       </sprites>
       <sprite>sprites\sSelectedSign</sprite>
       <sprite>sprites\sCarSmoke</sprite>
@@ -280,6 +281,7 @@
         <script>scripts\weaponSetTargetDirection.gml</script>
         <script>scripts\weaponSetShootNecessity.gml</script>
         <script>scripts\explosionSmallCreate.gml</script>
+        <script>scripts\gameGetWeaponIndepthInf.gml</script>
       </scripts>
       <scripts name="EFFECTS">
         <script>scripts\carParticlesGenerate.gml</script>
@@ -303,6 +305,7 @@
       <script>scripts\carCollideWalls.gml</script>
       <script>scripts\carDrawShadow.gml</script>
       <script>scripts\carCollidePeople.gml</script>
+      <script>scripts\gameGetCarIndepthInf.gml</script>
     </scripts>
     <scripts name="GAME CONTROLLER">
       <scripts name="STATE">
@@ -342,6 +345,7 @@
       <script>scripts\addTrailingZeroes.gml</script>
       <script>scripts\physicalDrawShadow.gml</script>
       <script>scripts\nextRoomEffectInit.gml</script>
+      <script>scripts\stringThousandsDivide.gml</script>
     </scripts>
     <scripts name="ENEMY">
       <scripts name="SITUATIONS">
@@ -390,6 +394,19 @@
         <script>scripts\mapLevelPointInitByMap.gml</script>
       </scripts>
       <script>scripts\mapInit.gml</script>
+    </scripts>
+    <scripts name="SHOP">
+      <script>scripts\shopChangeFolder.gml</script>
+      <script>scripts\shopGetCarInfo.gml</script>
+      <script>scripts\shopGetWeaponInfo.gml</script>
+      <script>scripts\shopSetSelectedCar.gml</script>
+      <script>scripts\shopSetSelectedWeapon.gml</script>
+      <script>scripts\shopBuyItem.gml</script>
+    </scripts>
+    <scripts name="GARAGE">
+      <scripts name="UTIL">
+        <script>scripts\garageGetItemCount.gml</script>
+      </scripts>
     </scripts>
   </scripts>
   <shaders name="shaders">
@@ -442,6 +459,7 @@
       <object>objects\oButtonCarGUIWeaponCarMode</object>
       <object>objects\oLevelEnd</object>
       <object>objects\oButtonOk</object>
+      <object>objects\oButtonBack</object>
     </objects>
     <objects name="Obstacles">
       <object>objects\oBaseWall</object>
@@ -484,6 +502,9 @@
     <objects name="Shop">
       <object>objects\oShopController</object>
     </objects>
+    <objects name="Garage">
+      <object>objects\oGarageController</object>
+    </objects>
     <object>objects\oControl</object>
     <object>objects\oGameController</object>
     <object>objects\oCamera</object>
@@ -504,6 +525,7 @@
     <room>rooms\rIntro</room>
     <room>rooms\rMainMenu</room>
     <room>rooms\rShop</room>
+    <room>rooms\rGarage</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

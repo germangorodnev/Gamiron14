@@ -95,7 +95,8 @@ enum CARS
     __SCOOL_BUS = 3,
     __POLICE,
     __POLICE_HARD,
-    __BLACKS_JEEP
+    __BLACKS_JEEP,
+    __BLACKS_DODGE
 }
 
 enum CONTROL_TYPES
@@ -110,7 +111,8 @@ enum WEAPONS
     __NONE = -1,
     __SIMPLE = 0,
     __ROCKET = 1,
-    __SHIELD = 2
+    __SHIELD = 2,
+    __COUNT,
 }
 
 enum BULLETS
