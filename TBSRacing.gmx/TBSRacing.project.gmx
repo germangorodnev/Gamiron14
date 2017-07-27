@@ -277,11 +277,13 @@
       </scripts>
       <scripts name="WEAPONS">
         <script>scripts\carWeaponSet.gml</script>
+        <script>scripts\carWeaponPlaceInf.gml</script>
         <script>scripts\weaponSetState.gml</script>
         <script>scripts\weaponSetTargetDirection.gml</script>
         <script>scripts\weaponSetShootNecessity.gml</script>
         <script>scripts\explosionSmallCreate.gml</script>
         <script>scripts\gameGetWeaponIndepthInf.gml</script>
+        <script>scripts\weaponGetIco.gml</script>
       </scripts>
       <scripts name="EFFECTS">
         <script>scripts\carParticlesGenerate.gml</script>
@@ -407,6 +409,13 @@
       <scripts name="UTIL">
         <script>scripts\garageGetItemCount.gml</script>
       </scripts>
+      <scripts name="BOTTOM LINE">
+        <script>scripts\shopGarageBottomCreate.gml</script>
+      </scripts>
+      <script>scripts\garageChangeFolder.gml</script>
+      <script>scripts\garageStateInit.gml</script>
+      <script>scripts\garageCarSetCar.gml</script>
+      <script>scripts\garageUpdateCarSlots.gml</script>
     </scripts>
   </scripts>
   <shaders name="shaders">
@@ -504,6 +513,7 @@
     </objects>
     <objects name="Garage">
       <object>objects\oGarageController</object>
+      <object>objects\oGarageCar</object>
     </objects>
     <object>objects\oControl</object>
     <object>objects\oGameController</object>

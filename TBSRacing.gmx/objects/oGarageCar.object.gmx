@@ -3,10 +3,10 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>-10</depth>
   <persistent>0</persistent>
   <parentName>oStateObject</parentName>
-  <maskName>&lt;undefined&gt;</maskName>
+  <maskName>sMask32x32</maskName>
   <events>
     <event eventtype="0" enumb="0">
       <action>
@@ -33,26 +33,47 @@ flagSet(OBJ_PAR.UPDATABLE
     | OBJ_PAR.IMPACTABLE_PAUSE 
     | OBJ_PAR.IMPACTABLE_TURN, 1);  
 
-state = 0; 
-// 0 - choose car \ change cars
-// 1 - change car's things
+state = 0;
+// 0 - vertical choose
+// 1 - edit
 
-cperc = 0;
-swipex = 0;
+ind = 0;
 
-shopGarageBottomCreate();
+spr = -1;
+spx = 0;
+spy = 0;
+xoff = 0;
+yoff = 0;
 
-garage = oControl.json[? "garage"];
-gWeapons = garage[? "weapons"];
-gCars = garage[? "cars"];
-activeCars = oControl.json[? "cars"];
+st0x1 = x;
+st0y1 = y;
+st0w = 150;
+st0h = 280;
+st0c = c_black;
+st0perc = 0;
 
-dragInd = -1;
-carInd = -1;
+xcenter = global.guiW / 2 - st0w / 2;
 
-garageChangeFolder(0);
-garageStateInit(0);
+spx = st0x1 + st0w / 2;
+spy = st0y1 + st0h / 2;
 
+image_xscale = st0w / 32;
+image_yscale = st0h / 32;
+
+wcount = 0;
+wspr[0] = 0;
+woff[0] = 0;
+wlen[0] = 0;
+
+st1perc = 0;
+
+// rect for weaps
+wrx1[0] = 0;
+wry1[0] = 0;
+wrpx[0] = 0;
+wrpy[0] = 0;
+wrw = 150;
+wrh = 90;
 </string>
           </argument>
         </arguments>
@@ -104,105 +125,46 @@ garageStateInit(0);
 switch (state)
 {
 case 0:
-    cperc = min(1, cperc + .05);
-    break;
-case 1: // particular car
-    cperc = min(1, cperc + .05);
-    break;
-}
-
-if (oControl.key[KEY.MOUSE_LEFT] == 0)
-{
-    // check folders
-    mxpr = mouse_x;
-    for (var i = 0; i &lt; foldersCount; i++)
+    st0perc= min(1, st0perc + .05);
+    if (oControl.key[KEY.MOUSE_LEFT] == 0)
     {
-        var xx = folderx[i], 
-            yy = foldery[i];
-        if (point_in_rectangle(mouse_x, mouse_y, xx, yy, xx + fw, yy + fh))
+        if (mouseOnUs())
         {
-            for (var k = 0; k &lt; foldersCount; k++)
-                foldera[k] = 0;
-            foldera[i] = 1;
-            dragInd = -1;
-            garageChangeFolder(i);
-        }
-    }
-    // check items
-    if (mxpr == mouse_x)
-    {
-        if (point_in_rectangle(mouse_x, mouse_y, surfx, surfy, surfx + bottomw, surfy + bottomh))
-        {
-            switch (folderAInd)
+            if (oGarageController.dragInd != -1)
             {
-            case 0: //cars
-                var rectx = 0;
-                for (var i = 0, cnt = ds_list_size(gCars); i &lt; cnt; i++)
+                // set the car
+                garageCarSetCar(oGarageController.dragInd);
+                with (oGarageController)
                 {
-                    var xbeg = surfx + swipex + rectx,
-                        ybeg = surfy;
-                    if (point_in_rectangle(mouse_x, mouse_y,
-                        xbeg, ybeg, xbeg + boticow, ybeg + boticoh))
-                    {
-                        dragInd = i;
-                        break;
-                    }
-                    rectx += boticow + boticobetw;
+                    dragInd = -1;
+                    garageChangeFolder(folderAInd);
+                    garageUpdateCarSlots();
                 }
-                break;
-            case 1: // weaps
-                var rectx = 0;
-                for (var i = 0, cnt = ds_list_size(gWeapons); i &lt; cnt; i++)
-                {
-                    var xbeg = surfx + swipex + rectx,
-                        ybeg = surfy;
-                    if (point_in_rectangle(mouse_x, mouse_y,
-                        xbeg, ybeg, xbeg + boticow, ybeg + boticoh))
-                    {
-                        dragInd = i;
-                        break;
-                    }
-                    rectx += boticow + boticobetw;
-                }
-                break;
+                with (oControl)
+                    gameSave();
+            }
+            else
+            {
+                // go to detail mode
+                var myind = ind;
+                with (oGarageController)
+                    garageStateInit(1, myind);   
             }
         }
-        
     }
-}
-else if (oControl.key[KEY.MOUSE_LEFT] == 1)
-{
-    // swipe
-    if (mouse_y &gt; bottomy1)
-    {
-        var d = mouse_x - mxpr;
-        show_debug_message(string(swipex));
-        if (d &lt; 0)
-        {
-            // swipe right  
-            var val = surfx + bottomw;      
-            if (rightX &gt; val)
-                swipex -= swipePower * max(1, abs(d div 10));
-            swipex = clamp(swipex, -val, 0);
-        }
-        else if (d &gt; 0)
-        {
-            // swipe left
-            var val = surfx + bottomw;
-                swipex += swipePower * max(1, abs(d div 10));
-            swipex = clamp(swipex, -val, 0);
-        }
-        mxpr = mouse_x;
-        //mxpr += min(swipePower * max(1, abs(d div 10)), abs(d)) * sign(d);
-        garageChangeFolder(folderAInd);
-    }
-}
-else if (oControl.key[KEY.MOUSE_LEFT] == 2)
-{
-    mxpr = mouse_x;
+    break;
+case 1: // edit
+    // move to the center
+    st1perc = min(1, st1perc + .03);
+    st0x1 += max(min(abs(xcenter - st0x1), 5), abs(xcenter - st0x1) / 5) * sign(xcenter - st0x1);
+    spx = st0x1 + st0w / 2;
+    break;
+    
+case 2: // fadeaway
+    st0perc= max(0, st0perc - .05);
+    break;
     
 }
-
 </string>
           </argument>
         </arguments>
@@ -274,41 +236,39 @@ image_speed = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>// bottom
-//draw bottom screen
-drawCroppedRect(bottomx1, bottomy1, bottomx2, bottomy2, foldercinactive, 1, 1);
-
-// surf
-draw_surface(surf, surfx, surfy);
-
-//draw folders
-for (var i = 0; i &lt; foldersCount; i++)
+            <string>switch (state)
 {
-    if (foldera[i])
-        continue;
-    var xx = folderx[i], 
-        yy = foldery[i],
-        cc = foldercinactive,
-        ct = foldercacitve;
-    drawCroppedRect(xx, yy, xx + fw, yy + fh, cc, 1, 8);
-    // text
-    draw_set_font(fQuestion);
-    draw_set_valign(fa_top);
-    draw_set_halign(fa_left);
-    draw_text_colour(xx + 20, yy + 5, foldert[i], ct, ct, ct, ct, 1);
+case 0:
+case 1:
+case 2:
+    drawCroppedRect(st0x1, st0y1, st0x1 + st0w * st0perc, st0y1 + st0h * st0perc, st0c, 1, 7);
+    var xo = spx + xoff, 
+        yo = spy + yoff;
+    if (spr != -1)
+    {
+        draw_sprite_ext(spr, 0, xo, yo, 1, 1, 90, image_blend, st0perc);
+    }    
+    for (var i = 0; i &lt; wcount; i++)
+    {
+        draw_sprite_ext(wspr[i], 0, xo + lengthdir_x(woff[i], 90 + wlen[i]), 
+            yo + lengthdir_y(woff[i], 90 + wlen[i]), 1, 1, 90, image_blend, st0perc);        
+    }
+    break;
 }
-    var xx = folderx[folderAInd], 
-        yy = foldery[folderAInd],
-        cc = foldercacitve,
-        ct = foldercinactive;
-// real one
-drawCroppedRect(xx, yy, xx + fw, yy + fh, cc, 1, 8);
-// text
-draw_set_font(fQuestion);
-draw_set_valign(fa_top);
-draw_set_halign(fa_left);
-draw_text_colour(xx + 15, yy + 5, foldert[folderAInd], ct, ct, ct, ct, 1);
 
+switch (state)
+{
+case 1:
+    // draw lines and rects
+    for (var i = 0; i &lt; wcount; i++)
+    {
+        drawCroppedRect(wrx1[i], wry1[i], 
+            wrx1[i] + wrw * st1perc, wry1[i] + wrh * st1perc, st0c, 1, 7);  
+        // icon
+        draw_sprite_ext(weaponGetIco(wspr[i]), 0, wrx1[i] + wrw / 2, wry1[i] + wrh / 2,
+            1, 1, 0, image_blend, st1perc);  
+    }
+}
 </string>
           </argument>
         </arguments>

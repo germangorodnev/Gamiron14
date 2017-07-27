@@ -19,7 +19,6 @@ case CARS.__MINI_TRUCK:
 case CARS.__SCOOL_BUS:
     _arr[0] = sPlayerCar4;
     _arr[1] = .6;
-    _arr[2] = 22;
     break;
 }
 

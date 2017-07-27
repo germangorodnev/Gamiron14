@@ -1,9 +1,10 @@
-///carWeaponSet(slot, WEAPONS weapon)
+///carWeaponPlaceInf(car, slot, weap)
+var _arr;
 var ll, aa, 
     obj,
     oxoff = sprite_get_xoffset(sprite_index),
     oyoff = sprite_get_yoffset(sprite_index);
-switch (type)
+switch (argument[0])
 {
 case CARS.__ORANGE:
     // 1 slot
@@ -19,7 +20,7 @@ case CARS.__MINI_TRUCK:
     
 case CARS.__MINI_VAN:
     // 2
-    switch (argument[0])
+    switch (argument[1])
     {
     case 0:
         ll = 46;
@@ -34,7 +35,7 @@ case CARS.__MINI_VAN:
     
 case CARS.__SCOOL_BUS:
     // 3
-    switch (argument[0])
+    switch (argument[1])
     {
     case 0:
         ll = 99.5;
@@ -50,47 +51,21 @@ case CARS.__SCOOL_BUS:
         break;
     }
     break;
-
-case CARS.__POLICE:
-    // 1 slot
-    ll = 12;
-    aa = 175;
-    break;
-    
-case CARS.__BLACKS_JEEP:
-    // 1 slot
-    ll = 19;
-    aa = 177;
-    break;
 }
 
-switch (argument[1])
+switch (argument[2])
 {
 case WEAPONS.__SIMPLE:
-    obj = oWeaponSimple;
+    _arr[2] = sGunSimple;
     break;
 case WEAPONS.__ROCKET:
-    obj = oWeaponRocket;
+    _arr[2] = sGunRocket;
     break;
 case WEAPONS.__SHIELD:
-    obj = oWeaponShield;
+    _arr[2] = sGunShield;
     break;
 }
-var pos = argument[0];
-if (argument[0] == -1)
-{
-    for (var i = 0; i < weaponsCount; i++)
-    {
-        if (weapon[i] == noone)
-        {
-            pos = i;
-            break;
-        }
-    }
-}
-weapon[pos] = instance_create(phy_position_x + lengthdir_x(ll, phy_rotation + aa), 
-    phy_position_y + lengthdir_y(ll, phy_rotation + aa), obj);
-weapon[pos].lenoff = ll;
-weapon[pos].angleoff = aa;
-weapon[pos].depth = depth - 2;
-weapon[pos].car = id;
+
+_arr[0] = ll;
+_arr[1] = aa;
+return _arr;
