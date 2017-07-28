@@ -23,7 +23,7 @@ case CARS.__MINI_VAN:
     {
     case 0:
         ll = 46;
-        aa = 178;    
+        aa = 182;    
         break;
     case 1:
         ll = 4;
@@ -37,15 +37,15 @@ case CARS.__SCOOL_BUS:
     switch (argument[0])
     {
     case 0:
-        ll = 99.5;
-        aa = 0;    
+        ll = 100;
+        aa = 180;    
         break;
     case 1:
         ll = 42;
-        aa = 0;
+        aa = 180;
         break;
     case 2:
-        ll = 18;
+        ll = 17;
         aa = 0;
         break;
     }

@@ -23,7 +23,6 @@ global.sound = real(json[? "sound"]);
 global.money = real(json[? "money"]);
 // game params
 global.lvlPassed = real(json[? "levelsPassed"]);
-global.carsCount = real(json[? "carsCount"]);
 
 // parse the cars now
 global.playerCars = json[? "cars"];

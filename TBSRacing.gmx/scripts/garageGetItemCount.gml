@@ -32,7 +32,7 @@ case 1:
             slot < slcnt; slot++)
         {
             var sl = slots[| slot];
-            if (sl[? "type"] == em) 
+            if (sl == em) 
                 CNT++;
         }   
     }

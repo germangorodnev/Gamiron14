@@ -39,6 +39,8 @@ state = 0;
 
 ind = 0;
 
+CAR_ANGLE = oGarageController.CAR_ANGLE;
+
 spr = -1;
 spx = 0;
 spy = 0;
@@ -53,6 +55,7 @@ st0c = c_black;
 st0perc = 0;
 
 xcenter = global.guiW / 2 - st0w / 2;
+xwentfrom = 0;
 
 spx = st0x1 + st0w / 2;
 spy = st0y1 + st0h / 2;
@@ -68,12 +71,8 @@ wlen[0] = 0;
 st1perc = 0;
 
 // rect for weaps
-wrx1[0] = 0;
-wry1[0] = 0;
-wrpx[0] = 0;
-wrpy[0] = 0;
-wrw = 150;
-wrh = 90;
+wSlot[0] = noone;
+
 </string>
           </argument>
         </arguments>
@@ -155,15 +154,45 @@ case 0:
     break;
 case 1: // edit
     // move to the center
-    st1perc = min(1, st1perc + .03);
-    st0x1 += max(min(abs(xcenter - st0x1), 5), abs(xcenter - st0x1) / 5) * sign(xcenter - st0x1);
+    st1perc = min(1, st1perc + .08);
+    var diff = xcenter - st0x1;
+    st0x1 += max(min(abs(diff), 5), abs(diff) / 5) * sign(diff);
     spx = st0x1 + st0w / 2;
+    x = st0x1;
+    if (diff == 0)
+        if (oControl.key[KEY.MOUSE_LEFT] == 0)
+        {
+            if (!mouseOnUs())
+            {
+                if (mouse_y &lt; oGarageController.folderyoff)
+                {
+                    if (instance_place(mouse_x, mouse_y, oBaseButton) == noone)
+                    {
+                        var myind = ind;
+                        with (oGarageController)
+                            garageStateInit(2, myind);                       
+                    }
+                }
+            }
+        }
     break;
     
 case 2: // fadeaway
     st0perc= max(0, st0perc - .05);
     break;
     
+case 3: // movein
+    st1perc = max(0, st1perc - .08);
+    st0perc = 1;
+    var diff = xwentfrom - st0x1;
+    st0x1 += max(min(abs(diff), 5), abs(diff) / 5) * sign(diff);
+    spx = st0x1 + st0w / 2;
+    if (diff == 0)
+    {
+        state = 0;
+    }
+    x = st0x1;
+    break;
 }
 </string>
           </argument>
@@ -241,6 +270,7 @@ image_speed = 0;
 case 0:
 case 1:
 case 2:
+case 3:
     drawCroppedRect(st0x1, st0y1, st0x1 + st0w * st0perc, st0y1 + st0h * st0perc, st0c, 1, 7);
     var xo = spx + xoff, 
         yo = spy + yoff;
@@ -250,25 +280,15 @@ case 2:
     }    
     for (var i = 0; i &lt; wcount; i++)
     {
-        draw_sprite_ext(wspr[i], 0, xo + lengthdir_x(woff[i], 90 + wlen[i]), 
-            yo + lengthdir_y(woff[i], 90 + wlen[i]), 1, 1, 90, image_blend, st0perc);        
+        if (wspr[i] == -1)
+            continue;
+        draw_sprite_ext(wspr[i], 0, xo + lengthdir_x(woff[i], CAR_ANGLE + wlen[i]), 
+            yo + lengthdir_y(woff[i], CAR_ANGLE + wlen[i]), 1, 1, CAR_ANGLE, image_blend, st0perc);        
     }
     break;
 }
-
-switch (state)
-{
-case 1:
-    // draw lines and rects
-    for (var i = 0; i &lt; wcount; i++)
-    {
-        drawCroppedRect(wrx1[i], wry1[i], 
-            wrx1[i] + wrw * st1perc, wry1[i] + wrh * st1perc, st0c, 1, 7);  
-        // icon
-        draw_sprite_ext(weaponGetIco(wspr[i]), 0, wrx1[i] + wrw / 2, wry1[i] + wrh / 2,
-            1, 1, 0, image_blend, st1perc);  
-    }
-}
+//draw_sprite_ext(mask_index, 0, x, y, image_xscale, image_yscale, 0, image_blend, .5);
+//draw_text(st0x1, st0y1, string(wcount));
 </string>
           </argument>
         </arguments>

@@ -20,7 +20,7 @@ foldercinactive = c_black;
 
 fw = 145; fh = 40;
 var folderxoff = 10;
-    folderyoff = bottomy1 - fh + 3;
+folderyoff = bottomy1 - fh + 3;
 for (var i = 0; i < foldersCount; i++)
 {
     folderx[i] = folderxoff;

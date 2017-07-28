@@ -62,7 +62,6 @@ with (oEnemyCar)
     <instance objName="oMaterialMask" x="0" y="1280" name="inst_729B8456" locked="0" code="zone = ZONES.__ASPHALT;&#xA;" scaleX="96" scaleY="12" colour="4294967295" rotation="0"/>
     <instance objName="oMaterialMask" x="1024" y="0" name="inst_59D190B8" locked="0" code="zone = ZONES.__ASPHALT;&#xA;" scaleX="12" scaleY="96" colour="4294967295" rotation="0"/>
     <instance objName="oBaseWall" x="0" y="1920" name="inst_4FD3EEEE" locked="0" code="" scaleX="24" scaleY="36" colour="4294967295" rotation="0"/>
-    <instance objName="oPlayerCar" x="256" y="1408" name="inst_DC0E26CA" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="oLantern1" x="144" y="1720" name="inst_AFC2E29C" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="270"/>
     <instance objName="oLantern1" x="976" y="1720" name="inst_691C1A72" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="225"/>
     <instance objName="oLantern1" x="976" y="2408" name="inst_70331CE3" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="180"/>
@@ -97,6 +96,8 @@ with (oEnemyCar)
     <instance objName="oHumanGeneratorPeriodic" x="-196" y="1816" name="inst_4676DC0E" locked="0" code="tmr = 1; //room_speed * 5;&#xA;tmrMin = room_speed;&#xA;tmrMax = room_speed * 2;&#xA;path = pStreets1Human1;&#xA;xshiftmax = 35;&#xA;yshiftmax = 100;&#xA;speedcoeffmin = 1.0;&#xA;speedcoeffmax = 2.0;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="oHumanGeneratorPeriodic" x="1528" y="3292" name="inst_A106920B" locked="0" code="path = pStreets1Human2;&#xA;xshiftmax = 100;&#xA;yshiftmax = 100;&#xA;tmrMin = irandom_range(room_speed, room_speed * 1.5);&#xA;tmrMax = tmrMin + irandom(room_speed);" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="oHumanGeneratorPeriodic" x="3116" y="956" name="inst_A27E4225" locked="0" code="tmr = 1; //room_speed * 5;&#xA;tmrMin = room_speed;&#xA;tmrMax = room_speed * 2;&#xA;path = pStreets1Human3;&#xA;xshiftmax = 35;&#xA;yshiftmax = 100;&#xA;speedcoeffmin = 1.0;&#xA;speedcoeffmax = 2.0;&#xA;&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="oAllyCarPlace" x="128" y="1332" name="inst_C05BF15F" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="oAllyCarPlace" x="136" y="1588" name="inst_A74F1C4C" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles>
     <tile bgName="tls1" x="128" y="256" w="128" h="128" xo="128" yo="768" id="10001748" name="inst_F8BA99CE" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>

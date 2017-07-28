@@ -28,17 +28,66 @@ case 1:
         else
         {
             state = 1;
+            xwentfrom = st0x1;
             // recalculate rectangles
-            switch (slot)
+            with (oGarageWSlot)
+                instance_destroy();
+            for (var slot = 0; slot < wcount; slot++)
             {
-            case 0:
-                wrx1[slot] = xcenter - 300;
-                wry1[slot] = st0y1 + 80;
-                wrpx[slot] = wrx1[slot];
-                wrpy[slot] = wry1[slot] + 350;
-                break;
+                var obj = instance_create(0, 0, oGarageWSlot);
+                wSlot[slot] = obj;
+                obj.car = id;
+                obj.ind = slot;
+                switch (slot)
+                {
+                case 0:
+                    obj.x = xcenter - 300;
+                    obj.y = st0y1 - 100;
+                    obj.cx = xcenter + xoff + lengthdir_x(woff[slot], oGarageController.CAR_ANGLE + wlen[slot]);
+                    obj.cy = spy + yoff + lengthdir_y(woff[slot], oGarageController.CAR_ANGLE + wlen[slot]);
+                    obj.px = xcenter - 300;
+                    obj.py = obj.cy - 50;
+                    break;
+                case 1:
+                    obj.x = xcenter + 250;
+                    obj.y = st0y1 - 35;
+                    obj.cx = xcenter + xoff + lengthdir_x(woff[slot], oGarageController.CAR_ANGLE + wlen[slot]);
+                    obj.cy = spy + yoff + lengthdir_y(woff[slot], oGarageController.CAR_ANGLE + wlen[slot]);
+                    obj.px = xcenter + 390;
+                    obj.py = obj.cy - 100;
+                    break;
+                case 2:
+                    obj.x = xcenter + 300;
+                    obj.y = st0y1 + 300;
+                    obj.cx = xcenter + xoff + lengthdir_x(woff[slot], oGarageController.CAR_ANGLE + wlen[slot]);
+                    obj.cy = spy + yoff + lengthdir_y(woff[slot], oGarageController.CAR_ANGLE + wlen[slot]);
+                    obj.px = xcenter + 130;
+                    obj.py = obj.cy + 150;
+                    break;
+                }
+                with (obj) 
+                    event_user(11);
             }
         }
     }
+    break;
+    
+case 2:
+    dragInd = -1;
+    carInd = -1;
+    with (oGarageCar)
+    {
+        if (ind != argument[1])
+            state = 0;
+        else
+        {
+            state = 3;
+            // recalculate rectangles
+            with (oGarageWSlot)
+                state = 1;
+        }
+    }
+    state = 0;
+    oControl.key[KEY.MOUSE_LEFT] = -1;
     break;
 }

@@ -415,6 +415,7 @@
       <script>scripts\garageChangeFolder.gml</script>
       <script>scripts\garageStateInit.gml</script>
       <script>scripts\garageCarSetCar.gml</script>
+      <script>scripts\garageCarSetWeapon.gml</script>
       <script>scripts\garageUpdateCarSlots.gml</script>
     </scripts>
   </scripts>
@@ -514,6 +515,7 @@
     <objects name="Garage">
       <object>objects\oGarageController</object>
       <object>objects\oGarageCar</object>
+      <object>objects\oGarageWSlot</object>
     </objects>
     <object>objects\oControl</object>
     <object>objects\oGameController</object>

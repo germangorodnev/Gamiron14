@@ -310,6 +310,11 @@ image_speed = 0;
 drawCroppedRect(bottomx1, bottomy1, bottomx2, bottomy2, foldercinactive, 1, 1);
 
 // surf
+if (!surface_exists(surf))
+{
+    surf = surface_create(bottomw, bottomh);
+    shopChangeFolder(folderAInd, choosenItem);
+}
 draw_surface(surf, surfx, surfy);
 
 

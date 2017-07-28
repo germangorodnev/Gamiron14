@@ -8,23 +8,26 @@ switch (argument[0])
 {
 case CARS.__ORANGE:
     // 1 slot
+    _arr[3] = 1;
     ll = 0;
     aa = 0;
     break;
     
 case CARS.__MINI_TRUCK:
     // 1 slot
+    _arr[3] = 1;
     ll = 30;
     aa = 176;
     break;
     
 case CARS.__MINI_VAN:
     // 2
+    _arr[3] = 2;
     switch (argument[1])
     {
     case 0:
         ll = 46;
-        aa = 178;    
+        aa = 182;    
         break;
     case 1:
         ll = 4;
@@ -35,18 +38,19 @@ case CARS.__MINI_VAN:
     
 case CARS.__SCOOL_BUS:
     // 3
+    _arr[3] = 3;
     switch (argument[1])
     {
     case 0:
-        ll = 99.5;
-        aa = 0;    
+        ll = 100;
+        aa = 180;    
         break;
     case 1:
         ll = 42;
-        aa = 0;
+        aa = 180;
         break;
     case 2:
-        ll = 18;
+        ll = 17;
         aa = 0;
         break;
     }

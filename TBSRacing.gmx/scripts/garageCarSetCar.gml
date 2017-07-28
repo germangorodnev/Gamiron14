@@ -9,11 +9,10 @@ var mySlots = mecar[? "slots"];
 for (var slot = 0, slc = ds_list_size(mySlots); slot < slc; slot++)
 {
     var slval = mySlots[| slot];
-    if (is_undefined(slval))
+    if (slval == -1)
         continue; 
     // add the weapon to garage's weaponary
-    ds_list_add(gw, slval[? "type"]);
-    ds_map_destroy(slval);
+    ds_list_add(gw, slval);
 }
 // now add the car itself to the garage too
 if (mecar[? "type"] != -1)
@@ -25,8 +24,15 @@ ds_list_clear(mySlots);
 if (gInd != -1)
 {
     // set new car
-    mecar[? "type"] = gc[| gInd]; // set to slot
+    var TYPE = gc[| gInd];
+    mecar[? "type"] = TYPE; // set to slot
     ds_list_delete(gc, gInd); // remove from garage
+    // set amount of slots to n
+    var _arr = gameGetCarIndepthInf(TYPE);
+    while (ds_list_size(mySlots) < _arr[1])
+    {
+        ds_list_add(mySlots, -1);
+    }
 }
 
 

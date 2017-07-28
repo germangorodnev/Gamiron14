@@ -8,13 +8,13 @@ for (var i = 0, cnt = selectedCar.weaponsCount; i < cnt; i++)
     bt.weap = selectedCar.weapon[i];
     with (bt)
     {
+        var ww = 140 + 4,
+            hh = 75 + 4;
         switch (weap.wType)
         {
         case WEAPONS.__SIMPLE:
             spr = sGunSimpleIco;
             img = 0;
-            var ww = sprite_get_width(sGunSimpleIco) + 4,
-                hh = sprite_get_height(sGunSimpleIco) + 4;
             rx1 = xbeg;
             ry1 = ybeg;
             rx2 = rx1 + ww;
@@ -37,8 +37,6 @@ for (var i = 0, cnt = selectedCar.weaponsCount; i < cnt; i++)
         case WEAPONS.__ROCKET:
             spr = sGunRocketIco;
             img = 0;
-            var ww = sprite_get_width(sGunRocketIco) + 4,
-                hh = sprite_get_height(sGunRocketIco) + 4;
             rx1 = xbeg;
             ry1 = ybeg;
             rx2 = rx1 + ww;
@@ -60,8 +58,6 @@ for (var i = 0, cnt = selectedCar.weaponsCount; i < cnt; i++)
         case WEAPONS.__SHIELD:
             spr = sGunShieldIco;
             img = 0;
-            var ww = sprite_get_width(spr) + 4,
-                hh = sprite_get_height(spr) + 4;
             rx1 = xbeg;
             ry1 = ybeg;
             rx2 = rx1 + ww;

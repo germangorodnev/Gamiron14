@@ -16,19 +16,32 @@ with (oGarageCar)
         // slots now
         var mySlots = car[? "slots"],
             ww = 0;
+        var _a = gameGetCarIndepthInf(ctype);
+        wcount = _a[1];
+        for(var i = 0; i < wcount; i++)
+        {
+            wspr[i] = -1;
+            woff[i] = 0;
+            wlen[i] = 0;
+        }
+        while (ds_list_size(mySlots) < wcount)
+        {
+            ds_list_add(mySlots, -1);
+        }
+
         for (var slot = 0, slc = ds_list_size(mySlots); slot < slc; slot++)
         {
+            wspr[slot] = -1;
             var slval = mySlots[| slot];
-            if (is_undefined(slval))
+            if (slval == -1)
                 continue; 
             
             // add the weapon to garage's weaponary
-            var _arr = carWeaponPlaceInf(ctype, ww, slval[? "type"]);
+            var _arr = carWeaponPlaceInf(ctype, ww, slval);
             wspr[slot] = _arr[2];
             woff[slot] = _arr[0];
             wlen[slot] = _arr[1];
             ww++;
         }
-        wcount = ww;
     }
 }

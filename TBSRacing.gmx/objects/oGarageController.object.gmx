@@ -40,6 +40,8 @@ state = 0;
 cperc = 0;
 swipex = 0;
 
+CAR_ANGLE = 90;
+
 shopGarageBottomCreate();
 
 garage = oControl.json[? "garage"];
@@ -203,6 +205,12 @@ else if (oControl.key[KEY.MOUSE_LEFT] == 2)
     
 }
 
+if (oControl.key[KEY.MOUSE_RIGHT] == 0)
+{
+    dragInd = -1;
+    garageChangeFolder(folderAInd);
+}
+
 </string>
           </argument>
         </arguments>
@@ -279,6 +287,11 @@ image_speed = 0;
 drawCroppedRect(bottomx1, bottomy1, bottomx2, bottomy2, foldercinactive, 1, 1);
 
 // surf
+if (!surface_exists(surf))
+{
+    surf = surface_create(bottomw, bottomh);
+    garageChangeFolder(folderAInd, dragInd);
+}
 draw_surface(surf, surfx, surfy);
 
 //draw folders
