@@ -1,6 +1,6 @@
 ///carPhysicsInit(type)
 var ad = .7,
-    rest = .05,
+    rest = .2,
     densityBase = .5;
     
 // wheels
@@ -61,20 +61,24 @@ case CARS.__MINI_TRUCK:
     var xoff = sprite_get_xoffset(sprite_index),
         yoff = sprite_get_yoffset(sprite_index);
     physics_fixture_set_polygon_shape(fix);
-    physics_fixture_add_point(fix, 1 - xoff, 6 - yoff);
-    physics_fixture_add_point(fix, 6 - xoff, 4 - yoff);
-    physics_fixture_add_point(fix, 116 - xoff, 3 - yoff);
-    physics_fixture_add_point(fix, 123 - xoff, 8 - yoff);
-    physics_fixture_add_point(fix, 123 - xoff, 48 - yoff);
-    physics_fixture_add_point(fix, 116 - xoff, 54 - yoff);
-    physics_fixture_add_point(fix, 6 - xoff, 54 - yoff);
-    physics_fixture_add_point(fix, 1 - xoff, 51 - yoff);
+    physics_fixture_add_point(fix, 7 - xoff, 4 - yoff);
+    physics_fixture_add_point(fix, 133 - xoff, 4 - yoff);
+    physics_fixture_add_point(fix, 144 - xoff, 10 - yoff);
+    physics_fixture_add_point(fix, 144 - xoff, 57 - yoff);
+    physics_fixture_add_point(fix, 133 - xoff, 63 - yoff);
+    physics_fixture_add_point(fix, 6 - xoff, 65 - yoff);
+    physics_fixture_add_point(fix, 0 - xoff, 59 - yoff);
+    physics_fixture_add_point(fix, 0 - xoff, 9 - yoff);
     
     fixtures[fixturesCnt++] = physics_fixture_bind(fix, id);
     physics_fixture_delete(fix);
     
     // parameters
-    //spdMaxForward =
+    spdMaxForward = 200;
+    spdAccelForward = 2.3;
+    spdAccelBrake = 2.8;
+    spdAccelBackward = 3;
+    angleTorque = .9;
     
     // particles
     part_type_sprite(ptyre, sPlayerCar2Tyre, 0, 0, 0);
@@ -126,10 +130,10 @@ case CARS.__SCOOL_BUS:
     // make the fixture
     // left
     var fix = physics_fixture_create();
-    var density = .7;
+    var density = .4;
     physics_fixture_set_collision_group(fix, 0);    
     physics_fixture_set_density(fix, density);  
-    physics_fixture_set_restitution(fix, .01);  
+    physics_fixture_set_restitution(fix, .15);  
     physics_fixture_set_linear_damping(fix, .3);  
     physics_fixture_set_angular_damping(fix, ad);  
     physics_fixture_set_awake(fix, 1);
@@ -168,11 +172,11 @@ case CARS.__SCOOL_BUS:
     physics_fixture_delete(fix);
 
     // parameters
-    spdMaxForward = 220;
-    spdAccelForward = 1.6;
-    spdAccelBrake = 2.5;
-    spdAccelBackward = 2;
-    angleTorque = .6;
+    spdMaxForward = 290;
+    spdAccelForward = 3;
+    spdAccelBrake = 4;
+    spdAccelBackward = 4;
+    angleTorque = 1.2;
     
     // particles
     part_type_sprite(ptyre, sPlayerCar4Tyre, 0, 0, 0);
@@ -243,7 +247,6 @@ case CARS.__POLICE:
     
     weaponsCount = 1;
     
-    carWeaponSet(0, choose(WEAPONS.__SIMPLE, WEAPONS.__ROCKET));
     break;
     
     

@@ -75,6 +75,7 @@ pem = part_emitter_create(psys);
             <kind>1</kind>
             <string>event_inherited();
 part_emitter_destroy(psys, pem);
+part_particles_clear(psys);
 part_system_destroy(psys);
 explosionSmallCreate();   
 

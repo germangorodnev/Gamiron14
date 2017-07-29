@@ -31,6 +31,7 @@ with (oGameController)
 with (oEnemyCar)
 {
     carPhysicsInit(type);
+    carWeaponSet(0, choose(WEAPONS.__SIMPLE, WEAPONS.__ROCKET));
     carInitEnd();
 }</code>
   <enableViews>-1</enableViews>
@@ -74,7 +75,6 @@ with (oEnemyCar)
   </views>
   <instances>
     <instance objName="oGameController" x="0" y="0" name="inst_A8C2A80B" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="oPlayerCar" x="512" y="512" name="inst_E517445E" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="oBall" x="773" y="589" name="inst_DE1967F1" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="oBall" x="1114" y="1033" name="inst_AE78D945" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="oBall" x="1832" y="855" name="inst_0BF41E6E" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
@@ -88,8 +88,6 @@ with (oEnemyCar)
     <instance objName="oHuman" x="2331" y="622" name="inst_3CA15C2A" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="oHuman" x="2792" y="1411" name="inst_C7DEB655" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="oHuman" x="3063" y="687" name="inst_11DF68DD" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="oPlayerCar" x="618" y="801" name="inst_7832FD53" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="oPlayerCar" x="538" y="1099" name="inst_57808B04" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="oEnemyCar" x="2720" y="572" name="inst_BF93031B" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="175"/>
     <instance objName="oEnemyCar" x="3250" y="885" name="inst_C22B0D6B" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="220"/>
     <instance objName="oEnemyCar" x="2872" y="1228" name="inst_D197C951" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="75"/>
@@ -98,6 +96,10 @@ with (oEnemyCar)
     <instance objName="oWallBulletWalkable" x="3571" y="384" name="inst_F7F0A725" locked="0" code="" scaleX="0.419354826211929" scaleY="40.4193534851074" colour="4294967295" rotation="0"/>
     <instance objName="oWallBulletWalkable" x="384" y="1663" name="inst_97C24431" locked="0" code="" scaleX="99.870002746582" scaleY="0.483870953321457" colour="4294967295" rotation="0"/>
     <instance objName="oWallBulletWalkable" x="384" y="382" name="inst_9AF811DE" locked="0" code="" scaleX="0.439999997615814" scaleY="40.310001373291" colour="4294967295" rotation="0"/>
+    <instance objName="oAllyCarPlace" x="591" y="461" name="inst_3F00F1EF" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="-22"/>
+    <instance objName="oAllyCarPlace" x="576" y="1299" name="inst_0212ACED" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="-35"/>
+    <instance objName="oAllyCarPlace" x="603" y="889" name="inst_67624CBB" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="5"/>
+    <instance objName="oMaterialMask" x="397" y="383" name="inst_1F55EE62" locked="0" code="zone = ZONES.__GRASS;&#xA;" scaleX="99.7699966430664" scaleY="40.322582244873" colour="4294967295" rotation="0"/>
   </instances>
   <tiles>
     <tile bgName="tls1" x="384" y="384" w="128" h="128" xo="0" yo="256" id="10000995" name="inst_D4BB84DE" depth="1000000" locked="0" colour="4294967295" scaleX="1" scaleY="1"/>

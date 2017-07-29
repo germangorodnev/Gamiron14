@@ -272,6 +272,66 @@ with (other.human)
         </arguments>
       </action>
     </event>
+    <event eventtype="4" ename="oBlackCar">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///get some scorez
+if ( (phy_speed &gt; 2.3 || other.phy_speed &gt; 2.3) &amp;&amp; ((phy_mass &gt; other.phy_mass)
+    || (phy_speed &gt; other.phy_speed)) )
+{
+    var val = irandom_range(45, 100) div 5 * 5;
+    popupInit(phy_position_x, phy_position_y - 20, string(val), "gray");    
+    gameScoreIncrease(val);
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="oEnemyCar">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///get some scorez
+if ( (phy_speed &gt; 2.3 &amp;&amp; other.phy_speed &gt; 2.3) || ((phy_mass &gt; other.phy_mass)
+    &amp;&amp; (phy_speed &gt; 2.3 || other.phy_speed &gt; 2.3)) )
+{
+    var val = irandom_range(45, 100) div 5 * 5;
+    popupInit(phy_position_x, phy_position_y - 20, string(val), "gray");    
+    gameScoreIncrease(val);
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="7" enumb="16">
       <action>
         <libid>1</libid>

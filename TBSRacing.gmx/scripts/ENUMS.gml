@@ -144,7 +144,8 @@ enum HUMAN_STATES
 enum CAM_STATES
 {
     __FREE,
-    __PARTICULAR_OBJ
+    __PARTICULAR_OBJ,
+    __FREE_WITH_MOUSE
 }
 
 enum CAM_FLAGS

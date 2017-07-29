@@ -3,7 +3,7 @@
   <spriteName>sMask32x32</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>-3000</depth>
+  <depth>-10</depth>
   <persistent>0</persistent>
   <parentName>oStateObject</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -149,6 +149,28 @@ case CAM_STATES.__FREE:
     var ymove = oControl.key[KEY.CAM_BOTTOM] - oControl.key[KEY.CAM_TOP],
         xmove = oControl.key[KEY.CAM_RIGHT] - oControl.key[KEY.CAM_LEFT],
         spdmove = movSpd;
+    x += spdmove * xmove;
+    y += spdmove * ymove;
+    x = clamp(x, view_wview div 2, room_width - view_wview div 2);
+    y = clamp(y, view_hview div 2, room_height - view_hview div 2);
+    break;
+    
+case CAM_STATES.__FREE_WITH_MOUSE:
+    var ymove = oControl.key[KEY.CAM_BOTTOM] - oControl.key[KEY.CAM_TOP],
+        xmove = oControl.key[KEY.CAM_RIGHT] - oControl.key[KEY.CAM_LEFT],
+        spdmove = movSpd;
+    if (mouse_wheel_down())
+    {
+        if (ymove == 0)
+            spdmove *= 2;
+        ymove = 1;
+    }
+    else if (mouse_wheel_up())
+    {
+        if (ymove == 0)
+            spdmove *= 2;
+        ymove = -1;
+    }
     x += spdmove * xmove;
     y += spdmove * ymove;
     x = clamp(x, view_wview div 2, room_width - view_wview div 2);

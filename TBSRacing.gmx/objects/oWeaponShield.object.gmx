@@ -43,7 +43,7 @@ wMaxHP = 50;
 wHP = wMaxHP;
 
 shotTmr = -1;
-shotTmrStep = round(1.5 * room_speed);
+shotTmrStep = round(3 * room_speed);
 canShootTmrSteps = room_speed * 6;
 
 lenoff = 0;
@@ -52,9 +52,46 @@ angleoff = 0;
 ldll = 44;
 lddir = -2;
 
+R = 226;
+cA = 0;
+cC = c_blue;
+cR = 0;
 
-colArrowInner = make_colour_hsv(0, 167, 115);
-colArrowOuter = make_colour_hsv(0, 211, 76);
+uni_time = shader_get_uniform(shdWave,"time");
+var_time_var = 0;
+
+uni_mouse_pos = shader_get_uniform(shdWave,"mouse_pos");
+var_mouse_pos_x = mouse_x - view_xview;
+var_mouse_pos_y = mouse_y - view_yview;
+
+uni_resolution = shader_get_uniform(shdWave,"resolution");
+var_resolution_x = view_wview;
+var_resolution_y = view_hview;
+
+uni_wave_amount = shader_get_uniform(shdWave,"wave_amount");
+var_wave_amount = 5; //higher = more waves
+
+uni_wave_distortion = shader_get_uniform(shdWave,"wave_distortion");
+var_wave_distortion = 60; //higher = less distortion
+
+uni_wave_speed = shader_get_uniform(shdWave,"wave_speed");
+var_wave_speed = 1.0; //higher = faster
+
+uni_alpha = shader_get_uniform(shdWave, "alpha");
+
+
+cFix = physics_fixture_create();
+physics_fixture_set_collision_group(cFix, 0);    
+physics_fixture_set_density(cFix, .5);  
+physics_fixture_set_restitution(cFix, 0);  
+physics_fixture_set_linear_damping(cFix, 0);  
+physics_fixture_set_angular_damping(cFix, 0);  
+physics_fixture_set_awake(cFix, 1);
+physics_fixture_set_sensor(cFix, 1);
+physics_fixture_set_circle_shape(cFix, 1);
+
+cFixBind = physics_fixture_bind(cFix, id);
+
 </string>
           </argument>
         </arguments>
@@ -78,6 +115,8 @@ colArrowOuter = make_colour_hsv(0, 211, 76);
           <argument>
             <kind>1</kind>
             <string>event_inherited();
+physics_remove_fixture(id, cFixBind);
+physics_fixture_delete(cFix);
 </string>
           </argument>
         </arguments>
@@ -120,14 +159,53 @@ case WEAPON_STATES.__FREE:
     {
         weaponSetState(WEAPON_STATES.__SHIELD_ACTIVE);
     }
+    cR = approach(cR, 0, 8);
+    if (!cR)
+        cA = 0;
     break;
     
 case WEAPON_STATES.__SHIELD_ACTIVE:
     if (shotTmr &amp;&amp; !--shotTmr)
     {
         weaponSetState(WEAPON_STATES.__FREE);
+        exit;
     }
+    cA = approach(cA, .5, .03);
+    cR = approach(cR, R, 4);
+    // update mask
+    physics_remove_fixture(id, cFixBind);
+    physics_fixture_set_circle_shape(cFix, cR);
+    cFixBind = physics_fixture_bind(cFix, id);
     break;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="4" ename="oBaseBullet">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (state == WEAPON_STATES.__SHIELD_ACTIVE)
+{
+    if (other.team != car.team)
+        // delete
+        with (other)
+            instance_destroy();
 }
 </string>
           </argument>
@@ -251,10 +329,8 @@ image_speed = 0;
           <argument>
             <kind>1</kind>
             <string>draw_self();
-if (state == WEAPON_STATES.__SHIELD_ACTIVE)
-{
-
-}
+if (global.debug)
+    physics_draw_debug();
 </string>
           </argument>
         </arguments>

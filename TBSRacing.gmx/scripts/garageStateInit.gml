@@ -89,5 +89,6 @@ case 2:
     }
     state = 0;
     oControl.key[KEY.MOUSE_LEFT] = -1;
+    garageChangeFolder(folderAInd);
     break;
 }

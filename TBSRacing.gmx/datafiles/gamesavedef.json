@@ -3,12 +3,13 @@
 	"sound": 1,	
 	"levelsPassed": 0,
 	"carsCount": 1,
-	"money": 0,
+	"money": 3000,
 	"tutorialPassed": 0,
+	"shadersEnabled": 1,
 
 	"cars": [
 		{
-			"type": 0,
+			"type": 1,
 			"slots": [
 				1
 			]
@@ -27,7 +28,7 @@
 			"type": -1,
 			"slots": [
 			]
-		},
+		}
 	],
 
 	"garage": {
@@ -110,6 +111,22 @@
 			"room": "rNightRace1",
 			"x": 0.5546,
 			"y": 0.6187
+		},
+
+		{
+			"name": [
+				"Центр",
+				"Centre"
+			],
+			"desc": [
+				"Кто быстрее?",
+				"Who is faster?"
+			],
+			"DONE": 0,
+			"type": 2,
+			"room": "rNightRace2",
+			"x": 0.3906,
+			"y": 0.5151
 		}
 	]
 

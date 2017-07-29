@@ -1,4 +1,5 @@
 ///gameLevelEnd(win)
+global.lvlWon = argument[0];
 with (oGameController)
     gameControllerStateSet(INGAME_STATES.ENDLEVEL);
 with (instance_create(view_xview, view_yview, oLevelEnd))

@@ -18,6 +18,7 @@ with (oGarageCar)
             ww = 0;
         var _a = gameGetCarIndepthInf(ctype);
         wcount = _a[1];
+        wspr[wcount] = 0;
         for(var i = 0; i < wcount; i++)
         {
             wspr[i] = -1;
@@ -37,11 +38,10 @@ with (oGarageCar)
                 continue; 
             
             // add the weapon to garage's weaponary
-            var _arr = carWeaponPlaceInf(ctype, ww, slval);
+            var _arr = carWeaponPlaceInf(ctype, slot, slval);
             wspr[slot] = _arr[2];
             woff[slot] = _arr[0];
             wlen[slot] = _arr[1];
-            ww++;
         }
     }
 }

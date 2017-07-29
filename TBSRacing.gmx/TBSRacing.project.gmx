@@ -24,6 +24,7 @@
   </datafiles>
   <NewExtensions>
     <extension index="0">extensions\TrueLight2D</extension>
+    <extension index="1">extensions\Free Shaders</extension>
   </NewExtensions>
   <sounds name="sound"/>
   <sprites name="sprites">
@@ -112,6 +113,7 @@
       <sprites name="Shield">
         <sprite>sprites\sGunShield</sprite>
         <sprite>sprites\sGunShieldIco</sprite>
+        <sprite>sprites\sGunShieldTexture</sprite>
       </sprites>
       <sprite>sprites\sShootSign</sprite>
     </sprites>
@@ -199,6 +201,14 @@
     <paths name="Night Street 1">
       <paths name="AI">
         <path>paths\pNightStreet1AI1</path>
+      </paths>
+    </paths>
+    <paths name="Night Street 2">
+      <paths name="AI">
+        <path>paths\pNightStreet2AI1</path>
+      </paths>
+      <paths name="Human Paths">
+        <path>paths\pNightRace2Human1</path>
       </paths>
     </paths>
   </paths>
@@ -348,6 +358,7 @@
       <script>scripts\physicalDrawShadow.gml</script>
       <script>scripts\nextRoomEffectInit.gml</script>
       <script>scripts\stringThousandsDivide.gml</script>
+      <script>scripts\drawCircle.gml</script>
     </scripts>
     <scripts name="ENEMY">
       <scripts name="SITUATIONS">
@@ -421,6 +432,8 @@
   </scripts>
   <shaders name="shaders">
     <shader type="GLSLES">shaders\shdBlack.shader</shader>
+    <shader type="GLSLES">shaders\shdWave.shader</shader>
+    <shader type="GLSLES">shaders\shdRadialBlur.shader</shader>
   </shaders>
   <fonts name="fonts">
     <font>fonts\fSpeed</font>
@@ -491,6 +504,7 @@
       <object>objects\oRocketBullet</object>
       <object>objects\oExplosion</object>
       <object>objects\oWeaponShield</object>
+      <object>objects\oShieldsDepth</object>
     </objects>
     <objects name="Human">
       <object>objects\oHumanGenerator</object>
@@ -534,6 +548,7 @@
     <room>rooms\rField</room>
     <room>rooms\rStreets1</room>
     <room>rooms\rNightRace1</room>
+    <room>rooms\rNightRace2</room>
     <room>rooms\rIntro</room>
     <room>rooms\rMainMenu</room>
     <room>rooms\rShop</room>

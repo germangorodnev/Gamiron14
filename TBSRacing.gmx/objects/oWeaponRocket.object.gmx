@@ -248,7 +248,7 @@ image_speed = 0;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_self();
+            <string>draw_sprite_ext(sprite_index, image_index, phy_position_x, phy_position_y, image_xscale, image_yscale, -phy_rotation, image_blend, image_alpha);
 if (state == WEAPON_STATES.__ROCKET_ATTACK)
     draw_sprite_ext(sGunRocketEffect, 0, 
         phy_position_x + lengthdir_x(ldll, -phy_rotation + lddir),

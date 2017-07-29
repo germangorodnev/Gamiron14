@@ -13,8 +13,8 @@ case CARS.__ORANGE:
     
 case CARS.__MINI_TRUCK:
     // 1 slot
-    ll = 30;
-    aa = 176;
+    ll = 34;
+    aa = 180;
     break;
     
 case CARS.__MINI_VAN:
@@ -23,7 +23,7 @@ case CARS.__MINI_VAN:
     {
     case 0:
         ll = 46;
-        aa = 182;    
+        aa = 181.5;    
         break;
     case 1:
         ll = 4;

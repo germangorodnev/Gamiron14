@@ -49,6 +49,7 @@ points[2] = x + sprite_width; points[3] = y;
 points[4] = x; points[5] = y + sprite_height;
 points[6] = x + sprite_width; points[7] = y + sprite_height;
 
+winner = 0;
 winnerTmrCnt = .5 * room_speed;
 winnerTmr = -1;
 </string>
@@ -101,10 +102,13 @@ winnerTmr = -1;
     
 xoff += spd;
 
-if (winnerTmr &amp;&amp; !--winnerTmr || keyboard_check(vk_space))
+if (winnerTmr &amp;&amp; !--winnerTmr || (keyboard_check(vk_space) * global.debug))
 {
     // winner found, can close the game
-    gameLevelEnd(choose(0, 1));
+    if (winner == 0)
+        gameLevelEnd(1);
+    else
+        gameLevelEnd(0);
     winnerTmr = -1;
 }
 </string>

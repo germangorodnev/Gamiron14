@@ -140,7 +140,7 @@ forwLightCol = c_yellow;
 
 if (pathMove != -1) 
     path_delete(pathMove);
-part_system_clear(psys);
+part_particles_clear(psys);
 part_emitter_destroy(psys, pem);
 part_type_destroy(ptyre);
 part_type_destroy(smoke);

@@ -39,7 +39,7 @@ case os_win32:
     if (keyboard_check(ord('S')))
         key[KEY.CAM_BOTTOM] = 1;
         
-    if (keyboard_check_pressed(vk_tab))
+    if (keyboard_check_pressed(vk_space))
         key[KEY.SWITCH] = 1;
     break;
     

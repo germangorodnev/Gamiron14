@@ -35,7 +35,8 @@ flagSet(OBJ_PAR.UPDATABLE
 
 // cam
 instance_create(0, 0, oCamera);
-
+with (oCamera)
+    camSetState(CAM_STATES.__FREE_WITH_MOUSE);
 width = sprite_get_width(sMap);
 height = sprite_get_height(sMap);
 

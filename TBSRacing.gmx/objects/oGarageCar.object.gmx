@@ -129,7 +129,8 @@ case 0:
     {
         if (mouseOnUs())
         {
-            if (oGarageController.dragInd != -1)
+            if (oGarageController.dragInd != -1
+                &amp;&amp; oGarageController.folderAInd == 0)
             {
                 // set the car
                 garageCarSetCar(oGarageController.dragInd);
@@ -166,7 +167,7 @@ case 1: // edit
             {
                 if (mouse_y &lt; oGarageController.folderyoff)
                 {
-                    if (instance_place(mouse_x, mouse_y, oBaseButton) == noone)
+                    if (instance_position(mouse_x, mouse_y, oBaseButton) == noone)
                     {
                         var myind = ind;
                         with (oGarageController)

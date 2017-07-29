@@ -44,7 +44,7 @@ wHP = wMaxHP;
 
 shotTmr = -1;
 shotTmrStep = round(.05 * room_speed);
-canShootTmrSteps = room_speed div 2;
+canShootTmrSteps = room_speed div 3;
 
 lenoff = 0;
 angleoff = 0;

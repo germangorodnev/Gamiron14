@@ -213,6 +213,8 @@ for (var i = 0; i &lt; cnt; i++)
     c.type = ctype;
     with (c)
         carPhysicsInit(type);
+    c.phy_rotation = oo.image_angle;
+    c.arrowDir = -c.phy_rotation;
     // now add weapos
     var slots = cdict[? "slots"];
     for (var sl = 0, slc = c.weaponsCount; sl &lt; slc; sl++)
@@ -223,10 +225,13 @@ for (var i = 0; i &lt; cnt; i++)
         with (c)
             carWeaponSet(sl, slot);
     }
+    with (c)
+        carInitEnd();
 }
 with (oAllyCarPlace)
     instance_destroy();
-instance_create(oPlayerCar.x, oPlayerCar.y, oCamera);
+instance_create(oPlayerCar.phy_position_x, oPlayerCar.phy_position_y, oCamera);
+instance_create(0, 0, oShieldsDepth);
 
 alarm[0] = room_speed / 2;
 
@@ -288,6 +293,8 @@ part_type_destroy(blood);
             <string>// WARNING
 gameControllerStateSet(INGAME_STATES.TURN);
 gameControllerSubstateSet(SUBSTATES.__NONE);
+with (oCamera)
+    camSetTarget(oPlayerCar.phy_position_x, oPlayerCar.phy_position_y);
 </string>
           </argument>
         </arguments>
@@ -529,7 +536,8 @@ if (drift)
             <kind>1</kind>
             <string>/// draw things
 ///Draw game gui
-draw_text_colour(view_xview + 30, view_yview + 30, string(fps), c_red, c_blue, c_red, c_yellow, 1);
+if (global.debug)
+    draw_text_colour(view_xview + 30, view_yview + 30, string(fps), c_red, c_blue, c_red, c_yellow, 1);
 
 switch (substate)
 {
