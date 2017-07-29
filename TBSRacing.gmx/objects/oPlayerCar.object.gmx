@@ -36,6 +36,8 @@ state = PL_CAR_ST.__INACTIVE;
 
 pointId = -1;
 
+dmgScore = -1;
+
 // gui control
 engineArrowH = -1;
 
@@ -155,6 +157,9 @@ for (var i = 0; i &lt; weaponsCount; i++)
             <string>/// Update
 if (!(flags &amp; OBJ_PAR.UPDATABLE))
     exit;
+if (dmgScore &amp;&amp; !--dmgScore)
+    dmgScore = -1;
+    
 switch (state)
 {
 case PL_CAR_ST.__INACTIVE:
@@ -290,9 +295,13 @@ with (other.human)
           <argument>
             <kind>1</kind>
             <string>///get some scorez
-if ( (phy_speed &gt; 2.3 || other.phy_speed &gt; 2.3) &amp;&amp; ((phy_mass &gt; other.phy_mass)
-    || (phy_speed &gt; other.phy_speed)) )
-{
+if (dmgScore != -1)
+    exit;
+
+if ( (phy_speed &gt; 2.3 &amp;&amp; other.phy_speed &gt; 2.3) || ((phy_mass &gt; other.phy_mass)
+    &amp;&amp; (phy_speed &gt; 2.3 || other.phy_speed &gt; 2.3)) )
+{   
+    dmgScore = room_speed / 3;
     var val = irandom_range(45, 100) div 5 * 5;
     popupInit(phy_position_x, phy_position_y - 20, string(val), "gray");    
     gameScoreIncrease(val);
@@ -320,9 +329,13 @@ if ( (phy_speed &gt; 2.3 || other.phy_speed &gt; 2.3) &amp;&amp; ((phy_mass &gt;
           <argument>
             <kind>1</kind>
             <string>///get some scorez
+if (dmgScore != -1)
+    exit;
+
 if ( (phy_speed &gt; 2.3 &amp;&amp; other.phy_speed &gt; 2.3) || ((phy_mass &gt; other.phy_mass)
     &amp;&amp; (phy_speed &gt; 2.3 || other.phy_speed &gt; 2.3)) )
-{
+{   
+    dmgScore = room_speed / 3;
     var val = irandom_range(45, 100) div 5 * 5;
     popupInit(phy_position_x, phy_position_y - 20, string(val), "gray");    
     gameScoreIncrease(val);
