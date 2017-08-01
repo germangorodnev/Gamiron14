@@ -295,8 +295,11 @@ if ((phy_position_x == other.phy_position_x)
 }
 
 var dir = point_direction(other.phy_position_x, other.phy_position_x, phy_position_x, phy_position_x);
-var dx = lengthdir_x(2, dir),
-    dy = lengthdir_y(2, dir);
+var dx = lengthdir_x(4, dir),
+    dy = lengthdir_y(4, dir);
+
+phy_rotation -= 5 * -sign(id - other.id);
+
 phy_position_x += dx;
 phy_position_y += dy;
 

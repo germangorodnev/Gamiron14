@@ -127,6 +127,22 @@
 			"room": "rNightRace2",
 			"x": 0.3906,
 			"y": 0.5151
+		},
+
+		{
+			"name": [
+				"Набережная",
+				"Embankment"
+			],
+			"desc": [
+				"Крутейшие повороты",
+				"Abrupt turns"
+			],
+			"DONE": 0,
+			"type": 2,
+			"room": "rLongRace1",
+			"x": 0.3281,
+			"y": 0.6231
 		}
 	]
 

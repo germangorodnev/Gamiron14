@@ -52,6 +52,11 @@ activeCars = oControl.json[? "cars"];
 dragInd = -1;
 carInd = -1;
 
+bc1 = make_colour_hsv(166, 116, 64);
+bc2 = make_colour_hsv(175, 151, 88);
+bc3 = make_colour_hsv(155, 139, 77);
+bc4 = bc2;
+
 garageChangeFolder(0);
 garageStateInit(0);
 
@@ -283,6 +288,7 @@ image_speed = 0;
           <argument>
             <kind>1</kind>
             <string>// bottom
+draw_rectangle_colour(0, 0, room_width, room_height, bc1, bc2, bc3, bc4, 0);
 //draw bottom screen
 drawCroppedRect(bottomx1, bottomy1, bottomx2, bottomy2, foldercinactive, 1, 1);
 

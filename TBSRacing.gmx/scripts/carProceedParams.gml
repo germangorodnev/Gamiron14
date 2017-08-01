@@ -34,11 +34,22 @@ else
     phy_speed_x /= 1.005;
     phy_speed_y /= 1.005;
     // change speed too  
-    if (phy_speed < .03)
+    if (phy_speed < .05)
     {
         phy_speed_x = 0;
         phy_speed_y = 0;
     }
 }
-
+if (engineHP / engineMaxHP <= .35)
+{
+    flagSet(OBJ_PAR.ENGINE_CONTROLLABLE, 0);
+}
+if (state < PL_CAR_ST.__DIE)
+{
+    if (engineHP <= 0)
+    {
+        engineHP = 0;
+        carSetState(PL_CAR_ST.__DIE);
+    }
+}
 

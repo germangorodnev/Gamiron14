@@ -45,6 +45,8 @@ contr = 0;
 yoff = hfspplateah;
 if (oGameController.selectedCar.engineArrowH != -1)
     yoff = oGameController.selectedCar.engineArrowH;
+    
+index = !flagIsActive(oGameController.selectedCar.flags, OBJ_PAR.ENGINE_CONTROLLABLE);
 </string>
           </argument>
         </arguments>
@@ -94,7 +96,9 @@ if (oGameController.selectedCar.engineArrowH != -1)
             <string>/// update
 if (!(flags &amp; OBJ_PAR.UPDATABLE))
     exit;
-
+if (index == 1)
+    exit;
+    
 if (oControl.key[KEY.MOUSE_LEFT] == 1)
 {
     if (mouseOnUs())
@@ -199,7 +203,7 @@ image_speed = 0;
           <argument>
             <kind>1</kind>
             <string>/// draw
-draw_sprite_ext(sSpeedPlateArrow, 0, spplateax, spplateay + yoff, 1, 1, 0, image_blend, image_alpha);  
+draw_sprite_ext(sSpeedPlateArrow, index, spplateax, spplateay + yoff, 1, 1, 0, image_blend, image_alpha);  
 
 </string>
           </argument>

@@ -130,9 +130,6 @@
       <sprite>sprites\sBank</sprite>
     </sprites>
     <sprites name="Lights">
-      <sprite>sprites\spr_light_spot</sprite>
-      <sprite>sprites\spr_light_point</sprite>
-      <sprite>sprites\spr_light_spark</sprite>
       <sprite>sprites\sLightPoint</sprite>
       <sprite>sprites\sLantern1</sprite>
     </sprites>
@@ -159,6 +156,9 @@
       <sprite>sprites\sMap</sprite>
       <sprite>sprites\sMapIcos</sprite>
       <sprite>sprites\sMapIcosImages</sprite>
+    </sprites>
+    <sprites name="Dialogs and tutors">
+      <sprite>sprites\sTutorer</sprite>
     </sprites>
     <sprite>sprites\sWater</sprite>
     <sprite>sprites\sBall</sprite>
@@ -209,6 +209,14 @@
       </paths>
       <paths name="Human Paths">
         <path>paths\pNightRace2Human1</path>
+      </paths>
+    </paths>
+    <paths name="Long Race 1">
+      <paths name="AI">
+        <path>paths\pLongRace1AI1</path>
+      </paths>
+      <paths name="Human Paths">
+        <path>paths\pLongRace1Human1</path>
       </paths>
     </paths>
   </paths>
@@ -318,6 +326,8 @@
       <script>scripts\carDrawShadow.gml</script>
       <script>scripts\carCollidePeople.gml</script>
       <script>scripts\gameGetCarIndepthInf.gml</script>
+      <script>scripts\carPsysesUpdate.gml</script>
+      <script>scripts\carHPCheck.gml</script>
     </scripts>
     <scripts name="GAME CONTROLLER">
       <scripts name="STATE">
@@ -368,11 +378,17 @@
         </scripts>
         <scripts name="BLACKS">
           <script>scripts\enemyCarBlacksJeepDetermineSituation.gml</script>
+          <script>scripts\enemyCarBlacksDodgeDetermineSituation.gml</script>
         </scripts>
       </scripts>
       <scripts name="RACES">
         <script>scripts\enemyRacingInit.gml</script>
         <script>scripts\enemyPathGetNextPoint.gml</script>
+      </scripts>
+      <scripts name="FLASHERS">
+        <script>scripts\enemyFlashersInit.gml</script>
+        <script>scripts\enemyFlashersUpdate.gml</script>
+        <script>scripts\enemyFlashersDraw.gml</script>
       </scripts>
       <script>scripts\enemiesMakeTurn.gml</script>
       <script>scripts\enemySetState.gml</script>
@@ -434,6 +450,7 @@
     <shader type="GLSLES">shaders\shdBlack.shader</shader>
     <shader type="GLSLES">shaders\shdWave.shader</shader>
     <shader type="GLSLES">shaders\shdRadialBlur.shader</shader>
+    <shader type="GLSLES">shaders\shdRecolor.shader</shader>
   </shaders>
   <fonts name="fonts">
     <font>fonts\fSpeed</font>
@@ -446,6 +463,7 @@
     <objects name="Base">
       <object>objects\oStateObject</object>
       <object>objects\oBaseDerivable</object>
+      <object>objects\oMonolouge</object>
       <object>objects\oBaseButton</object>
       <objects name="Physics">
         <object>objects\oBasePhysicalMovable</object>
@@ -549,6 +567,7 @@
     <room>rooms\rStreets1</room>
     <room>rooms\rNightRace1</room>
     <room>rooms\rNightRace2</room>
+    <room>rooms\rLongRace1</room>
     <room>rooms\rIntro</room>
     <room>rooms\rMainMenu</room>
     <room>rooms\rShop</room>

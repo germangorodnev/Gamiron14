@@ -12,6 +12,11 @@ case rNightRace2:
     path_append(pathMove, pathCopy);
     path_set_closed(pathMove, path_get_closed(pathCopy));
     break;
+case rLongRace1:
+    pathCopy = asset_get_index("pLongRace1AI" + string(irandom_range(1, 1)));
+    path_append(pathMove, pathCopy);
+    path_set_closed(pathMove, path_get_closed(pathCopy));
+    break;
 }
 
 // create the point to follow to

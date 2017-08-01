@@ -60,12 +60,15 @@ enum OBJ_PAR
     IMPACTABLE_PAUSE = 1 << 4,
     IMPACTABLE_TURN = 1 << 5,
     DAMAGABLE = 1 << 6,
+    ENGINE_CONTROLLABLE = 1 << 7,
+    ROTATE_CONTROLLABLE = 1<< 8
 }
 
 enum PL_CAR_ST
 {
     __INACTIVE,
-    __MOVE_TO_POINT
+    __MOVE_TO_POINT,
+    __DIE,
 }
 
 enum ZONES
@@ -82,7 +85,8 @@ enum EN_CAR_ST
     __MOVE_TO_POINT,
     __MOEV_IN_DIRECTION,
     __EVADE_OBJECT,
-    __PURSUIT_OBJECT
+    __PURSUIT_OBJECT,
+    __DIE
 }
 
 /////////////// CARS

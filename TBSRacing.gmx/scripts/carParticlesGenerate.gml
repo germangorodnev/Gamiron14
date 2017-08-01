@@ -1,4 +1,4 @@
-if (phy_speed > 1)
+if (phy_speed > .8)
 {
     part_emitter_region(psys, pem, x - 1, x + 1, y - 1, y + 1, ps_shape_rectangle, ps_distr_gaussian);
     inertiaDir = point_direction(x, y, x + phy_speed_x, y + phy_speed_y);
@@ -32,4 +32,13 @@ if (phy_speed > 1)
         }
     }
 }
-
+// engine hp
+if (engineHP < 100)
+{
+    part_type_direction(smoke, 0, 360, 0, 0);
+    var xp = x + lengthdir_x(50, -phy_rotation), 
+        yp = y + lengthdir_y(50, -phy_rotation);
+    part_emitter_region(psysEngine, pemEngine, xp - irandom(6), xp + irandom(5), yp - irandom(5), yp + irandom(5), ps_shape_ellipse, ps_distr_gaussian);
+    part_emitter_burst(psysEngine, pemEngine, smoke, 1);  
+}      
+    

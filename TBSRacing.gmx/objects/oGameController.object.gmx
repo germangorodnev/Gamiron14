@@ -443,7 +443,7 @@ case INGAME_STATES.TURN:
                 90);
             draw_sprite_ext(sSpeedometerArrow, 0, spidx, spidy, 1, 1, spdAngle, image_blend, image_alpha);
             // speed
-            draw_sprite_ext(sSpeedPlate, 0, spplatex, spplatey, 1, 1, 0, image_blend, image_alpha);        
+            draw_sprite_ext(sSpeedPlate, !(selectedCar.flags &amp; OBJ_PAR.ENGINE_CONTROLLABLE), spplatex, spplatey, 1, 1, 0, image_blend, image_alpha);        
             // real speedometer
             draw_sprite_ext(sKmh, 0, kmhx, kmhy, 1, 1, 0, image_blend, image_alpha);  
             draw_set_font(fSpeed);

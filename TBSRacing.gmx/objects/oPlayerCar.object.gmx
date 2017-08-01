@@ -165,10 +165,16 @@ switch (state)
 case PL_CAR_ST.__INACTIVE:
 case PL_CAR_ST.__MOVE_TO_POINT:
     carProceedParams();
-    part_system_update(psys);
     carMoveArrow();  
+    carPsysesUpdate();
     //physics_apply_impulse(phy_position_x, phy_position_y,
         
+    break;
+    
+case PL_CAR_ST.__DIE:
+    carProceedParams();
+    carMoveArrow();  
+    carPsysesUpdate();    
     break;
 }
 

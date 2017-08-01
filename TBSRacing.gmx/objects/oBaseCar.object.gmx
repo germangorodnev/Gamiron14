@@ -31,7 +31,9 @@ event_inherited();
 flagSet(OBJ_PAR.UPDATABLE 
     | OBJ_PAR.DRAWABLE
     | OBJ_PAR.IMPACTABLE_PAUSE 
-    | OBJ_PAR.IMPACTABLE_TURN, 1);
+    | OBJ_PAR.IMPACTABLE_TURN
+    | OBJ_PAR.ENGINE_CONTROLLABLE
+    | OBJ_PAR.ROTATE_CONTROLLABLE, 1);
     //| OBJ_PAR.HAVE_LIGHT, 1);  
 
 team = 0; // 0 - player, 1 - enemy
@@ -86,7 +88,16 @@ part_system_depth(psys, 300);
 part_system_automatic_draw(psys, 1);
 part_system_position(psys, 0, 0);
 
+psysEngine = part_system_create();
+part_system_automatic_update(psysEngine, 0);
+part_system_depth(psysEngine, depth - 10);
+part_system_automatic_draw(psysEngine, 1);
+part_system_position(psysEngine, 0, 0);
+
+
 pem = part_emitter_create(psys);
+
+pemEngine = part_emitter_create(psysEngine);
 
 // tyre effect
 ptyre = part_type_create();
@@ -147,6 +158,9 @@ part_type_destroy(smoke);
 part_type_destroy(dirt);
 
 part_system_destroy(psys);
+
+part_emitter_destroy(psysEngine, pemEngine);
+part_system_destroy(psysEngine);
 
 </string>
           </argument>

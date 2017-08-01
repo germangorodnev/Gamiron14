@@ -30,6 +30,8 @@ image_speed = 0;
 
 path_clear_points(pathMove);
 
+flagSet(OBJ_PAR.HAVE_LIGHT, 1);
+
 type = choose(CARS.__POLICE);
 control = CONTROL_TYPES.POINTS;
 state = EN_CAR_ST.__INACTIVE;
@@ -56,6 +58,16 @@ wheelMaxHP[3] = 0;
 engineHP = 350;
 engineMaxHP = engineHP;
 
+flasherColUni = shader_get_uniform(shdRecolor, "colorTo");
+flasherL = 0;
+flasherY = 0;
+flasherA = 0;
+flashersState = choose(0, 1);
+flasherAlpha[1] = 0;
+flasherTmr = -1;
+flasherAlphaD = .03;
+flasherCol[1] = c_blue;
+flasherCol[0] = c_red;
 
 /*
 carPhysicsInit(type);
@@ -154,10 +166,18 @@ switch (state)
 case EN_CAR_ST.__INACTIVE:
 case EN_CAR_ST.__MOVE_TO_POINT:
     carProceedParams();
-    part_system_update(psys);
     carMoveArrow();  
+    carPsysesUpdate();
     //physics_apply_impulse(phy_position_x, phy_position_y,
-        
+    carHPCheck();
+    enemyFlashersUpdate();
+    break;
+    
+case EN_CAR_ST.__DIE:
+    carProceedParams();
+    carMoveArrow();  
+    carPsysesUpdate();
+    
     break;
 }
 
@@ -329,17 +349,8 @@ flagSet(OBJ_PAR.UPDATABLE, 0);
           <argument>
             <kind>1</kind>
             <string>/// draw light
-// forward lights
-if (!objectInView())
-    exit;
-var sx = phy_position_x + lengthdir_x(forwLightX, phy_rotation),
-    sy = phy_position_y + lengthdir_y(forwLightX, phy_rotation);
-var ldx = lengthdir_x(forwLightY, -phy_rotation + 90),
-    ldy = lengthdir_y(forwLightY, -phy_rotation + 90);
-draw_sprite_ext(sLightPoint, 0, sx + ldx - view_xview, 
-    sy + ldy - view_yview, 1, 1, 0, forwLightCol, image_alpha);
-draw_sprite_ext(sLightPoint, 0, sx - ldx - view_xview, 
-    sy - ldy - view_yview, 1, 1, 0, forwLightCol, image_alpha);
+enemyFlashersDraw();
+
 </string>
           </argument>
         </arguments>
